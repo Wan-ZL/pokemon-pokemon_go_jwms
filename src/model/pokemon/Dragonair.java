@@ -1,9 +1,11 @@
-package model;
+package model.pokemon;
 
-public class Poliwag extends Pokemon{
+import model.Pokemon;
 
-	public Poliwag() {
-		super(PokemonType.Poliwag, 200, 30, PokemonRarity.COMMON);
+public class Dragonair extends Pokemon{
+
+	public Dragonair() {
+		super(PokemonType.Dragonair, 400, 80, PokemonRarity.UNCOMMON);
 		// TODO Auto-generated constructor stub
 	}
 

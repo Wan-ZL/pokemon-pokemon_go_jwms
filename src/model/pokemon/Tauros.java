@@ -1,4 +1,6 @@
-package model;
+package model.pokemon;
+
+import model.Pokemon;
 
 public class Tauros extends Pokemon{
 

@@ -2,6 +2,9 @@ package model;
 
 import java.util.Random;
 
+import model.pokemon.PokemonRarity;
+import model.pokemon.PokemonType;
+
 /*
  *  This is the super class Pokemon that inherits all other Pokemon classes
  */
