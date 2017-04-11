@@ -1,9 +1,9 @@
 package model;
 
-public class Torros extends Pokemon{
+public class Tauros extends Pokemon{
 
-	public Torros() {
-		super(PokemonType.TORROS, 250, 30, PokemonRarity.COMMON);
+	public Tauros() {
+		super(PokemonType.Tauros, 250, 30, PokemonRarity.COMMON);
 	}
 
 	@Override

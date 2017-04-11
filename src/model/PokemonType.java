@@ -2,7 +2,7 @@ package model;
 
 public enum PokemonType {
 
-	TORROS(0), RYHORN(1);
+	Tauros(0), Poliwag(1);
 	
 	private int value;
 	
