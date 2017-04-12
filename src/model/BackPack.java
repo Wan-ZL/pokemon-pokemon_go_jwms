@@ -34,6 +34,7 @@ public class BackPack {
 	public void discardItem(ItemType type, int num) {
 		if (numItem(type) > 0) {
 			pack.get(indexOf(type)).addAmount(-num);
+			currAmt -= num;
 		}
 	}
 	

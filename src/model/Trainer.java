@@ -7,6 +7,7 @@ public class Trainer {
 	private PokemonBelt belt;
 	
 	public Trainer(String name) {
+		this.pack = new BackPack();
 		this.name = name;
 	}
 }
