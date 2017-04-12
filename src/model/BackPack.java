@@ -12,7 +12,7 @@ public class BackPack {
 	
 	public BackPack() {
 		pack = new ArrayList<Item>();
-		maxItems = 50;
+		maxItems = 75;
 	}
 	
 	// Add an item to the pack

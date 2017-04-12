@@ -2,8 +2,8 @@ package model.items;
 
 public class SafariBall extends Item{
 
-	public SafariBall() {
-		super(ItemType.SAFARI_BALL, 50);
+	public SafariBall(int amt) {
+		super(ItemType.SAFARI_BALL, 50, amt);
 	}
 
 	@Override
