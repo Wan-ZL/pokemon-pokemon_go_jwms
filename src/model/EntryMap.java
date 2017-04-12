@@ -5,7 +5,7 @@ import java.io.Serializable;
 /*
  * Map class to implement the game map
  */
-public class Map implements Serializable {
+public class EntryMap implements Serializable {
 
 	private static final long serialVersionUID = -7371246715182810289L;
 
@@ -13,7 +13,7 @@ public class Map implements Serializable {
 	private String[][] map;
 
 	//Constructor
-	public Map(String[][] map) {
+	public EntryMap(String[][] map) {
 		this.map = map;
 	}
 

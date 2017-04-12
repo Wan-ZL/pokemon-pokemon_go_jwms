@@ -1,6 +1,6 @@
 package controller;
 
-import model.Map;
+import model.EntryMap;
 
 //This class create the map by hard code 2D array
 public class MapCreater {
@@ -272,20 +272,20 @@ public class MapCreater {
 					// ---22---23---24---25---26---27---28---29---30---31---32---33---34---35
 					"t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t" } };
 	
-	private Map theMap;
+	private EntryMap theMap;
 	
 	//This is the constructor
 	public MapCreater(String map){
 		if(map.equals("StartMap")){
-			theMap = new Map(StartMap);
+			theMap = new EntryMap(StartMap);
 		}
 		else{
-			theMap = new Map(RightMap);
+			theMap = new EntryMap(RightMap);
 		}
 	}
 	
 	//return the map
-	public Map getMap(){
+	public EntryMap getMap(){
 		return theMap;
 	}
 	
