@@ -10,6 +10,7 @@ public class Trainer {
 	private static Trainer thisTrainer;
 	
 	public Trainer(String name) {
+		this.pack = new BackPack();
 		this.name = name;
 	}
 	
