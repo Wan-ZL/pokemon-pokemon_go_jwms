@@ -1,9 +1,11 @@
-package model;
+package model.pokemon;
 
-public class Torros extends Pokemon{
+import model.Pokemon;
 
-	public Torros() {
-		super(PokemonType.TORROS, 250, 30, PokemonRarity.COMMON);
+public class Tauros extends Pokemon{
+
+	public Tauros() {
+		super(PokemonType.Tauros, 250, 30, PokemonRarity.COMMON);
 	}
 
 	@Override

@@ -1,8 +1,8 @@
-package model;
+package model.pokemon;
 
 public enum PokemonType {
 
-	TORROS(0), RYHORN(1);
+	Mewtwo(0), Dragonair(1), Pinsir(2), Marowak(3), Tauros(4), Poliwag(5), Paras(6), Exeggcute(7), Parasect(8), Dratini(9);
 	
 	private int value;
 	

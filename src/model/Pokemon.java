@@ -2,6 +2,9 @@ package model;
 
 import java.util.Random;
 
+import model.pokemon.PokemonRarity;
+import model.pokemon.PokemonType;
+
 /*
  *  This is the super class Pokemon that inherits all other Pokemon classes
  */
@@ -108,13 +111,13 @@ public abstract class Pokemon {
 	public abstract void HitByRock();
 	
 	// Choose an action 
-	public PokemonAction chooseAction() {
+	public Action chooseAction() {
 		if (isEating()) {
-			return PokemonAction.EAT;
+			return Action.EAT;
 		} else if (fleeCheck()) {
-			return PokemonAction.RUN_AWAY_SUCCED;
+			return Action.RUN_AWAY_SUCCED;
 		} else {
-			return PokemonAction.ATTACK;
+			return Action.ATTACK;
 		}
 	}
 	

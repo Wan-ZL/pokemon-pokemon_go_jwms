@@ -1,13 +1,13 @@
 package model;
 
-public enum PokemonAction {
+public enum Action {
 
 	EAT(0), RUN_AWAY_FAIL(1), RUN_AWAY_SUCCED(2), ATTACK(3), THROW_ROCK(4),
 	THROW_BAIT(5), THROW_POKEBALL(6), NONE(-1);
 	
 	private int value;
 	
-	PokemonAction(int val) {
+	Action(int val) {
 		value = val;
 	}
 	
