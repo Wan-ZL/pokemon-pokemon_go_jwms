@@ -111,13 +111,13 @@ public abstract class Pokemon {
 	public abstract void HitByRock();
 	
 	// Choose an action 
-	public PokemonAction chooseAction() {
+	public Action chooseAction() {
 		if (isEating()) {
-			return PokemonAction.EAT;
+			return Action.EAT;
 		} else if (fleeCheck()) {
-			return PokemonAction.RUN_AWAY_SUCCED;
+			return Action.RUN_AWAY_SUCCED;
 		} else {
-			return PokemonAction.ATTACK;
+			return Action.ATTACK;
 		}
 	}
 	
