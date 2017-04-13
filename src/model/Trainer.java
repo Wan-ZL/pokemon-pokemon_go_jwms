@@ -1,5 +1,6 @@
 package model;
 
+import model.items.SafariBall;
 
 public class Trainer {
 
@@ -11,6 +12,7 @@ public class Trainer {
 	
 	public Trainer(String name) {
 		this.pack = new BackPack();
+		pack.addItem(new SafariBall(30));
 		this.name = name;
 	}
 	
