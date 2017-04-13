@@ -12,6 +12,7 @@ public class Trainer {
 	
 	public Trainer(String name) {
 		this.pack = new BackPack();
+		this.belt = new PokemonBelt();
 		pack.addItem(new SafariBall(30));
 		this.name = name;
 	}

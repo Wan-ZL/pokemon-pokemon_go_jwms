@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PokemonBelt {
+public class PokemonBelt implements Serializable{
 	
 	private ArrayList<Pokemon> belt;
 	
