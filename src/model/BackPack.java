@@ -8,6 +8,10 @@ import model.items.ItemType;
 
 public class BackPack implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1120322238595862779L;
 	private ArrayList<Item> pack;
 	private int maxItems, currAmt;
 	
