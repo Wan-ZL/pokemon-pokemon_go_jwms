@@ -87,7 +87,7 @@ public class MapView extends JPanel implements Observer{
 		//TODO: I want to check if the trainer is walking around
 		//		or just turn his face(change the direction) without
 		//		move
-		if(control.MoveChanged()){
+		if(data.MoveChanged()){
 			count = 4;
 			timer.start();
 			//TODO: These two methods are aim to change the trainer's status
