@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import model.items.Item;
 import model.items.ItemType;
 
-public class BackPack {
+public class BackPack implements Serializable{
 
 	private ArrayList<Item> pack;
 	private int maxItems, currAmt;
