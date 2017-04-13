@@ -73,9 +73,6 @@ public class Trainer {
 		return thisTrainer;
 	}
 	
-	public PokemonBelt getBelt(){					// return the pokemonbelt
-		return belt;
-	}
 	
 	public boolean addPokemon(Pokemon pokemon){		// add a pokemon to belt, return true if success
 		return this.belt.addPokemon(pokemon);
