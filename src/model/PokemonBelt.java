@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class PokemonBelt implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6433488251728986157L;
 	private ArrayList<Pokemon> belt;
 	
 	public PokemonBelt(){
