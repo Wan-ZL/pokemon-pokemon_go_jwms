@@ -63,4 +63,9 @@ public class Trainer implements Serializable{
 	public int getSize(){							// return the number of pokemon on belt.
 		return this.belt.getSize();
 	}
+	
+	
+	
+	
+	
 }
