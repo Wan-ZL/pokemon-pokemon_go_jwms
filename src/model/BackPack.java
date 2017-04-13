@@ -70,4 +70,9 @@ public class BackPack implements Serializable{
 	public void useItem() {
 		// TODO: determine what the item is and how to use it
 	}
+	
+	// return the Item at index
+	public Item getItemAt(int index) {
+		return pack.get(index);
+	}
 }
