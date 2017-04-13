@@ -10,7 +10,7 @@ public class Trainer {
 	
 	private static Trainer thisTrainer;
 	
-	public Trainer(String name) {
+	private Trainer(String name) {
 		this.pack = new BackPack();
 		this.belt = new PokemonBelt();
 		pack.addItem(new SafariBall(30));
