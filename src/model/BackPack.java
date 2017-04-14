@@ -1,18 +1,23 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import model.items.Item;
 import model.items.ItemType;
 
-public class BackPack {
+public class BackPack implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1120322238595862779L;
 	private ArrayList<Item> pack;
 	private int maxItems, currAmt;
 	
 	public BackPack() {
 		pack = new ArrayList<Item>();
-		maxItems = 50;
+		maxItems = 75;
 	}
 	
 	// Add an item to the pack
@@ -64,5 +69,10 @@ public class BackPack {
 	// Use an item from the pack
 	public void useItem() {
 		// TODO: determine what the item is and how to use it
+	}
+	
+	// return the Item at index
+	public Item getItemAt(int index) {
+		return pack.get(index);
 	}
 }

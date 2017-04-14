@@ -13,6 +13,7 @@ import java.util.Observer;
 import javax.swing.Timer;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import model.Trainer;
 
 public class MapView extends JPanel implements Observer{
 
@@ -32,12 +33,10 @@ public class MapView extends JPanel implements Observer{
 	private Timer timer;
 	private int count, xCount, yCount;
 	
-	//TODO: need work on this 
-	private DataController data;
+	private Trainer data;
 	
-	//Constructor
-	//TODO: I need to pass a data controller as the parameter
-	public MapView(DataController control){
+
+	public MapView(Trainer control){
 		this.data = control;
 		//this is to get the X axis for trainer
 		this.trainerX = control.getX();
@@ -90,7 +89,6 @@ public class MapView extends JPanel implements Observer{
 		if(data.MoveChanged()){
 			count = 4;
 			timer.start();
-			//TODO: These two methods are aim to change the trainer's status
 			data.setChangedMove(false);
 			data.setChangedDirection(false);
 		}
