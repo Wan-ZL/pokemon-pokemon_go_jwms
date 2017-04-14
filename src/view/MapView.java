@@ -108,7 +108,7 @@ public class MapView extends JPanel implements Observer{
 		for(int i=0; i<height; i++){
 			for(int j=0; j<width; j++){
 				//TODO: Data controller call getmap() to get the map, them get the location
-				String loc = data.getMap().getLocation(i,j);
+				String loc = data.getItemOnMap(i,j);
 				//Draw images by compare strings
 				if (loc.equals("t")) {
 					g2.drawImage(tree, j * 20, i * 20, null);
