@@ -1,6 +1,5 @@
 package controller;
 
-import model.EntryMap;
 
 //This class create the map by hard code 2D array
 public class MapCreater {
@@ -272,25 +271,12 @@ public class MapCreater {
 					// ---22---23---24---25---26---27---28---29---30---31---32---33---34---35
 					"t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t" } };
 	
-	private EntryMap theMap;
 	
-	//This is the constructor
-	public MapCreater(String map){
-		if(map.equals("StartMap")){
-			theMap = new EntryMap(StartMap);
-		}
-		else{
-			theMap = new EntryMap(RightMap);
-		}
+	public String[][] getMap1(){		// return the start map
+		return this.StartMap;
 	}
 	
-	//return the map
-	public EntryMap getMap(){
-		return theMap;
-	}
-	
-	//return the location from a map
-	public String getMapLocation(int a, int b){
-		return theMap.getLocation(a, b);
+	public String[][] getMap2(){		// return the second map
+		return this.RightMap;
 	}
 }

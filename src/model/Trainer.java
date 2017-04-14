@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Point;
 
+import controller.MapCreater;
 import model.items.SafariBall;
 
 public class Trainer {
@@ -9,14 +10,19 @@ public class Trainer {
 	private String name;
 	private BackPack pack;
 	private PokemonBelt belt;
+	private Map theMap;
 	private String trainerDirection;				// the trainer direction. Type is String
 	private Point trainerPosition;					// the trainer position. Type is Point. Point initial is (0,0)
 	private boolean positionChanged;
 	private boolean moved;
 	
+	private int map;	// 1 means trainer in map1, 2 means trainer in map2
+	
 	private static Trainer thisTrainer;
 	
 	private Trainer(String name) {
+		this.map = 1;
+		this.theMap = new Map();
 		this.pack = new BackPack();
 		pack.addItem(new SafariBall(30));
 		this.name = name;
@@ -25,7 +31,6 @@ public class Trainer {
 		this.trainerPosition.setLocation(0, 0);
 		this.positionChanged = false;
 		this.moved = false;
-		
 		
 	}
 	
@@ -92,5 +97,13 @@ public class Trainer {
 	
 	public int getSize(){							// return the number of pokemon on belt.
 		return this.belt.getSize();
+	}
+	
+	public String[][] getWholeMap(){				// return the whole map. return a string 2d array
+		return this.theMap.getMap(map);
+	}
+	
+	public String getItemOnMap(int x, int y){		// return the Item on map, like tree or stone. return value is String
+		return this.theMap.getMap(map)[x][y];
 	}
 }
