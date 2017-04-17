@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class pokemonGUI extends JFrame {
 	private JPanel currentView;
 	private Trainer trainer;
 	private MapView map;
+	private Container cp;
 	
 	public pokemonGUI(Trainer trainer) {
 		this.trainer = trainer;
@@ -32,10 +34,11 @@ public class pokemonGUI extends JFrame {
 	private void setUpGameWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Pokemon Safari Zone");
-		this.setSize(1000, 1000);
+		this.setSize(738, 590);
 		this.setLocation(100, 100);
-		this.setLayout(null);
+		cp = getContentPane();
 		currentView = map;
+		cp.add(currentView);
 		setupMenu();
 	}
 
@@ -48,6 +51,7 @@ public class pokemonGUI extends JFrame {
 		menu.add(pack);
 		save.addActionListener(new BackPackWindow());
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.add(menu);
 		this.setJMenuBar(menuBar);
 	}
 	
