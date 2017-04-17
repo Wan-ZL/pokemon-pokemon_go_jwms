@@ -38,6 +38,10 @@ public class Trainer {
 		return this.moved;
 	}
 	
+	public String getName(){
+		return this.name;
+	}
+	
 	public void setChangedMove(boolean status){
 		this.moved = status;
 	}
