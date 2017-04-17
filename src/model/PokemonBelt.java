@@ -27,8 +27,8 @@ public class PokemonBelt implements Serializable{
 		return belt.remove(index);
 	}
 	
-	public Pokemon[] getBeltArray(){				// return the whole pokemon on belt, type is array of pokemon
-		return (Pokemon[]) belt.toArray();
+	public ArrayList<Pokemon> getBeltArray(){				// return the whole pokemon on belt, type is array of pokemon
+		return this.belt;
 	}
 	
 	public int getSize(){							// return the number of pokemon on belt.

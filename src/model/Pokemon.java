@@ -29,9 +29,10 @@ public abstract class Pokemon {
 	}
 	
 	// returns the type of the Pokemon as a string
-	public String getType() {
+	public String getName() {
 		return this.type.toString();
 	}
+	
 	
 	// returns the level of the Pokemon
 	public int getLevel() {

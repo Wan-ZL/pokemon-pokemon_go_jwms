@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import model.items.SafariBall;
 
@@ -36,6 +37,10 @@ public class Trainer implements Serializable{
 		return this.name;
 	}
 	
+	public void setName(String name){
+		this.name = name;
+	}
+	
 	public void addStep(){							// step add one
 		this.step++;
 	}
@@ -56,12 +61,20 @@ public class Trainer implements Serializable{
 		return this.belt.removePokemon(index);
 	}
 	
-	public Pokemon[] getBeltArray(){				// return the whole pokemon on belt, type is array of pokemon
+	public void removeAllPokemoninBelt(){			// remove all pokemon in belt. (new pokemonbelt)
+		this.belt = new PokemonBelt();
+	}
+	
+	public ArrayList<Pokemon> getBeltArray(){				// return the whole pokemon on belt, type is array of pokemon
 		return this.belt.getBeltArray();
 	}
 	
 	public int getSize(){							// return the number of pokemon on belt.
 		return this.belt.getSize();
+	}
+	
+	public Pokemon getPokemon(int index){
+		return this.belt.getBeltArray().get(index);
 	}
 	
 	
