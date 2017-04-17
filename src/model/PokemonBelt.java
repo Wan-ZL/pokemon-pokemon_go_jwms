@@ -3,7 +3,10 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PokemonBelt implements Serializable{
+
+import model.items.Item;
+
+public class PokemonBelt {
 	
 	/**
 	 * 
