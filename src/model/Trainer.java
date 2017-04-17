@@ -106,8 +106,8 @@ public class Trainer {
 	public String[][] getWholeMap(){				// return the whole map. return a string 2d array
 		return this.theMap.getMap(map);
 	}
-	
-	public String getItemOnMap(int x, int y){		// return the Item on map, like tree or stone. return value is String
-		return this.theMap.getMap(map)[x][y];
+
+	public String getItemOnMap(int i, int j) {      // return the Item on map, like tree or stone. return value is String
+		return this.theMap.getMap(map)[i][j];
 	}
 }
