@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import model.Trainer;
@@ -16,6 +17,7 @@ public class pokemonGO {
 	public static void main(String[] args){
 		setUpModel();
 		pokemonGUI g = new pokemonGUI(trainer);
+		g.setVisible(true);
 	}
 
 	private static void setUpModel() {
@@ -28,7 +30,7 @@ public class pokemonGO {
 			try {
 				fis = new FileInputStream("saveData");
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(new JFrame(), "No save data found!");
 			}
 			
 			// Attempt to open an Object stream from the file stream
