@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import model.items.Item;
 import model.items.SafariBall;
 
 public class Trainer implements Serializable{
@@ -65,8 +66,12 @@ public class Trainer implements Serializable{
 		this.belt = new PokemonBelt();
 	}
 	
-	public ArrayList<Pokemon> getBeltArray(){				// return the whole pokemon on belt, type is array of pokemon
+	public ArrayList<Pokemon> getBeltArray(){		// return the whole pokemon on belt, type is array of pokemon
 		return this.belt.getBeltArray();
+	}
+	
+	public ArrayList<Item> getBackpackArray(){		// return the whole backpack
+		return this.pack.getBackpackArray();
 	}
 	
 	public int getSize(){							// return the number of pokemon on belt.
@@ -76,7 +81,6 @@ public class Trainer implements Serializable{
 	public Pokemon getPokemon(int index){
 		return this.belt.getBeltArray().get(index);
 	}
-	
 	
 	
 	
