@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import model.items.Item;
+
 public class PokemonBelt {
 	
 	private ArrayList<Pokemon> belt;
@@ -22,8 +24,8 @@ public class PokemonBelt {
 		return belt.remove(index);
 	}
 	
-	public Pokemon[] getBeltArray(){				// return the whole pokemon on belt, type is array of pokemon
-		return (Pokemon[]) belt.toArray();
+	public ArrayList<Pokemon> getBeltArray(){				// return the whole pokemon on belt, type is array of pokemon
+		return this.belt;
 	}
 	
 	public int getSize(){							// return the number of pokemon on belt.

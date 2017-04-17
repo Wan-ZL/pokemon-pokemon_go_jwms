@@ -1,8 +1,10 @@
 package model;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import controller.MapCreater;
+import model.items.Item;
 import model.items.SafariBall;
 
 public class Trainer {
@@ -95,8 +97,12 @@ public class Trainer {
 		return this.belt.removePokemon(index);
 	}
 	
-	public Pokemon[] getBeltArray(){				// return the whole pokemon on belt, type is array of pokemon
+	public ArrayList<Pokemon> getBeltArray(){		// return the whole belt
 		return this.belt.getBeltArray();
+	}
+	
+	public ArrayList<Item> getBackpackArray(){		// return the whole backpack
+		return this.pack.getBackpackArray();
 	}
 	
 	public int getSize(){							// return the number of pokemon on belt.

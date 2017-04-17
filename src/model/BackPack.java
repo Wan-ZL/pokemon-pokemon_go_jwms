@@ -75,4 +75,8 @@ public class BackPack implements Serializable{
 	public Item getItemAt(int index) {
 		return pack.get(index);
 	}
+	
+	public ArrayList<Item> getBackpackArray(){
+		return this.pack;
+	}
 }
