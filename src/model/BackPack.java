@@ -83,57 +83,63 @@ public class BackPack implements Serializable, TableModel{
 		return this.pack;
 	}
 
-	@Override
-	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	// need to implement these method for table model interface
+		@Override
+		public int getRowCount() {
+			return pack.size();
+		}
 
-	@Override
-	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		@Override
+		public int getColumnCount() {
+			return 2;
+		}
 
-	@Override
-	public String getColumnName(int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		@Override
+		public String getColumnName(int columnIndex) {
+			if(columnIndex == 0)
+				return "Name";
+			else
+				return "Value";
+		}
 
-	@Override
-	public Class<?> getColumnClass(int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		@Override
+		public Class<?> getColumnClass(int columnIndex) {
+			if(columnIndex <=1)
+				return String.class;
+			else 
+				return Integer.class;
+		}
 
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		@Override
+		public boolean isCellEditable(int rowIndex, int columnIndex) {
+			// TODO Auto-generated method stub
+			return false;
+		}
 
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		@Override
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			Item item = pack.get(rowIndex);
+			if(columnIndex == 0)	
+				return item.getType();
+			else
+				return item.getAmount();
+		}
 
-	@Override
-	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		
-	}
+		@Override
+		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+			// TODO Auto-generated method stub
+			
+		}
 
-	@Override
-	public void addTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
-		
-	}
+		@Override
+		public void addTableModelListener(TableModelListener l) {
+			// TODO Auto-generated method stub
+			
+		}
 
-	@Override
-	public void removeTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
-		
-	}
+		@Override
+		public void removeTableModelListener(TableModelListener l) {
+			// TODO Auto-generated method stub
+			
+		}
 }
