@@ -7,6 +7,7 @@ import java.awt.Point;
 
 import controller.MapCreater;
 import model.items.Item;
+import model.items.ItemType;
 import model.items.MaxPotion;
 import model.items.SafariBall;
 import model.pokemon.Paras;
@@ -172,6 +173,17 @@ public class Trainer implements Serializable {
 	}
 	//*
 	
+
+	public int getPokemonNumberinBelt(){			// return the number of pokemon on belt.
+		return this.belt.getSize();
+	}
+	
+	public int getItemNumberinPack(){				// return the number of item in backpack
+		return this.pack.getSize();
+	}
+	
+	public String[][] getWholeMap(){				// return the whole map. return a string 2d array
+		return this.theMap.getMap(map);
 	public PokemonBelt getPokemonBelt(){
 		return belt;
 	}
@@ -189,6 +201,14 @@ public class Trainer implements Serializable {
 	public String[][] getWholeMap() { // return the whole map. return a string
 										// 2d array
 		return this.theMap.getMap();
+	}
+	
+	public void discardItem(ItemType type, int num){// Discards the given amount of an item
+		this.pack.discardItem(type, num);
+	}
+	
+	public void useItem(ItemType type){				// Use an item from the pack. (remove the item from pack)
+		this.pack.useItem(type);
 	}
 
 	public String getItemOnMap(int i, int j) { // return the Item on map, like
