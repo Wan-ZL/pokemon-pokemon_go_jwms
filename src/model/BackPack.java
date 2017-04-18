@@ -66,9 +66,9 @@ public class BackPack implements Serializable{
 		return (currAmt + amt) <= maxItems;
 	}
 	
-	// Use an item from the pack
-	public void useItem() {
-		// TODO: determine what the item is and how to use it
+	// Use an item from the pack. (remove the item from pack)
+	public void useItem(ItemType type) {
+		this.pack.remove(type);
 	}
 	
 	// return the Item at index
@@ -78,5 +78,9 @@ public class BackPack implements Serializable{
 	
 	public ArrayList<Item> getBackpackArray(){
 		return this.pack;
+	}
+	
+	public int getSize(){		// return the size of arraylist
+		return this.pack.size();
 	}
 }
