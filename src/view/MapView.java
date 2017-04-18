@@ -17,11 +17,12 @@ import model.Trainer;
 
 public class MapView extends JPanel implements Observer{
 
-	private static final long serialVersionUID = 3336864412070556704L;
 	private int height = 26;
 	private int width = 36;
 	private int trainerX;
 	private int trainerY;
+	
+	
 	//Images
 	private Image grass, RoadOne, RoadTwo, sand, water, tree, sign, RoughRoad, Rock, stairs;
 	private BufferedImage Trainer, forward, backward, left, right, forward_walking_left, forward_walking_right,
