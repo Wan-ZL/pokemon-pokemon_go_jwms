@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
 
-import model.items.Item;
-
 public class PokemonBelt implements ListModel<String>{
 	
 	private ArrayList<Pokemon> belt;

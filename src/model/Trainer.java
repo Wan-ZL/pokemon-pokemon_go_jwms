@@ -27,6 +27,7 @@ public class Trainer {
 		this.theMap = new Map();
 		this.pack = new BackPack();
 		pack.addItem(new SafariBall(30));
+		this.belt = new PokemonBelt();
 		this.name = name;
 		this.trainerDirection = "down";
 		this.trainerPosition = new Point();

@@ -20,9 +20,9 @@ import model.Trainer;
 
 public class ItemView extends JPanel implements Observer {
 	private JTable table;	// hold all the items
-	private JList list;		// hold all the caught pokemon
+	private JList<String> list;		// hold all the caught pokemon
 
-	private ListModel list_model;
+	private ListModel<String> list_model;
 	private TableModel table_model;
 	
 	private Trainer trainer;
@@ -34,9 +34,10 @@ public class ItemView extends JPanel implements Observer {
 		JLabel name = new JLabel(trainer.getName());
 		this.add(name);
 		
-		list = new JList();
+		list = new JList<String>();
 		//this.add(list);
 		list_model = trainer.getPokemonBelt();
+		System.out.println(list_model);
 		list.setModel(list_model);
 		list.setBackground(Color.red);
 		
