@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Container;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -40,6 +41,7 @@ public class pokemonGUI extends JFrame {
 		cp = getContentPane();
 		currentView = map;
 		currentView.addKeyListener(new MoveListener());
+		cp.setLayout(new GridLayout());
 		cp.add(currentView);
 		setupMenu();
 		setupItems();
