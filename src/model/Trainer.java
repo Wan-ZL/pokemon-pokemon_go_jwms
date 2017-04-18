@@ -7,7 +7,9 @@ import java.awt.Point;
 
 import controller.MapCreater;
 import model.items.Item;
+import model.items.MaxPotion;
 import model.items.SafariBall;
+import model.pokemon.Paras;
 
 public class Trainer implements Serializable {
 
@@ -36,7 +38,12 @@ public class Trainer implements Serializable {
 		this.theMap = new Map();
 		this.pack = new BackPack();
 		this.belt = new PokemonBelt();
+		// initialize the default items
 		pack.addItem(new SafariBall(30));
+		pack.addItem(new MaxPotion(20));
+		
+		belt.addPokemon(new Paras());
+		
 		this.name = name;
 		this.trainerDirection = "down";
 		this.trainerPosition = new Point();
@@ -94,7 +101,7 @@ public class Trainer implements Serializable {
 	public static Trainer getTrainerInstance() { // create instance variable of
 													// trainer
 		if (thisTrainer == null) {
-			thisTrainer = new Trainer("Trainer Name");
+			thisTrainer = new Trainer("This is default name"); 	// this is default name
 		}
 		return thisTrainer;
 	}

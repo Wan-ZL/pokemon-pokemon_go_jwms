@@ -40,6 +40,13 @@ public class PokemonBelt implements ListModel<String> {
 		return belt.size();
 	}
 
+	public String toString(){
+		String str = "";
+		for(int i=0; i < belt.size(); i++)
+			str += belt.get(i).getName() + "  ";
+		return str;
+	}
+	
 	
 	
 	// methods for list model

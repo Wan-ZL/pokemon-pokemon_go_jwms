@@ -84,7 +84,12 @@ public class BackPack implements TableModel,Serializable{
 	}
 
 	
-	
+	public String toString(){
+		String str = "";
+		for(int i=0; i < pack.size(); i++)
+			str += pack.get(i).getType() + "  ";
+		return str;
+	}
 	
 	
 	// need to implement these method for table model interface
