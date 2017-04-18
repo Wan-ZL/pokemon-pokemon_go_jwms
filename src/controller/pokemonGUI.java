@@ -16,6 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import model.Trainer;
+import view.ItemView;
 import view.MapView;
 
 public class pokemonGUI extends JFrame {
@@ -26,6 +27,7 @@ public class pokemonGUI extends JFrame {
 	private Trainer trainer;
 	private MapView map;
 	private Container cp;
+	private ItemView items;
 	
 	public pokemonGUI(Trainer trainer) {
 		this.trainer = trainer;
@@ -43,6 +45,7 @@ public class pokemonGUI extends JFrame {
 		currentView.addKeyListener(new MoveListener());
 		cp.add(currentView);
 		setupMenu();
+		setupItems();
 	}
 
 	private void setupMenu() {
@@ -56,6 +59,12 @@ public class pokemonGUI extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.add(menu);
 		this.setJMenuBar(menuBar);
+	}
+	
+	private void setupItems(){
+		items = new ItemView(trainer);
+		this.add(items);
+		System.out.println("here");
 	}
 	
 	private class SaveGame implements ActionListener {

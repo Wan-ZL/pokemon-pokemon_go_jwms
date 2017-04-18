@@ -7,7 +7,7 @@ import javax.swing.event.ListDataListener;
 
 import model.items.Item;
 
-public class PokemonBelt implements ListModel{
+public class PokemonBelt implements ListModel<String>{
 	
 	private ArrayList<Pokemon> belt;
 	
@@ -36,7 +36,7 @@ public class PokemonBelt implements ListModel{
 	}
 
 	@Override
-	public Object getElementAt(int index) {
+	public String getElementAt(int index) {
 		// TODO Auto-generated method stub
 		return belt.get(index).getName();
 	}
