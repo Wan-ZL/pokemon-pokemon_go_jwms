@@ -116,4 +116,12 @@ public class Trainer {
 	public String getItemOnMap(int i, int j) {      // return the Item on map, like tree or stone. return value is String
 		return this.theMap.getMap(map)[i][j];
 	}
+	
+	public PokemonBelt getPokemonBelt(){
+		return belt;
+	}
+	
+	public BackPack getBackpack(){
+		return this.pack;
+	}
 }
