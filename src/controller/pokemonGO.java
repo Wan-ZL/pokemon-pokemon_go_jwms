@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import model.Trainer;
 
 public class pokemonGO {
-	
+	// have a trainer instance 
 	private static Trainer trainer;
 	
 	public static void main(String[] args){
@@ -56,6 +56,7 @@ public class pokemonGO {
 			}
 		} 
 		else {
+			// start from fresh 
 			trainer = Trainer.getTrainerInstance();
 		}
 		
