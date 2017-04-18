@@ -3,6 +3,8 @@ package controller;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
@@ -27,7 +29,7 @@ public class pokemonGUI extends JFrame {
 	
 	public pokemonGUI(Trainer trainer) {
 		this.trainer = trainer;
-		this.map = new MapView(trainer);
+		this.map = new MapView();
 		setUpGameWindow();
 	}
 
@@ -38,6 +40,7 @@ public class pokemonGUI extends JFrame {
 		this.setLocation(100, 100);
 		cp = getContentPane();
 		currentView = map;
+		currentView.addKeyListener(new MoveListener());
 		cp.add(currentView);
 		setupMenu();
 	}
@@ -70,6 +73,28 @@ public class pokemonGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Open a window to show items
+			
+		}
+		
+	}
+	
+	private class MoveListener implements KeyListener {
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			//if (e.getKeyCode())
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
 			
 		}
 		

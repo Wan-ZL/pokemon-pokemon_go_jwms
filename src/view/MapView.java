@@ -24,7 +24,7 @@ public class MapView extends JPanel implements Observer{
 	private int trainerY;
 	//Images
 	private Image grass, RoadOne, RoadTwo, sand, water, tree, sign, RoughRoad, Rock, stairs;
-	private BufferedImage Trainer, forward, backward, left, right, forward_walking_left, forward_walking_right,
+	private BufferedImage trainer, forward, backward, left, right, forward_walking_left, forward_walking_right,
 			backward_walking_left, backward_walking_right, left_walking_left, left_walking_right, right_walking_left,
 			right_walking_right;
 
@@ -36,12 +36,13 @@ public class MapView extends JPanel implements Observer{
 	private Trainer data;
 	
 
-	public MapView(Trainer control){
-		this.data = control;
+	public MapView(){
+		data = Trainer.getTrainerInstance();
+		//this.data = control;
 		//this is to get the X axis for trainer
-		this.trainerX = control.getX();
+		this.trainerX = data.getX();
 		//this is to get the Y axis for trainer
-		this.trainerY = control.getY();
+		this.trainerY = data.getY();
 		
 		//TODO: set the images
 		try{
@@ -56,21 +57,21 @@ public class MapView extends JPanel implements Observer{
 			Rock = ImageIO.read(new File("image/Rock.png"));
 			stairs = ImageIO.read(new File("image/Stair.png"));
 
-			Trainer = ImageIO.read(new File("image/TrainerMove.png"));
+			trainer = ImageIO.read(new File("image/TrainerMove.png"));
 
-			forward = Trainer.getSubimage(0, 64, spriteSize, spriteSize);
-			backward = Trainer.getSubimage(0, 0, spriteSize, spriteSize);
-			left = Trainer.getSubimage(0, 32, spriteSize, spriteSize);
-			right = Trainer.getSubimage(0, 96, spriteSize, spriteSize);
+			forward = trainer.getSubimage(0, 64, spriteSize, spriteSize);
+			backward = trainer.getSubimage(0, 0, spriteSize, spriteSize);
+			left = trainer.getSubimage(0, 32, spriteSize, spriteSize);
+			right = trainer.getSubimage(0, 96, spriteSize, spriteSize);
 
-			forward_walking_left = Trainer.getSubimage(32, 64, spriteSize, spriteSize);
-			forward_walking_right = Trainer.getSubimage(64, 64, spriteSize, spriteSize);
-			backward_walking_left = Trainer.getSubimage(32, 0, spriteSize, spriteSize);
-			backward_walking_right = Trainer.getSubimage(64, 0, spriteSize, spriteSize);
-			left_walking_left = Trainer.getSubimage(32, 32, spriteSize, spriteSize);
-			left_walking_right = Trainer.getSubimage(64, 32, spriteSize, spriteSize);
-			right_walking_left = Trainer.getSubimage(32, 96, spriteSize, spriteSize);
-			right_walking_right = Trainer.getSubimage(64, 96, spriteSize, spriteSize);
+			forward_walking_left = trainer.getSubimage(32, 64, spriteSize, spriteSize);
+			forward_walking_right = trainer.getSubimage(64, 64, spriteSize, spriteSize);
+			backward_walking_left = trainer.getSubimage(32, 0, spriteSize, spriteSize);
+			backward_walking_right = trainer.getSubimage(64, 0, spriteSize, spriteSize);
+			left_walking_left = trainer.getSubimage(32, 32, spriteSize, spriteSize);
+			left_walking_right = trainer.getSubimage(64, 32, spriteSize, spriteSize);
+			right_walking_left = trainer.getSubimage(32, 96, spriteSize, spriteSize);
+			right_walking_right = trainer.getSubimage(64, 96, spriteSize, spriteSize);
 		}catch(IOException e){
 			System.out.println("Cannot find the image file.");
 		}
