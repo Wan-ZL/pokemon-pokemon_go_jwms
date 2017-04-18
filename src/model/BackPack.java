@@ -86,8 +86,7 @@ public class BackPack implements TableModel,Serializable{
 	
 	public int getSize(){		// return the size of arraylist
 		return this.pack.size();
-
-
+	}
 	
 	public String toString(){
 		String str = "";

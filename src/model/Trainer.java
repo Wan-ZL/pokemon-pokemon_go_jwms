@@ -183,7 +183,9 @@ public class Trainer implements Serializable {
 	}
 	
 	public String[][] getWholeMap(){				// return the whole map. return a string 2d array
-		return this.theMap.getMap(map);
+		return null;//this.theMap.getMap(map);		!!!!!!!
+	}
+	
 	public PokemonBelt getPokemonBelt(){
 		return belt;
 	}
@@ -196,11 +198,6 @@ public class Trainer implements Serializable {
 	
 	public int getSize() { // return the number of pokemon on belt.
 		return this.belt.getSize();
-	}
-
-	public String[][] getWholeMap() { // return the whole map. return a string
-										// 2d array
-		return this.theMap.getMap();
 	}
 	
 	public void discardItem(ItemType type, int num){// Discards the given amount of an item
