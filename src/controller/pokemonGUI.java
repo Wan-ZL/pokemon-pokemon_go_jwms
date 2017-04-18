@@ -1,5 +1,9 @@
 package controller;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
@@ -7,12 +11,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import model.Trainer;
+import view.ItemView;
 import view.MapView;
 
 public class pokemonGUI extends JFrame {
@@ -21,10 +27,14 @@ public class pokemonGUI extends JFrame {
 	
 	private JPanel currentView;
 	private Trainer trainer;
-	private MapView map;
 	
+	private MapView map;
+	private ItemView items;
+	
+	// need to know the trainer
 	public pokemonGUI(Trainer trainer) {
 		this.trainer = trainer;
+		// the map need to be set
 		this.map = new MapView(trainer);
 		setUpGameWindow();
 	}
@@ -34,9 +44,25 @@ public class pokemonGUI extends JFrame {
 		this.setTitle("Pokemon Safari Zone");
 		this.setSize(1000, 1000);
 		this.setLocation(100, 100);
-		this.setLayout(null);
 		currentView = map;
+		
+		
+		this.setLayout(new GridLayout(1, 3));
+		
+		/*
+		// map panel
+		JPanel mapPanel = new JPanel();
+		this.add(mapPanel);
+		mapPanel.setBackground(Color.pink);
+		
+		// item panel
+		JPanel itemsPanel = new JPanel();
+		this.add(itemsPanel);
+		itemsPanel.setBackground(Color.green);
+		*/
 		setupMenu();
+		setupMap();
+		setupItems();
 	}
 
 	private void setupMenu() {
@@ -51,12 +77,26 @@ public class pokemonGUI extends JFrame {
 		this.setJMenuBar(menuBar);
 	}
 	
+	private void setupMap(){
+		map = new MapView(trainer);
+		this.add(map);
+	}
+	
+	private void setupItems(){
+		items = new ItemView(trainer);
+		this.add(items);
+		System.out.println("here");
+	}
+	
+	
+	
+	
 	private class SaveGame implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO save the game into a file
-			
+			// what need to be saved 
 		}
 		
 	}

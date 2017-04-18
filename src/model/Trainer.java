@@ -133,6 +133,7 @@ public class Trainer implements Serializable {
 		return this.belt.removePokemon(index);
 	}
 
+	//*
 	public ArrayList<Pokemon> getBeltArray() { // return the whole belt
 		return this.belt.getBeltArray();
 	}
@@ -140,7 +141,18 @@ public class Trainer implements Serializable {
 	public ArrayList<Item> getBackpackArray() { // return the whole backpack
 		return this.pack.getBackpackArray();
 	}
-
+	//*
+	
+	public PokemonBelt getPokemonBelt(){
+		return belt;
+	}
+	
+	public BackPack getBackpack(){
+		return this.pack;
+	}
+	
+	
+	
 	public int getSize() { // return the number of pokemon on belt.
 		return this.belt.getSize();
 	}
