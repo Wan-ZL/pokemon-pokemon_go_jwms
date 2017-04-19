@@ -13,11 +13,16 @@ import java.util.Observer;
 import javax.swing.Timer;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import model.Map;
 import model.Trainer;
 
 public class MapView extends JPanel implements Observer{
 
 	private static final long serialVersionUID = 3336864412070556704L;
+	
+	private Map theMap;
+	private int mapNum;
 	private int height = 26;
 	private int width = 36;
 	private int trainerX;
@@ -43,6 +48,8 @@ public class MapView extends JPanel implements Observer{
 		this.trainerX = data.getX();
 		//this is to get the Y axis for trainer
 		this.trainerY = data.getY();
+		this.theMap = new Map();
+		this.mapNum = data.getMapNum();
 		
 		this.setSize(20*36, 26*20);
 		
@@ -111,7 +118,7 @@ public class MapView extends JPanel implements Observer{
 		for(int i=0; i<height; i++){
 			for(int j=0; j<width; j++){
 				//TODO: Data controller call getmap() to get the map, them get the location
-				String loc = data.getItemOnMap(i, j);
+				String loc = theMap.getItemOnMap(mapNum ,i, j);
 				//Draw images by compare strings
 				if (loc.equals("t")) {
 					g2.drawImage(tree, j * 20, i * 20, null);

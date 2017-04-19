@@ -14,7 +14,6 @@ public class Trainer implements Serializable{
 	private String name;
 	private BackPack pack;
 	private PokemonBelt belt;
-	private Map theMap;
 	private String trainerDirection;				// the trainer direction. Type is String
 	private Point trainerPosition;					// the trainer position. Type is Point. Point initial is (0,0)
 	private boolean positionChanged;
@@ -26,7 +25,6 @@ public class Trainer implements Serializable{
 	
 	private Trainer(String name) {
 		this.map = 1;
-		this.theMap = new Map();
 		this.pack = new BackPack();
 		pack.addItem(new SafariBall(30));
 		this.belt = new PokemonBelt();
@@ -49,6 +47,10 @@ public class Trainer implements Serializable{
 	
 	public void setChangedMove(boolean status){
 		this.moved = status;
+	}
+	
+	public int getMapNum() {
+		return map;
 	}
 	
 	public int getX(){						// return trainer x position
@@ -110,14 +112,6 @@ public class Trainer implements Serializable{
 	
 	public int getSize(){							// return the number of pokemon on belt.
 		return this.belt.getSize();
-	}
-	
-	public String[][] getWholeMap(){				// return the whole map. return a string 2d array
-		return this.theMap.getMap(map);
-	}
-
-	public String getItemOnMap(int i, int j) {      // return the Item on map, like tree or stone. return value is String
-		return this.theMap.getMap(map)[i][j];
 	}
 	
 	public PokemonBelt getPokemonBelt(){

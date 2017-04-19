@@ -25,4 +25,8 @@ public class Map implements Serializable{								// this class store the two map
 			return map2;
 		}
 	}
+	
+	public String getItemOnMap(int map, int i, int j) {      // return the Item on map, like tree or stone. return value is String
+		return this.getMap(map)[i][j];
+	}
 }
