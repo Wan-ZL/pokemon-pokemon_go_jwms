@@ -1,14 +1,16 @@
 package model;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import controller.MapCreater;
 import model.items.Item;
 import model.items.SafariBall;
 
-public class Trainer {
+public class Trainer implements Serializable{
 
+	private static final long serialVersionUID = -6525984868814788240L;
+	
 	private String name;
 	private BackPack pack;
 	private PokemonBelt belt;
