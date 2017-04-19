@@ -22,11 +22,11 @@ public abstract class Pokemon implements Serializable{
 	// super class constructor
 	public Pokemon(PokemonType type, int baseHP, int baseSpeed, PokemonRarity rarity) {
 		this.type = type;
-		this.hp = baseHP + rand.nextInt(75);
 		this.speed = baseSpeed + rand.nextInt(20);
 		this.rarity = rarity;
 		this.damage = 0;
 		this.lvl = 25 + rand.nextInt(10);
+		this.hp = baseHP + rand.nextInt(75) + (lvl*rand.nextInt(4));
 		this.fleeChance = 12 * this.rarity.getValue();
 		this.catchChance = 42 / this.rarity.getValue();
 	}
