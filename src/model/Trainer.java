@@ -18,6 +18,7 @@ public class Trainer implements Serializable{
 	private Point trainerPosition;					// the trainer position. Type is Point. Point initial is (0,0)
 	private boolean positionChanged;
 	private boolean moved;
+	private int step;
 	
 	private int map;	// 1 means trainer in map1, 2 means trainer in map2
 	
@@ -25,16 +26,29 @@ public class Trainer implements Serializable{
 	
 	private Trainer(String name) {
 		this.map = 1;
+		this.step = 500;
 		this.pack = new BackPack();
 		pack.addItem(new SafariBall(30));
 		this.belt = new PokemonBelt();
 		this.name = name;
 		this.trainerDirection = "down";
 		this.trainerPosition = new Point();
-		this.trainerPosition.setLocation(10, 0);
+		this.trainerPosition.setLocation(10, 1);
 		this.positionChanged = false;
 		this.moved = false;
 		
+	}
+	
+	public int getStep(){
+		return this.step;
+	}
+	
+	public void setPosition(int x, int y){
+		this.trainerPosition.setLocation(x, y);
+	}
+	
+	public int getMap(){
+		return this.map;
 	}
 	
 	public boolean MoveChanged(){
