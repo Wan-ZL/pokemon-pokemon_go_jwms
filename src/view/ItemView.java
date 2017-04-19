@@ -34,6 +34,8 @@ public class ItemView extends JPanel implements Observer {
 		JLabel name = new JLabel(trainer.getName());
 		this.add(name);
 		
+		this.setSize(300, 26*20);
+		
 		list = new JList<String>();
 		//this.add(list);
 		list_model = trainer.getPokemonBelt();

@@ -44,6 +44,8 @@ public class MapView extends JPanel implements Observer{
 		//this is to get the Y axis for trainer
 		this.trainerY = data.getY();
 		
+		this.setSize(20*36, 26*20);
+		
 		//TODO: set the images
 		try{
 			grass = ImageIO.read(new File("image/big bush.png"));
@@ -193,6 +195,14 @@ public class MapView extends JPanel implements Observer{
 				g2.drawImage(left, trainerX * 20 - 6 + xCount, trainerY * 20 - 12 + yCount, null);
 			}
 		}
+	}
+	
+	public int getMapWidth() {
+		return 20 * width;
+	}
+	
+	public int getMapHeight() {
+		return 20 * height;
 	}
 	
 	/**

@@ -36,12 +36,14 @@ public class pokemonGUI extends JFrame {
 	private void setUpGameWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Pokemon Safari Zone");
-		this.setSize(738, 590);
+		this.setSize((20*36)+300, 590);
 		this.setLocation(100, 100);
 		cp = getContentPane();
 		currentView = map;
+		currentView.setLocation(0, 0);
+		currentView.setSize(map.getWidth(), map.getHeight());
 		currentView.addKeyListener(new MoveListener());
-		cp.setLayout(new GridLayout());
+		cp.setLayout(null);
 		cp.add(currentView);
 		setupMenu();
 		setupItems();
@@ -62,6 +64,7 @@ public class pokemonGUI extends JFrame {
 	
 	private void setupItems(){
 		items = new ItemView(trainer);
+		items.setLocation(map.getWidth(), 0);
 		cp.add(items);
 		//System.out.println("here");
 	}
