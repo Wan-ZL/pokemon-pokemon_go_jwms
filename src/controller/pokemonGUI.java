@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,6 +18,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import model.Map;
 import model.Trainer;
 import view.ItemView;
 import view.MapView;
@@ -24,13 +29,15 @@ public class pokemonGUI extends JFrame {
 	
 	private MapView currentView;
 	private Trainer trainer;
-	private MapView map;
+	private MapView mapView;
 	private Container cp;
 	private ItemView items;
+	private Map map;
 	
 	public pokemonGUI(Trainer trainer) {
+		this.map = new Map();
 		this.trainer = trainer;
-		this.map = new MapView();
+		this.mapView = new MapView();
 		setUpGameWindow();
 	}
 
@@ -40,9 +47,9 @@ public class pokemonGUI extends JFrame {
 		this.setSize((20*36)+300, 590);
 		this.setLocation(100, 100);
 		cp = getContentPane();
-		currentView = map;
+		currentView = mapView;
 		currentView.setLocation(0, 0);
-		currentView.setSize(map.getWidth(), map.getHeight());
+		currentView.setSize(mapView.getWidth(), mapView.getHeight());
 		this.addKeyListener(new MoveListener());
 		cp.setLayout(null);
 		cp.add(currentView);
@@ -70,7 +77,7 @@ public class pokemonGUI extends JFrame {
 	
 	private void setupItems(){
 		items = new ItemView(trainer);
-		items.setLocation(map.getWidth(), 0);
+		items.setLocation(mapView.getWidth(), 0);
 		cp.add(items);
 		//System.out.println("here");
 	}
@@ -79,8 +86,25 @@ public class pokemonGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO save the game into a file
-			
+			int userInput = JOptionPane.showConfirmDialog(null, "Save over existing file?");
+			if (userInput == JOptionPane.YES_OPTION) {
+				
+				FileOutputStream fos = null;
+				try {
+					fos = new FileOutputStream("saveData");
+				} catch (FileNotFoundException ex) {
+					ex.printStackTrace();
+				}
+				ObjectOutputStream oos = null;
+				try {
+					oos = new ObjectOutputStream(fos);
+					oos.writeObject(trainer);
+					fos.close();
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+				
+			} 
 		}
 		
 	}
@@ -112,7 +136,7 @@ public class pokemonGUI extends JFrame {
 				int x = trainer.getX();
 				int y = trainer.getY();
 				int mapNum = trainer.getMap();
-				String[][] theMap = map.getMap();
+				String[][] theMap = map.getMap(mapNum);
 				String face = trainer.getTrainerDirection();
 				//press "up"
 				if(e.getKeyCode() == KeyEvent.VK_DOWN){

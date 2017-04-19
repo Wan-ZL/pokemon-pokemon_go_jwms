@@ -59,6 +59,8 @@ public class pokemonGO {
 		} 
 		else {
 			trainer = Trainer.getTrainerInstance();
+			String userName = JOptionPane.showInputDialog("Enter a your name.");
+			trainer.setName(userName);
 		}
 		
 	}

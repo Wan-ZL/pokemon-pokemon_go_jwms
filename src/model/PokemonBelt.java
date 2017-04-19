@@ -1,11 +1,14 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
 
-public class PokemonBelt implements ListModel<String>{
+public class PokemonBelt implements ListModel<String>, Serializable{
+	
+	private static final long serialVersionUID = -574054507504033536L;
 	
 	private ArrayList<Pokemon> belt;
 	
