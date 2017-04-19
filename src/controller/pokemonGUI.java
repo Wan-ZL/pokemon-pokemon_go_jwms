@@ -140,6 +140,7 @@ public class pokemonGUI extends JFrame {
 				String face = trainer.getTrainerDirection();
 				//press "up"
 				if(e.getKeyCode() == KeyEvent.VK_DOWN){
+					trainer.setTrainerDirection("down");
 					if(theMap[x][y+1] == "t" || theMap[x][y+1] == "a"){
 						System.out.print("can't move");
 					}
@@ -159,6 +160,7 @@ public class pokemonGUI extends JFrame {
 					}
 				} 
 				else if (e.getKeyCode() == KeyEvent.VK_UP) {
+					trainer.setTrainerDirection("up");
 					if(theMap[x][y-1] == "t" || theMap[x][y-1] == "a"){
 						System.out.print("can't move");
 					}
@@ -178,6 +180,7 @@ public class pokemonGUI extends JFrame {
 					}
 				} 
 				else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					trainer.setTrainerDirection("right");
 					if(theMap[x+1][y] == "t" || theMap[x+1][y] == "a"){
 						System.out.print("can't move");
 					}
@@ -197,6 +200,7 @@ public class pokemonGUI extends JFrame {
 					}
 				} 
 				else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					trainer.setTrainerDirection("left");
 					if(theMap[x-1][y] == "t" || theMap[x-1][y] == "a"){
 						System.out.print("can't move");
 					}
