@@ -42,8 +42,8 @@ public class MapView extends JPanel{
 	private Trainer trainer;
 	private String[][] map;
 
-	public MapView(){
-		trainer = Trainer.getTrainerInstance();
+	public MapView(Trainer trainer){
+		this.trainer = trainer;
 		//this.data = control;
 		//this is to get the X axis for trainer
 		this.trainerX = trainer.getX();
@@ -100,8 +100,8 @@ public class MapView extends JPanel{
 	}
 	
 	public void updatePanel() {
-		this.trainerX = trainer.getX();
-		this.trainerY = trainer.getY();
+		//this.trainerX = trainer.getX();
+		//this.trainerY = trainer.getY();
 		//TODO: I want to check if the trainer is walking around
 		//		or just turn his face(change the direction) without
 		//		move
