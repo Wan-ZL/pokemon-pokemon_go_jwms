@@ -76,5 +76,15 @@ public class testPokemon {
 		assertEquals(0, pinsir.getCurHP());
 		assertTrue(pinsir.isKnockedOut());
 	}
+	
+	@Test
+	public void testFlee() {
+		assertEquals(12, dratini.getFleeChance());
+		assertEquals(24, dragonair.getFleeChance());
+		assertEquals(36, mewtwo.getFleeChance());
+		
+		dratini.changeFleeChance(12);
+		assertEquals(24, dratini.getFleeChance());
+	}
 
 }
