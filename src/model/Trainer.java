@@ -41,6 +41,10 @@ public class Trainer implements Serializable{
 		return this.moved;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getName(){
 		return this.name;
 	}
