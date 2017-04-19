@@ -85,6 +85,10 @@ public class testPokemon {
 		
 		dratini.changeFleeChance(12);
 		assertEquals(24, dratini.getFleeChance());
+		
+		dratini.changeFleeChance(76);
+		assertEquals(100, dratini.getFleeChance());
+		assertTrue(dratini.fleeCheck());
 	}
 
 }

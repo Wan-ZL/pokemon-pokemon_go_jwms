@@ -78,7 +78,7 @@ public abstract class Pokemon implements Serializable{
 	
 	// check if the Pokemon flees
 	public boolean fleeCheck() {
-		if (rand.nextInt(100) > fleeChance) 
+		if (rand.nextInt(100) < fleeChance) 
 			return true;
 		else
 			return false;
