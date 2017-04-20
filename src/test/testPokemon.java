@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import model.Action;
 import model.Pokemon;
 import model.pokemon.Dragonair;
 import model.pokemon.Dratini;
@@ -89,6 +90,46 @@ public class testPokemon {
 		dratini.changeFleeChance(76);
 		assertEquals(100, dratini.getFleeChance());
 		assertTrue(dratini.fleeCheck());
+		
+		dratini.changeFleeChance(-100);
+		assertEquals(0, dratini.getFleeChance());
+		assertFalse(dratini.fleeCheck());
+	}
+	
+	@Test
+	public void testCatch() {
+		assertEquals(42, dratini.getCatchChance());
+		assertEquals(21, dragonair.getCatchChance());
+		assertEquals(14, mewtwo.getCatchChance());
+		
+		dratini.changeCatchChance(8);
+		assertEquals(50, dratini.getCatchChance());
+		
+		dratini.changeCatchChance(50);
+		assertEquals(100, dratini.getCatchChance());
+		assertTrue(dratini.catchCheck());
+		
+		dratini.changeCatchChance(-100);
+		assertEquals(0, dratini.getCatchChance());
+		assertFalse(dratini.catchCheck());
+	}
+	
+	@Test
+	public void testEatingOrAction() {
+		assertFalse(tauros.isEating());
+		tauros.setEating(true);
+		assertTrue(tauros.isEating());
+		tauros.HitByRock();
+		assertFalse(tauros.isEating());
+		tauros.eatBait();
+		assertTrue(tauros.isEating());
+		assertEquals(Action.EAT, tauros.chooseAction());
+		
+		dratini.changeFleeChance(-12);
+		assertEquals(0, dratini.getFleeChance());
+		assertEquals(Action.ATTACK, dratini.chooseAction());
+		dratini.changeFleeChance(100);
+		assertEquals(Action.RUN_AWAY_SUCCED, dratini.chooseAction());
 	}
 
 }

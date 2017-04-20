@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -28,15 +29,26 @@ public class ItemView extends JPanel implements Observer {
 	private TableModel table_model;
 	
 	private Trainer trainer;
+	private JPanel text;
+	private JLabel steps;
+	private JLabel name;
 	
 	public ItemView(Trainer trainer){
 		this.setPreferredSize(new Dimension(100,100));
 		this.setLayout(new GridLayout(3, 1));
 		this.setBackground(Color.cyan);
-		JLabel name = new JLabel(trainer.getName());
-		this.add(name);
+		this.trainer = trainer;
+		text = new JPanel();
+		text.setLayout(new GridLayout(2, 1));
+		text.setBackground(Color.cyan);
+		name = new JLabel(trainer.getName());
+		steps = new JLabel("Steps: " + String.valueOf(trainer.getStep()));
+		text.add(name);
+		text.add(steps);
+		this.add(text);
+		//this.add(steps);
 		
-		this.setSize(300, 26*20);
+		this.setSize(200, 11*20);
 		
 		list = new JList<String>();
 		//this.add(list);
@@ -63,7 +75,10 @@ public class ItemView extends JPanel implements Observer {
 	   
 	}
 	
-	
+	public void updateSteps() {
+		this.steps.setText("Steps: " + String.valueOf(trainer.getStep()));
+		//repaint();
+	}
 	
 	// method needed from the observer interface
 	@Override

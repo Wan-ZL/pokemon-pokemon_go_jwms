@@ -5,7 +5,7 @@ import model.Pokemon;
 public class Parasect extends Pokemon{
 
 	public Parasect() {
-		super(PokemonType.Paras, 300, 20, PokemonRarity.COMMON);
+		super(PokemonType.Parasect, 300, 20, PokemonRarity.COMMON);
 		// TODO Auto-generated constructor stub
 	}
 

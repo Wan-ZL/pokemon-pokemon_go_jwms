@@ -28,10 +28,8 @@ public class MapView extends JPanel{
 	private int width = 36;
 	private int trainerX;
 	private int trainerY;
-	
-	
 	//Images
-	private Image grass, RoadOne, RoadTwo, sand, water, tree, sign, RoughRoad, Rock, stairs;
+	private Image grass, RoadOne, RoadTwo, sand, water, tree, sign, RoughRoad, Rock, stairs, emptySquare;
 	private BufferedImage trainerImg, forward, backward, left, right, forward_walking_left, forward_walking_right,
 			backward_walking_left, backward_walking_right, left_walking_left, left_walking_right, right_walking_left,
 			right_walking_right;
@@ -68,6 +66,7 @@ public class MapView extends JPanel{
 			RoughRoad = ImageIO.read(new File("image/RoughRoad.png"));
 			Rock = ImageIO.read(new File("image/Rock.png"));
 			stairs = ImageIO.read(new File("image/Stair.png"));
+			emptySquare = ImageIO.read(new File("image/black.square.jpg"));
 
 			trainerImg = ImageIO.read(new File("image/TrainerMove.png"));
 
@@ -88,7 +87,7 @@ public class MapView extends JPanel{
 			System.out.println("Cannot find the image file.");
 		}
 		
-		timer = new Timer(50, new TrainerListener());
+		timer = new Timer(60, new TrainerListener());
 		repaint();
 	}
 	
@@ -126,6 +125,42 @@ public class MapView extends JPanel{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
+		int x = trainer.getX();
+		int y = trainer.getY();
+		for (int i = y-5, r = 0; i <= y +5; i++, r++) {
+			for (int j = x-5, c = 0; j <= x +5; j++, c++) {
+				String loc = theMap.getItemOnMap(mapNum ,i, j);
+				//Draw images by compare strings
+				if (loc.equals("t")) {
+					g2.drawImage(tree, c * 20, r * 20, null);
+				} else if (loc.equals("g")) {
+					g2.drawImage(grass, c * 20, r * 20, null);
+				} else if (loc.equals("n")) {
+					if (Math.random() * 10 < 5) {
+						g2.drawImage(RoadOne, c * 20, r * 20, null);
+					} else {
+						g2.drawImage(RoadTwo, c * 20, r * 20, null);
+					}
+				} else if (loc.equals("s")) {
+					g2.drawImage(sand, c * 20, r * 20, null);
+				} else if (loc.equals("w")) {
+					g2.drawImage(water, c * 20, r * 20, null);
+				} else if (loc.equals("i")) {
+					g2.drawImage(sign, c * 20, r * 20, null);
+				} else if (loc.equals("a")) {
+					g2.drawImage(Rock, c * 20, r * 20, null);
+				} else if (loc.equals("l")) {
+					g2.drawImage(stairs, c * 20, r * 20, null);
+				} else if (loc.equals("b")) {
+					g2.drawImage(RoughRoad, c * 20, r * 20, null);
+				} else if (loc.equals("_")) {
+					g2.drawImage(emptySquare, c * 20, r * 20, null);
+				}
+			}
+		}
+		
+		
+		/*
 		for(int i=0; i<height; i++){
 			for(int j=0; j<width; j++){
 				//TODO: Data controller call getmap() to get the map, them get the location
@@ -154,10 +189,71 @@ public class MapView extends JPanel{
 					g2.drawImage(stairs, j * 20, i * 20, null);
 				} else if (loc.equals("b")) {
 					g2.drawImage(RoughRoad, j * 20, i * 20, null);
+				} else if (loc.equals("_")) {
+					g2.drawImage(emptySquare, j * 20, i * 20, null);
 				}
 			}
-		}
+		}*/
 		
+		//if the trainer's direction is UP
+				if (trainer.getTrainerDirection().equals("up")) {
+					if (count > 0) {
+						if (count % 2 == 1) {
+							g2.drawImage(backward_walking_left, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount,
+									null);
+						} else if (count % 2 == 0) {
+							g2.drawImage(backward_walking_right, 5 * 20 - 6 + xCount,
+									5 * 20 - 12 + yCount, null);
+						}
+					} else {
+						g2.drawImage(backward, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount, null);
+					}
+				}
+				//if the trainer's direction is DOWN
+				else if (trainer.getTrainerDirection().equals("down")) {
+					if (count > 0) {
+						if (count % 2 == 0) {
+							g2.drawImage(forward_walking_left, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount,
+									null);
+						} else if (count % 2 == 1) {
+							g2.drawImage(forward_walking_right, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount,
+									null);
+						}
+					} else {
+						g2.drawImage(forward, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount, null);
+					}
+				}
+				//if the trainer's direction is RIGHT
+				else if (trainer.getTrainerDirection().equals("right")) {
+					if (count > 0) {
+						if (count % 2 == 0) {
+							g2.drawImage(right_walking_left, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount,
+									null);
+						} else if (count % 2 == 1) {
+							g2.drawImage(right_walking_right, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount,
+									null);
+						}
+					} else {
+						g2.drawImage(right, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount, null);
+					}
+				}
+				//if the trainer's direction is LEFT
+				else {
+					if (count > 0) {
+						if (count % 2 == 1) {
+							g2.drawImage(left_walking_left, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount,
+									null);
+						} else if (count % 2 == 0) {
+							g2.drawImage(left_walking_right, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount,
+									null);
+						}
+					} else {
+						g2.drawImage(left, 5 * 20 - 6 + xCount, 5 * 20 - 12 + yCount, null);
+					}
+				}
+			}
+		
+		/*
 		//if the trainer's direction is UP
 		if (trainer.getTrainerDirection().equals("up")) {
 			if (count > 0) {
@@ -214,14 +310,14 @@ public class MapView extends JPanel{
 				g2.drawImage(left, trainerX * 20 - 6 + xCount, trainerY * 20 - 12 + yCount, null);
 			}
 		}
-	}
+	}*/
 	
 	public int getMapWidth() {
-		return 20 * width;
+		return 20 * 11;
 	}
 	
 	public int getMapHeight() {
-		return 20 * height;
+		return 20 * 11;
 	}
 	
 	/**
@@ -263,12 +359,8 @@ public class MapView extends JPanel{
 							yCount = 0;
 							count = 0;
 							repaint();
-							
 							timer.stop();
-							
 						}
 		}
-
 	}
-	
 }
