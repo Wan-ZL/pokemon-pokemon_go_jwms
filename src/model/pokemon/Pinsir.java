@@ -5,7 +5,7 @@ import model.Pokemon;
 public class Pinsir extends Pokemon{
 
 	public Pinsir() {
-		super(PokemonType.Pinsir, 800, 30, PokemonRarity.UNCOMMON);
+		super(PokemonType.PINSIR, 800, 30, PokemonRarity.UNCOMMON);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -5,7 +5,7 @@ import model.Pokemon;
 public class Mewtwo extends Pokemon{
 
 	public Mewtwo() {
-		super(PokemonType.Mewtwo, 1000, 100, PokemonRarity.RARE);
+		super(PokemonType.MEWTWO, 1000, 100, PokemonRarity.RARE);
 		// TODO Auto-generated constructor stub
 	}
 

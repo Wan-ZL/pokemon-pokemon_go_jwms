@@ -2,7 +2,7 @@ package model.pokemon;
 
 public enum PokemonType {
 
-	Mewtwo(0), Dragonair(1), Pinsir(2), Marowak(3), Tauros(4), Poliwag(5), Paras(6), Exeggcute(7), Parasect(8), Dratini(9);
+	MEWTWO(0), DRAGONAIR(1), PINSIR(2), MAROWAK(3), TAUROS(4), POLIWAG(5), PARAS(6), EXEGGCUTE(7), PARASECT(8), DRATINI(9);
 	
 	private int value;
 	
@@ -16,7 +16,7 @@ public enum PokemonType {
 	}
 	
 	// get the name of the pokemon as a string
-	/*public String toString() {
+	public String toString() {
 		if (value == 0) {
 			return "Mewtwo";
 		} 
@@ -48,5 +48,5 @@ public enum PokemonType {
 			return "Dratini";
 		}
 		return "NA";
-	}*/
+	}
 }
