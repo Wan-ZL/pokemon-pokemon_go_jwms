@@ -161,7 +161,7 @@ public class pokemonGUI extends JFrame {
 				JOptionPane.showMessageDialog(null, "You can not move! You lOSE!");
 			}
 			else if (!trainer.MoveChanged()) {
-				boolean move = false;
+				//boolean move = false;
 				int x = trainer.getX();
 				int y = trainer.getY();
 				int mapNum = trainer.getMap();
@@ -171,17 +171,17 @@ public class pokemonGUI extends JFrame {
 				//press "up"
 				if(e.getKeyCode() == KeyEvent.VK_DOWN){
 					trainer.setTrainerDirection("down");
-					if(theMap[y+1][x] == "t" || theMap[y+1][x] == "a"){
+					if(theMap[y+1][x] == "t" || theMap[y+1][x] == "a" || theMap[y+1][x] == "w" || theMap[y+1][x] == "i"){
 						System.out.print("can't move because of " + theMap[y+1][x]);
 					}
 //					else if(theMap[x][y+1] == "n" || theMap[x][y+1] == "s"){
 //						trainer.setPosition(x, y);
 //					}
-					else if(theMap[y+1][x] == "w"){
+					/*else if(theMap[y+1][x] == "w"){
 						System.out.print("Walk into water now");
 						trainer.setPosition(x, y+1);
 						trainer.setChangedMove(true);
-					}
+					}*/
 					else if(theMap[y+1][x] == "g"){
 						System.out.print("Walk into grass now");
 						trainer.setPosition(x, y+1);
@@ -194,17 +194,17 @@ public class pokemonGUI extends JFrame {
 				} 
 				else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					trainer.setTrainerDirection("up");
-					if(theMap[y-1][x] == "t" || theMap[y-1][x] == "a"){
+					if(theMap[y-1][x] == "t" || theMap[y-1][x] == "a" || theMap[y-1][x] == "w" || theMap[y-1][x] == "i"){
 						System.out.print("can't move because of " + theMap[y-1][x]);
 					}
 //					else if(theMap[x][y-1] == "n" || theMap[x][y-1] == "s"){
 //						trainer.setPosition(x, y);
 //					}
-					else if(theMap[y-1][x] == "w"){
+					/*else if(theMap[y-1][x] == "w"){
 						System.out.print("Walk into water now");
 						trainer.setPosition(x, y-1);
 						trainer.setChangedMove(true);
-					}
+					}*/
 					else if(theMap[y-1][x] == "g"){
 						System.out.print("Walk into grass now");
 						trainer.setPosition(x, y-1);
@@ -217,17 +217,17 @@ public class pokemonGUI extends JFrame {
 				} 
 				else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					trainer.setTrainerDirection("right");
-					if(theMap[y][x+1] == "t" || theMap[y][x+1] == "a"){
+					if(theMap[y][x+1] == "t" || theMap[y][x+1] == "a" || theMap[y][x+1] == "w" || theMap[y][x+1] == "i"){
 						System.out.print("can't move because of " + theMap[y][x+1]);
 					}
 //					else if(theMap[x+1][y] == "n" || theMap[x+1][y] == "s"){
 //						trainer.setPosition(x, y);
 //					}
-					else if(theMap[y][x+1] == "w"){
+					/*else if(theMap[y][x+1] == "w"){
 						System.out.print("Walk into water now");
 						trainer.setPosition(x+1, y);
 						trainer.setChangedMove(true);
-					}
+					}*/
 					else if(theMap[y][x+1] == "g"){
 						System.out.print("Walk into grass now");
 						trainer.setPosition(x+1, y);
@@ -240,17 +240,17 @@ public class pokemonGUI extends JFrame {
 				} 
 				else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					trainer.setTrainerDirection("left");
-					if(theMap[y][x-1] == "t" || theMap[y][x-1] == "a"){
+					if(theMap[y][x-1] == "t" || theMap[y][x-1] == "a" || theMap[y][x-1] == "w" || theMap[y][x-1] == "i"){
 						System.out.print("can't move because of " + theMap[y][x-1]);
 					}
 //					else if(theMap[x-1][y] == "n" || theMap[x-1][y] == "s"){
 //						trainer.setPosition(x, y);
 //					}
-					else if(theMap[y][x-1] == "w"){
+					/*else if(theMap[y][x-1] == "w"){
 						System.out.print("Walk into water now");
 						trainer.setPosition(x-1, y);
 						trainer.setChangedMove(true);
-					}
+					}*/
 					else if(theMap[y][x-1] == "g"){
 						System.out.print("Walk into grass now");
 						trainer.setPosition(x-1, y);
