@@ -100,15 +100,15 @@ public class MapView extends JPanel{
 	}
 	
 	public void updatePanel() {
-		//this.trainerX = trainer.getX();
-		//this.trainerY = trainer.getY();
+		this.trainerX = trainer.getX();
+		this.trainerY = trainer.getY();
 		//TODO: I want to check if the trainer is walking around
 		//		or just turn his face(change the direction) without
 		//		move
 		if(trainer.MoveChanged()){
 			count = 4;
 			timer.start();
-			trainer.setChangedMove(false);
+			//trainer.setChangedMove(false);
 			trainer.setChangedDirection(false);
 		}
 		else{
@@ -250,6 +250,10 @@ public class MapView extends JPanel{
 								yCount = 0;
 								xCount = count * 5;
 							}
+							if (count == 1) {
+								trainer.setChangedMove(false);
+							}
+							
 							repaint();
 							count--;
 						} else {
@@ -257,7 +261,9 @@ public class MapView extends JPanel{
 							yCount = 0;
 							count = 0;
 							repaint();
+							
 							timer.stop();
+							
 						}
 		}
 

@@ -65,7 +65,7 @@ public class pokemonGUI extends JFrame {
 	
 	public void update(){
 		currentView.updatePanel();
-		this.repaint();
+		//this.repaint();
 	}
 
 	private void setupMenu() {
@@ -137,7 +137,7 @@ public class pokemonGUI extends JFrame {
 			if(trainer.getStep() <= 0){
 				JOptionPane.showMessageDialog(null, "You can not move! You lOSE!");
 			}
-			else{
+			else if (!trainer.MoveChanged()) {
 				boolean move = false;
 				int x = trainer.getX();
 				int y = trainer.getY();
