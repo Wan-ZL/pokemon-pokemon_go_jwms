@@ -14,25 +14,21 @@ public class testPokemonType {
 	public testPokemonType(){ 
 		d = new Dragonair(); 
 		trainer = Trainer.getTrainerInstance(); 
-		trainer.removeAllPokemoninBelt(); 
+		//trainer.removeAllPokemoninBelt(); 
 		trainer.addPokemon(d); 
 	} 
 	
-	@Test 
-	public void TestgetName() { 
-		this.trainer.setName("2333"); 
-		assertEquals("2333", this.trainer.getName()); 
-	} 
 
 	@Test 
 	public void TestPokemonGetName(){ 
 		//assertEquals("Dragonair", this.trainer.getPokemon(0).getName()); 
 	} 
 
-	@Test 
+	
+	/*@Test 
 	public void TestgetSize(){ 
 		//System.out.print(this.trainer.getSize());
 		assertEquals(1, this.trainer.getSize()); 
 	} 
-
+	*/
 }

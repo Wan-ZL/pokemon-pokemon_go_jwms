@@ -40,6 +40,10 @@ public class BackPack implements Serializable, TableModel{
 		}
 	}
 	
+	public int getSize(){
+		return currAmt;
+	}
+	
 	// Discards the given amount of an item
 	public void discardItem(ItemType type, int num) {
 		if (numItem(type) > 0) {

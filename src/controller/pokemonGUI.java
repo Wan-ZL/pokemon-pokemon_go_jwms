@@ -153,13 +153,13 @@ public class pokemonGUI extends JFrame {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			if(trainer.getStep() <= 0){
-				JOptionPane.showMessageDialog(null, "Out of steps! You caught " + trainer.getSize() + " Pokemon!");
+				JOptionPane.showMessageDialog(null, "Out of steps! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!");
 			}
 			else if (!trainer.MoveChanged()) {
 				//boolean move = false;
 				int x = trainer.getX();
 				int y = trainer.getY();
-				int mapNum = trainer.getMap();
+				int mapNum = trainer.getMapNum();
 				String[][] theMap = map.getMap(mapNum);
 				String face = trainer.getTrainerDirection();
 				
