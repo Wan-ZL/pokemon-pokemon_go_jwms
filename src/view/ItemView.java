@@ -3,10 +3,13 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -40,8 +43,8 @@ public class ItemView extends JPanel implements Observer {
 		this.trainer = trainer;
 		text = new JPanel();
 		text.setLayout(new GridLayout(2, 1));
-		text.setBackground(Color.cyan);
-		name = new JLabel(trainer.getName());
+		text.setBackground(Color.WHITE);
+		name = new JLabel("Trainer: " +trainer.getName());
 		steps = new JLabel("Steps: " + String.valueOf(trainer.getStep()));
 		text.add(name);
 		text.add(steps);
@@ -56,7 +59,7 @@ public class ItemView extends JPanel implements Observer {
 		System.out.println(list_model);
 
 		list.setModel(list_model);
-		list.setBackground(Color.red);
+		list.setBackground(Color.WHITE);
 		
 		
 		table = new JTable();
@@ -69,7 +72,7 @@ public class ItemView extends JPanel implements Observer {
 	    RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table_model);
 	    table.setRowSorter(sorter);
 	    table.setMaximumSize(new Dimension(30, 30));
-	    table.setBackground(Color.blue);
+	    table.setBackground(Color.WHITE);
 	    
 	    System.out.println("in the items");
 	   

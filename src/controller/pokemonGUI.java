@@ -71,7 +71,7 @@ public class pokemonGUI extends JFrame {
 	private void setUpGameWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Pokemon Safari Zone");
-		this.setSize((20*11)+215, (20*11)+70);
+		this.setSize((20*11)+215, (20*11)+64);
 		this.setLocation(100, 100);
 		cp = getContentPane();
 		currentView = mapView;
