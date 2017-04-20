@@ -36,6 +36,7 @@ public abstract class Pokemon implements Serializable{
 		return this.type.toString();
 	}
 	
+	
 	// returns the level of the Pokemon
 	public int getLevel() {
 		return this.lvl;

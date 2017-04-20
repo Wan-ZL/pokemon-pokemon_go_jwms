@@ -28,6 +28,8 @@ public class MapView extends JPanel{
 	private int width = 36;
 	private int trainerX;
 	private int trainerY;
+	
+	
 	//Images
 	private Image grass, RoadOne, RoadTwo, sand, water, tree, sign, RoughRoad, Rock, stairs;
 	private BufferedImage trainerImg, forward, backward, left, right, forward_walking_left, forward_walking_right,

@@ -4,12 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ListModel;
-import javax.swing.event.ListDataListener;
+import javax.swing.event.ListDataListener;<
 
 public class PokemonBelt implements ListModel<String>, Serializable{
 	
 	private static final long serialVersionUID = -574054507504033536L;
+
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6433488251728986157L;
 	private ArrayList<Pokemon> belt;
 	
 	public PokemonBelt(){
@@ -36,9 +41,11 @@ public class PokemonBelt implements ListModel<String>, Serializable{
 		return belt.size();
 	}
 
+
 	@Override
 	public String getElementAt(int index) {
 		// TODO Auto-generated method stub
+
 		return belt.get(index).getName();
 	}
 

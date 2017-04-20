@@ -1,17 +1,20 @@
 package controller;
 
 import java.awt.Container;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -29,15 +32,20 @@ public class pokemonGUI extends JFrame {
 	
 	private MapView currentView;
 	private Trainer trainer;
+
 	private MapView mapView;
 	private Container cp;
 	private ItemView items;
 	private Map map;
+
 	
+	// need to know the trainer
 	public pokemonGUI(Trainer trainer) {
 		this.map = new Map();
 		this.trainer = trainer;
+
 		this.mapView = new MapView(trainer);
+
 		setUpGameWindow();
 	}
 
@@ -46,6 +54,7 @@ public class pokemonGUI extends JFrame {
 		this.setTitle("Pokemon Safari Zone");
 		this.setSize((20*36)+300, 590);
 		this.setLocation(100, 100);
+
 		cp = getContentPane();
 		currentView = mapView;
 		currentView.setLocation(0, 0);
@@ -66,6 +75,7 @@ public class pokemonGUI extends JFrame {
 	public void update(){
 		currentView.updatePanel();
 		//this.repaint();
+
 	}
 
 	private void setupMenu() {
@@ -81,6 +91,7 @@ public class pokemonGUI extends JFrame {
 		this.setJMenuBar(menuBar);
 	}
 	
+
 	private void setupItems(){
 		items = new ItemView(trainer);
 		items.setLocation(mapView.getWidth(), 0);
@@ -88,10 +99,12 @@ public class pokemonGUI extends JFrame {
 		//System.out.println("here");
 	}
 	
+
 	private class SaveGame implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+
 			int userInput = JOptionPane.showConfirmDialog(null, "Save over existing file?");
 			if (userInput == JOptionPane.YES_OPTION) {
 				
@@ -111,6 +124,7 @@ public class pokemonGUI extends JFrame {
 				}
 				
 			} 
+
 		}
 		
 	}
@@ -240,6 +254,7 @@ public class pokemonGUI extends JFrame {
 				}
 				System.out.println("x: "+trainer.getX()+", y: "+trainer.getY());
 				update();
+
 				
 				//int x = trainer.getX();
 				//int y = trainer.getY();
@@ -250,6 +265,7 @@ public class pokemonGUI extends JFrame {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
+
 			// TODO Auto-generated method stub
 			
 		}

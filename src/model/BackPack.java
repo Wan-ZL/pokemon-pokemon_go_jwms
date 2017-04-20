@@ -9,7 +9,9 @@ import javax.swing.table.TableModel;
 import model.items.Item;
 import model.items.ItemType;
 
+
 public class BackPack implements Serializable, TableModel{
+
 
 	/**
 	 * 
@@ -69,9 +71,9 @@ public class BackPack implements Serializable, TableModel{
 		return (currAmt + amt) <= maxItems;
 	}
 	
-	// Use an item from the pack
-	public void useItem() {
-		// TODO: determine what the item is and how to use it
+	// Use an item from the pack. (remove the item from pack)
+	public void useItem(ItemType type) {
+		this.pack.remove(type);
 	}
 	
 	// return the Item at index
@@ -82,6 +84,7 @@ public class BackPack implements Serializable, TableModel{
 	public ArrayList<Item> getBackpackArray(){
 		return this.pack;
 	}
+
 
 	// need to implement these method for table model interface
 		@Override
@@ -142,4 +145,5 @@ public class BackPack implements Serializable, TableModel{
 			// TODO Auto-generated method stub
 			
 		}
+
 }
