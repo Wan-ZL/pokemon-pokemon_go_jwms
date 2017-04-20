@@ -17,6 +17,8 @@ public class pokemonGO {
 	public static void main(String[] args){
 		setUpModel();
 		pokemonGUI g = new pokemonGUI(trainer);
+		g.setFocusable(true);
+		g.requestFocusInWindow();
 		g.setVisible(true);
 	}
 
@@ -58,6 +60,8 @@ public class pokemonGO {
 		else {
 			// start from fresh 
 			trainer = Trainer.getTrainerInstance();
+			String userName = JOptionPane.showInputDialog("Enter a your name.");
+			trainer.setName(userName);
 		}
 		
 	}

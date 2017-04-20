@@ -1,7 +1,11 @@
 package model.items;
 
-public abstract class Item {
+import java.io.Serializable;
 
+public abstract class Item implements Serializable{
+
+	private static final long serialVersionUID = 2794282350305690429L;
+	
 	private ItemType type;
 	private int value;
 	private int amt;

@@ -1,37 +1,31 @@
 package model;
 
+
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import java.awt.Point;
-
-import controller.MapCreater;
 import model.items.Item;
 import model.items.ItemType;
 import model.items.MaxPotion;
 import model.items.SafariBall;
 import model.pokemon.Paras;
 
-public class Trainer implements Serializable {
+public class Trainer implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3272385814256960966L;
+	private static final long serialVersionUID = -6525984868814788240L;
+	
 	private String name;
 	private BackPack pack;
 	private PokemonBelt belt;
-	private int step; // step counter, start at 0;
-	private Map theMap;
-	private String trainerDirection; // the trainer direction. Type is String
-	private Point trainerPosition; // the trainer position. Type is Point. Point
-									// initial is (0,0)
-	private static int trainerX;
-	private static int trainerY;
+	private String trainerDirection;				// the trainer direction. Type is String
+	private Point trainerPosition;					// the trainer position. Type is Point. Point initial is (0,0)
 	private boolean positionChanged;
 	private boolean moved;
-
-	private int map; // 1 means trainer in map1, 2 means trainer in map2
+	private int step;
+	
+	private int map;	// 1 means trainer in map1, 2 means trainer in map2
+	
 
 	private static Trainer thisTrainer;
 	private Game gamedata;
@@ -39,36 +33,58 @@ public class Trainer implements Serializable {
 	Trainer(String name, int x, int y) {
 		this.step = 500;
 		this.map = 1;
-		this.theMap = gamedata.getMap();
+		this.step = 500;
+
 		this.pack = new BackPack();
 		this.belt = new PokemonBelt();
 		// initialize the default items
 		pack.addItem(new SafariBall(30));
-		pack.addItem(new MaxPotion(20));
-		
-		belt.addPokemon(new Paras());
-		
+		this.belt = new PokemonBelt();
 		this.name = name;
 		this.trainerDirection = "down";
 		this.trainerPosition = new Point();
-		this.trainerX = x;
-		this.trainerY = y;
-		this.trainerPosition.setLocation(0, 0);
+		this.trainerPosition.setLocation(10, 0);
 		this.positionChanged = false;
 		this.moved = false;
 
 	}
-
-	public boolean MoveChanged() {
+	
+	public int getStep(){
+		return this.step;
+	}
+	
+	public void setPosition(int x, int y){
+		this.trainerPosition.setLocation(x, y);
+		step--;
+	}
+	
+	public int getMap(){
+		return this.map;
+	}
+	
+	public boolean MoveChanged(){
 		return this.moved;
 	}
-
-	public void setChangedMove(boolean status) {
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
+	public void setChangedMove(boolean status){
 		this.moved = status;
 	}
+	
+	public int getMapNum() {
+		return map;
+	}
+	
+	public int getX(){						// return trainer x position
+		return (int) this.trainerPosition.getX();
 
-	public int getX() { // return trainer x position
-		return this.trainerX;
 	}
 
 	public int getY() { // return trainer y position
@@ -178,29 +194,14 @@ public class Trainer implements Serializable {
 		return this.belt.getSize();
 	}
 	
-	public int getItemNumberinPack(){				// return the number of item in backpack
-		return this.pack.getSize();
-	}
-	
-	public String[][] getWholeMap(){				// return the whole map. return a string 2d array
-		return this.theMap.getMap(map);
+
 	public PokemonBelt getPokemonBelt(){
 		return belt;
 	}
 	
 	public BackPack getBackpack(){
 		return this.pack;
-	}
-	
-	
-	
-	public int getSize() { // return the number of pokemon on belt.
-		return this.belt.getSize();
-	}
 
-	public String[][] getWholeMap() { // return the whole map. return a string
-										// 2d array
-		return this.theMap.getMap();
 	}
 	
 	public void discardItem(ItemType type, int num){// Discards the given amount of an item

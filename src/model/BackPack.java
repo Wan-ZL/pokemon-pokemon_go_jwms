@@ -9,7 +9,9 @@ import javax.swing.table.TableModel;
 import model.items.Item;
 import model.items.ItemType;
 
-public class BackPack implements TableModel,Serializable{
+
+public class BackPack implements Serializable, TableModel{
+
 
 	/**
 	 * 
@@ -83,77 +85,65 @@ public class BackPack implements TableModel,Serializable{
 		return this.pack;
 	}
 
-	
-	public int getSize(){		// return the size of arraylist
-		return this.pack.size();
 
-
-	
-	public String toString(){
-		String str = "";
-		for(int i=0; i < pack.size(); i++)
-			str += pack.get(i).getType() + "  ";
-		return str;
-	}
-	
-	
 	// need to implement these method for table model interface
-	@Override
-	public int getRowCount() {
-		return pack.size();
-	}
+		@Override
+		public int getRowCount() {
+			return pack.size();
+		}
 
-	@Override
-	public int getColumnCount() {
-		return 2;
-	}
+		@Override
+		public int getColumnCount() {
+			return 2;
+		}
 
-	@Override
-	public String getColumnName(int columnIndex) {
-		if(columnIndex == 0)
-			return "Name";
-		else
-			return "Value";
-	}
+		@Override
+		public String getColumnName(int columnIndex) {
+			if(columnIndex == 0)
+				return "Name";
+			else
+				return "Value";
+		}
 
-	@Override
-	public Class<?> getColumnClass(int columnIndex) {
-		if(columnIndex <=1)
-			return String.class;
-		else 
-			return Integer.class;
-	}
+		@Override
+		public Class<?> getColumnClass(int columnIndex) {
+			if(columnIndex <=1)
+				return String.class;
+			else 
+				return Integer.class;
+		}
 
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		@Override
+		public boolean isCellEditable(int rowIndex, int columnIndex) {
+			// TODO Auto-generated method stub
+			return false;
+		}
 
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		Item item = pack.get(rowIndex);
-		if(columnIndex == 0)	
-			return item.getType();
-		else
-			return item.getAmount();
-	}
+		@Override
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			Item item = pack.get(rowIndex);
+			if(columnIndex == 0)	
+				return item.getType();
+			else
+				return item.getAmount();
+		}
 
-	@Override
-	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		
-	}
+		@Override
+		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+			// TODO Auto-generated method stub
+			
+		}
 
-	@Override
-	public void addTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
-		
-	}
+		@Override
+		public void addTableModelListener(TableModelListener l) {
+			// TODO Auto-generated method stub
+			
+		}
 
-	@Override
-	public void removeTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
-		
-	}
+		@Override
+		public void removeTableModelListener(TableModelListener l) {
+			// TODO Auto-generated method stub
+			
+		}
+
 }

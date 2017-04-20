@@ -1,8 +1,14 @@
 package model;
 
-/*import controller.MapCreater;
 
-public class Map {								// this class store the two maps. we can add more functions, like edit map
+import java.io.Serializable;
+
+import controller.MapCreater;
+
+
+public class Map implements Serializable{								// this class store the two maps. we can add more functions, like edit map
+	
+	private static final long serialVersionUID = -6496427290493586496L;
 	
 	String[][] map1;
 	String[][] map2;
@@ -43,26 +49,9 @@ public class Map implements Serializable {
 		this.map = map;
 	}
 
-	//return the map
-	public String[][] getMap() {
-		return map;
+	
+	public String getItemOnMap(int map, int i, int j) {      // return the Item on map, like tree or stone. return value is String
+		return this.getMap(map)[i][j];
 	}
-
-	//return the location in the map
-	public String getLocation(int x, int y) {
-		return map[x][y];
-	}
-
-	@Override
-	public String toString() {
-		String str = "";
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[i].length; j++) {
-				str += map[i][j];
-			}
-			str += "\n";
-		}
-		return str;
-	}
-
 }
+

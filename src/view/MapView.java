@@ -13,10 +13,17 @@ import java.util.Observer;
 import javax.swing.Timer;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import model.Map;
 import model.Trainer;
 
-public class MapView extends JPanel implements Observer{
+public class MapView extends JPanel{
 
+
+	private static final long serialVersionUID = 3336864412070556704L;
+	
+	private Map theMap;
+	private int mapNum;
 	private int height = 26;
 	private int width = 36;
 	private int trainerX;
@@ -25,7 +32,7 @@ public class MapView extends JPanel implements Observer{
 	
 	//Images
 	private Image grass, RoadOne, RoadTwo, sand, water, tree, sign, RoughRoad, Rock, stairs;
-	private BufferedImage Trainer, forward, backward, left, right, forward_walking_left, forward_walking_right,
+	private BufferedImage trainerImg, forward, backward, left, right, forward_walking_left, forward_walking_right,
 			backward_walking_left, backward_walking_right, left_walking_left, left_walking_right, right_walking_left,
 			right_walking_right;
 
@@ -34,15 +41,20 @@ public class MapView extends JPanel implements Observer{
 	private Timer timer;
 	private int count, xCount, yCount;
 	
-	private Trainer data;
-	
+	private Trainer trainer;
+	private String[][] map;
 
-	public MapView(Trainer control){
-		this.data = control;
+	public MapView(Trainer trainer){
+		this.trainer = trainer;
+		//this.data = control;
 		//this is to get the X axis for trainer
-		this.trainerX = control.getX();
+		this.trainerX = trainer.getX();
 		//this is to get the Y axis for trainer
-		this.trainerY = control.getY();
+		this.trainerY = trainer.getY();
+		this.theMap = new Map();
+		this.mapNum = trainer.getMapNum();
+		
+		this.setSize(20*36, 26*20);
 		
 		//TODO: set the images
 		try{
@@ -57,21 +69,21 @@ public class MapView extends JPanel implements Observer{
 			Rock = ImageIO.read(new File("image/Rock.png"));
 			stairs = ImageIO.read(new File("image/Stair.png"));
 
-			Trainer = ImageIO.read(new File("image/TrainerMove.png"));
+			trainerImg = ImageIO.read(new File("image/TrainerMove.png"));
 
-			forward = Trainer.getSubimage(0, 64, spriteSize, spriteSize);
-			backward = Trainer.getSubimage(0, 0, spriteSize, spriteSize);
-			left = Trainer.getSubimage(0, 32, spriteSize, spriteSize);
-			right = Trainer.getSubimage(0, 96, spriteSize, spriteSize);
+			forward = trainerImg.getSubimage(0, 64, spriteSize, spriteSize);
+			backward = trainerImg.getSubimage(0, 0, spriteSize, spriteSize);
+			left = trainerImg.getSubimage(0, 32, spriteSize, spriteSize);
+			right = trainerImg.getSubimage(0, 96, spriteSize, spriteSize);
 
-			forward_walking_left = Trainer.getSubimage(32, 64, spriteSize, spriteSize);
-			forward_walking_right = Trainer.getSubimage(64, 64, spriteSize, spriteSize);
-			backward_walking_left = Trainer.getSubimage(32, 0, spriteSize, spriteSize);
-			backward_walking_right = Trainer.getSubimage(64, 0, spriteSize, spriteSize);
-			left_walking_left = Trainer.getSubimage(32, 32, spriteSize, spriteSize);
-			left_walking_right = Trainer.getSubimage(64, 32, spriteSize, spriteSize);
-			right_walking_left = Trainer.getSubimage(32, 96, spriteSize, spriteSize);
-			right_walking_right = Trainer.getSubimage(64, 96, spriteSize, spriteSize);
+			forward_walking_left = trainerImg.getSubimage(32, 64, spriteSize, spriteSize);
+			forward_walking_right = trainerImg.getSubimage(64, 64, spriteSize, spriteSize);
+			backward_walking_left = trainerImg.getSubimage(32, 0, spriteSize, spriteSize);
+			backward_walking_right = trainerImg.getSubimage(64, 0, spriteSize, spriteSize);
+			left_walking_left = trainerImg.getSubimage(32, 32, spriteSize, spriteSize);
+			left_walking_right = trainerImg.getSubimage(64, 32, spriteSize, spriteSize);
+			right_walking_left = trainerImg.getSubimage(32, 96, spriteSize, spriteSize);
+			right_walking_right = trainerImg.getSubimage(64, 96, spriteSize, spriteSize);
 		}catch(IOException e){
 			System.out.println("Cannot find the image file.");
 		}
@@ -80,23 +92,31 @@ public class MapView extends JPanel implements Observer{
 		repaint();
 	}
 	
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		this.trainerX = data.getX();
-		this.trainerY = data.getY();
+	public String[][] getMap(){
+		return this.map;
+		
+	}
+	
+	public void update(){
+		System.out.println("here");
+	}
+	
+	public void updatePanel() {
+		this.trainerX = trainer.getX();
+		this.trainerY = trainer.getY();
 		//TODO: I want to check if the trainer is walking around
 		//		or just turn his face(change the direction) without
 		//		move
-		if(data.MoveChanged()){
+		if(trainer.MoveChanged()){
 			count = 4;
 			timer.start();
-			data.setChangedMove(false);
-			data.setChangedDirection(false);
+			//trainer.setChangedMove(false);
+			trainer.setChangedDirection(false);
 		}
 		else{
-			if(data.DirectionChanged()){
+			if(trainer.DirectionChanged()){
 				repaint();
-				data.setChangedDirection(false);
+				trainer.setChangedDirection(false);
 			}
 		}
 	}
@@ -109,7 +129,8 @@ public class MapView extends JPanel implements Observer{
 		for(int i=0; i<height; i++){
 			for(int j=0; j<width; j++){
 				//TODO: Data controller call getmap() to get the map, them get the location
-				String loc = data.getItemOnMap(i, j);
+
+				String loc = theMap.getItemOnMap(mapNum ,i, j);
 				//Draw images by compare strings
 				if (loc.equals("t")) {
 					g2.drawImage(tree, j * 20, i * 20, null);
@@ -138,7 +159,7 @@ public class MapView extends JPanel implements Observer{
 		}
 		
 		//if the trainer's direction is UP
-		if (data.getTrainerDirection().equals("up")) {
+		if (trainer.getTrainerDirection().equals("up")) {
 			if (count > 0) {
 				if (count % 2 == 1) {
 					g2.drawImage(backward_walking_left, trainerX * 20 - 6 + xCount, trainerY * 20 - 12 + yCount,
@@ -152,7 +173,7 @@ public class MapView extends JPanel implements Observer{
 			}
 		}
 		//if the trainer's direction is DOWN
-		else if (data.getTrainerDirection().equals("down")) {
+		else if (trainer.getTrainerDirection().equals("down")) {
 			if (count > 0) {
 				if (count % 2 == 0) {
 					g2.drawImage(forward_walking_left, trainerX * 20 - 6 + xCount, trainerY * 20 - 12 + yCount,
@@ -166,7 +187,7 @@ public class MapView extends JPanel implements Observer{
 			}
 		}
 		//if the trainer's direction is RIGHT
-		else if (data.getTrainerDirection().equals("right")) {
+		else if (trainer.getTrainerDirection().equals("right")) {
 			if (count > 0) {
 				if (count % 2 == 0) {
 					g2.drawImage(right_walking_left, trainerX * 20 - 6 + xCount, trainerY * 20 - 12 + yCount,
@@ -195,6 +216,14 @@ public class MapView extends JPanel implements Observer{
 		}
 	}
 	
+	public int getMapWidth() {
+		return 20 * width;
+	}
+	
+	public int getMapHeight() {
+		return 20 * height;
+	}
+	
 	/**
 	 * The listener interface for receiving move events. The class that is
 	 * interested in processing a move event implements this interface, and the
@@ -210,19 +239,23 @@ public class MapView extends JPanel implements Observer{
 		public void actionPerformed(ActionEvent e) {
 			// Trainer move animation
 						if (count > 0) {
-							if (data.getTrainerDirection().equals("up")) {
+							if (trainer.getTrainerDirection().equals("up")) {
 								xCount = 0;
 								yCount = count * 5;
-							} else if (data.getTrainerDirection().equals("down")) {
+							} else if (trainer.getTrainerDirection().equals("down")) {
 								xCount = 0;
 								yCount = -count * 5;
-							} else if (data.getTrainerDirection().equals("right")) {
+							} else if (trainer.getTrainerDirection().equals("right")) {
 								yCount = 0;
 								xCount = -count * 5;
 							} else {
 								yCount = 0;
 								xCount = count * 5;
 							}
+							if (count == 1) {
+								trainer.setChangedMove(false);
+							}
+							
 							repaint();
 							count--;
 						} else {
@@ -230,7 +263,9 @@ public class MapView extends JPanel implements Observer{
 							yCount = 0;
 							count = 0;
 							repaint();
+							
 							timer.stop();
+							
 						}
 		}
 
