@@ -10,20 +10,25 @@ public class Map implements Serializable{								// this class store the two map
 	
 	String[][] map1;
 	String[][] map2;
+	String[][] map3;
 	
 	public Map(){
 		MapCreater creater = new MapCreater();
 		map1 = creater.getMap1();
 		map2 = creater.getMap2();
+		map2 = creater.getMap3();
 	}
 	
 	public String[][] getMap(int i){		// return the whole map
 		if(i == 1){
 			return map1;
 		}
-		else{
+		else if (i == 2) {
 			return map2;
+		} else {
+			return map3;
 		}
+		
 	}
 	
 	public String getItemOnMap(int map, int i, int j) {      // return the Item on map, like tree or stone. return value is String
