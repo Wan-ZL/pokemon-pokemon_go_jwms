@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import model.items.Item;
 import model.items.SafariBall;
+import model.pokemon.Paras;
 
 public class Trainer implements Serializable{
 	
@@ -37,6 +38,7 @@ public class Trainer implements Serializable{
 		this.trainerPosition.setLocation(15, 5);
 		this.positionChanged = false;
 		this.moved = false;
+		//this.addPokemon(new Paras()); // For testing
 		
 	}
 	
@@ -59,6 +61,16 @@ public class Trainer implements Serializable{
 	// ******
 	public boolean MoveChanged(){
 		return this.moved;
+	}
+	
+	public void setName(String name) {
+		if (name != null){
+			this.name = name;
+		}
+	}
+	
+	public String getName(){
+		return this.name;
 	}
 	
 	public void setChangedMove(boolean status){
@@ -87,13 +99,6 @@ public class Trainer implements Serializable{
 	}
 	// **********
 	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getName(){
-		return this.name;
-	}
 	
 	public int getMapNum() {
 		return map;
@@ -105,8 +110,8 @@ public class Trainer implements Serializable{
 	
 	public int getY(){						// return trainer y position
 		return (int) this.trainerPosition.getY();
+
 	}
-	
 	
 	public boolean addPokemon(Pokemon pokemon){		// add a pokemon to belt, return true if success
 		return this.belt.addPokemon(pokemon);

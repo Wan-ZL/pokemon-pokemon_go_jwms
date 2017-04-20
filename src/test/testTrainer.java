@@ -69,6 +69,7 @@ public class testTrainer {
 		assertTrue(t.MoveChanged());
 		
 		// test add and remove pokemon
+		t.getPokemonBelt().removAll();
 		t.addPokemon(p1);
 		assertEquals(1, t.getPokemonBelt().getSize());
 		t.addPokemon(p2);
