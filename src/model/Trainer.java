@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import model.items.Item;
 import model.items.SafariBall;
+import model.pokemon.Paras;
 
 public class Trainer implements Serializable{
 
@@ -36,6 +37,7 @@ public class Trainer implements Serializable{
 		this.trainerPosition.setLocation(15, 5);
 		this.positionChanged = false;
 		this.moved = false;
+		//this.addPokemon(new Paras()); // For testing
 		
 	}
 	
