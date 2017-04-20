@@ -40,6 +40,9 @@ public class BackPack implements Serializable, TableModel{
 		}
 	}
 	
+	public int getSize(){
+		return currAmt;
+	}
 	private boolean checkItem(ItemType type){
 		for(int i = 0 ; i < pack.size() ; i++){
 			if(pack.get(i).getType().equals(type)){

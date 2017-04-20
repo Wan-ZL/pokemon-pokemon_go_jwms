@@ -9,8 +9,6 @@ import model.items.SafariBall;
 import model.pokemon.Paras;
 
 public class Trainer implements Serializable{
-
-	private static final long serialVersionUID = -6525984868814788240L;
 	
 	private String name;
 	private BackPack pack;
@@ -33,13 +31,24 @@ public class Trainer implements Serializable{
 		this.belt = new PokemonBelt();
 		this.name = name;
 		this.trainerDirection = "down";
-		this.trainerPosition = new Point();
+		this.trainerPosition= new Point();
+
+		
+		// initial position 
 		this.trainerPosition.setLocation(15, 5);
 		this.positionChanged = false;
 		this.moved = false;
 		//this.addPokemon(new Paras()); // For testing
 		
 	}
+	
+	public static Trainer getTrainerInstance(){		// create instance variable of trainer
+		if(thisTrainer == null){
+			thisTrainer = new Trainer("default name");
+		}
+		return thisTrainer;
+	}
+	
 	
 	public int getStep(){
 		return this.step;
@@ -49,11 +58,7 @@ public class Trainer implements Serializable{
 		this.trainerPosition.setLocation(x, y);
 		step--;
 	}
-	
-	public int getMap(){
-		return this.map;
-	}
-	
+	// ******
 	public boolean MoveChanged(){
 		return this.moved;
 	}
@@ -70,18 +75,6 @@ public class Trainer implements Serializable{
 	
 	public void setChangedMove(boolean status){
 		this.moved = status;
-	}
-	
-	public int getMapNum() {
-		return map;
-	}
-	
-	public int getX(){						// return trainer x position
-		return (int) this.trainerPosition.getX();
-	}
-	
-	public int getY(){						// return trainer y position
-		return (int) this.trainerPosition.getY();
 	}
 	
 	public String getTrainerDirection(){			// return the trainer direction
@@ -104,19 +97,26 @@ public class Trainer implements Serializable{
 		System.out.print("Function setTrainerDirection argument doesn't match");
 		return false;
 	}
+	// **********
 	
-	public static Trainer getTrainerInstance(){		// create instance variable of trainer
-		if(thisTrainer == null){
-			thisTrainer = new Trainer("Ash");
-		}
-		return thisTrainer;
+	
+	public int getMapNum() {
+		return map;
 	}
 	
+	public int getX(){						// return trainer x position
+		return (int) this.trainerPosition.getX();
+	}
+	
+	public int getY(){						// return trainer y position
+		return (int) this.trainerPosition.getY();
+
+	}
 	
 	public boolean addPokemon(Pokemon pokemon){		// add a pokemon to belt, return true if success
 		return this.belt.addPokemon(pokemon);
 	}
-	
+	/*
 	public boolean removePokemon(Pokemon pokemon){	// remove a pokemon from belt, if have multi same pokemon, remove the first one.
 		return this.belt.removePokemon(pokemon);
 	}
@@ -124,7 +124,8 @@ public class Trainer implements Serializable{
 	public Pokemon removePokemon(int index){		// remove a pokemon on specific index, return the removed pokemon object.
 		return this.belt.removePokemon(index);
 	}
-	
+	*/
+	/*
 	public ArrayList<Pokemon> getBeltArray(){		// return the whole belt
 		return this.belt.getBeltArray();
 	}
@@ -132,11 +133,12 @@ public class Trainer implements Serializable{
 	public ArrayList<Item> getBackpackArray(){		// return the whole backpack
 		return this.pack.getBackpackArray();
 	}
-	
+	*/
+	/*
 	public int getSize(){							// return the number of pokemon on belt.
 		return this.belt.getSize();
 	}
-	
+	*/
 	public PokemonBelt getPokemonBelt(){
 		return belt;
 	}
@@ -144,8 +146,9 @@ public class Trainer implements Serializable{
 	public BackPack getBackpack(){
 		return this.pack;
 	}
-
+	/*
 	public void removeAllPokemoninBelt() {
 		belt.removAll();
 	}
+	*/
 }
