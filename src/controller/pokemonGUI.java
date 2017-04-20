@@ -71,12 +71,12 @@ public class pokemonGUI extends JFrame {
 	private void setUpGameWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Pokemon Safari Zone");
-		this.setSize((20*36)+300, 590);
+		this.setSize((20*11)+200, (20*11)+62);
 		this.setLocation(100, 100);
 		cp = getContentPane();
 		currentView = mapView;
 		currentView.setLocation(0, 0);
-		currentView.setSize(mapView.getWidth(), mapView.getHeight());
+		currentView.setSize(11*20, 11*20);
 		this.addKeyListener(new MoveListener());
 		cp.setLayout(null);
 		cp.add(currentView);
@@ -94,9 +94,9 @@ public class pokemonGUI extends JFrame {
 		JMenuItem save = new JMenuItem("Save");
 		menu.add(save);
 		save.addActionListener(new SaveGame());
-		JMenuItem pack = new JMenuItem("Pack");
-		menu.add(pack);
-		save.addActionListener(new BackPackWindow());
+		JMenuItem quit = new JMenuItem("Save and Quit");
+		menu.add(quit);
+		quit.addActionListener(new SaveGame());
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.add(menu);
 		this.setJMenuBar(menuBar);
@@ -106,7 +106,7 @@ public class pokemonGUI extends JFrame {
 
 	private void setupItems(){
 		items = new ItemView(trainer);
-		items.setLocation(mapView.getWidth(), 0);
+		items.setLocation((11*20), 0);
 		cp.add(items);
 		//System.out.println("here");
 	}
@@ -133,17 +133,11 @@ public class pokemonGUI extends JFrame {
 					ex.printStackTrace();
 				}
 				
-			} 
-		}
-		
-	}
-	
-	private class BackPackWindow implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Open a window to show items
+			}
 			
+			if (e.getActionCommand() == "Save and Quit") {
+				System.exit(DO_NOTHING_ON_CLOSE);
+			}
 		}
 		
 	}
@@ -171,7 +165,7 @@ public class pokemonGUI extends JFrame {
 				//press "up"
 				if(e.getKeyCode() == KeyEvent.VK_DOWN){
 					trainer.setTrainerDirection("down");
-					if(theMap[y+1][x] == "t" || theMap[y+1][x] == "a" || theMap[y+1][x] == "w" || theMap[y+1][x] == "i"){
+					if(theMap[y+1][x] == "t" || theMap[y+1][x] == "a" || theMap[y+1][x] == "w" || theMap[y+1][x] == "i" || theMap[y+1][x] == "_"){
 						System.out.print("can't move because of " + theMap[y+1][x]);
 					}
 //					else if(theMap[x][y+1] == "n" || theMap[x][y+1] == "s"){
@@ -194,7 +188,7 @@ public class pokemonGUI extends JFrame {
 				} 
 				else if (e.getKeyCode() == KeyEvent.VK_UP) {
 					trainer.setTrainerDirection("up");
-					if(theMap[y-1][x] == "t" || theMap[y-1][x] == "a" || theMap[y-1][x] == "w" || theMap[y-1][x] == "i"){
+					if(theMap[y-1][x] == "t" || theMap[y-1][x] == "a" || theMap[y-1][x] == "w" || theMap[y-1][x] == "i" || theMap[y-1][x] == "_"){
 						System.out.print("can't move because of " + theMap[y-1][x]);
 					}
 //					else if(theMap[x][y-1] == "n" || theMap[x][y-1] == "s"){
@@ -217,7 +211,7 @@ public class pokemonGUI extends JFrame {
 				} 
 				else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					trainer.setTrainerDirection("right");
-					if(theMap[y][x+1] == "t" || theMap[y][x+1] == "a" || theMap[y][x+1] == "w" || theMap[y][x+1] == "i"){
+					if(theMap[y][x+1] == "t" || theMap[y][x+1] == "a" || theMap[y][x+1] == "w" || theMap[y][x+1] == "i" || theMap[y][x+1] == "_"){
 						System.out.print("can't move because of " + theMap[y][x+1]);
 					}
 //					else if(theMap[x+1][y] == "n" || theMap[x+1][y] == "s"){
@@ -240,7 +234,7 @@ public class pokemonGUI extends JFrame {
 				} 
 				else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					trainer.setTrainerDirection("left");
-					if(theMap[y][x-1] == "t" || theMap[y][x-1] == "a" || theMap[y][x-1] == "w" || theMap[y][x-1] == "i"){
+					if(theMap[y][x-1] == "t" || theMap[y][x-1] == "a" || theMap[y][x-1] == "w" || theMap[y][x-1] == "i" || theMap[y][x-1] == "_"){
 						System.out.print("can't move because of " + theMap[y][x-1]);
 					}
 //					else if(theMap[x-1][y] == "n" || theMap[x-1][y] == "s"){

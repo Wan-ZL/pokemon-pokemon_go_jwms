@@ -33,7 +33,7 @@ public class Trainer implements Serializable{
 		this.name = name;
 		this.trainerDirection = "down";
 		this.trainerPosition = new Point();
-		this.trainerPosition.setLocation(10, 0);
+		this.trainerPosition.setLocation(15, 5);
 		this.positionChanged = false;
 		this.moved = false;
 		
