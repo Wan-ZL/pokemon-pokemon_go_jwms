@@ -133,10 +133,10 @@ public class pokemonGUI extends JFrame {
 					ex.printStackTrace();
 				}
 				
-			}
-			
-			if (e.getActionCommand() == "Save and Quit") {
-				System.exit(DO_NOTHING_ON_CLOSE);
+				if (e.getActionCommand() == "Save and Quit") {
+					System.exit(DO_NOTHING_ON_CLOSE);
+				}
+				
 			}
 		}
 		
