@@ -5,7 +5,7 @@ import model.Pokemon;
 public class Poliwag extends Pokemon{
 
 	public Poliwag() {
-		super(PokemonType.Poliwag, 200, 25, PokemonRarity.COMMON);
+		super(PokemonType.POLIWAG, 200, 25, PokemonRarity.COMMON);
 		// TODO Auto-generated constructor stub
 	}
 

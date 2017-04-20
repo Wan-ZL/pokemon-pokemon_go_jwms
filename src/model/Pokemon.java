@@ -85,9 +85,22 @@ public abstract class Pokemon implements Serializable{
 			return false;
 	}
 	
+	// check if the Pokemon flees
+	public boolean catchCheck() {
+		if (rand.nextInt(100) < catchChance) 
+			return true;
+		else
+			return false;
+	}
+	
 	// returns true if the pokemon is eating
 	public boolean isEating() {
 		return eatingBait;
+	}
+	
+	// Set eatingBait
+	public void setEating(Boolean eating) {
+		eatingBait = eating;
 	}
 	
 	// Take damage

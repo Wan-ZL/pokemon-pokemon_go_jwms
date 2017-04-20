@@ -5,7 +5,7 @@ import model.Pokemon;
 public class Dragonair extends Pokemon{
 
 	public Dragonair() {
-		super(PokemonType.Dragonair, 400, 80, PokemonRarity.UNCOMMON);
+		super(PokemonType.DRAGONAIR, 400, 80, PokemonRarity.UNCOMMON);
 		// TODO Auto-generated constructor stub
 	}
 

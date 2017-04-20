@@ -5,7 +5,7 @@ import model.Pokemon;
 public class Marowak extends Pokemon{
 
 	public Marowak() {
-		super(PokemonType.Marowak, 500, 60, PokemonRarity.UNCOMMON);
+		super(PokemonType.MAROWAK, 500, 60, PokemonRarity.UNCOMMON);
 		// TODO Auto-generated constructor stub
 	}
 
