@@ -57,7 +57,9 @@ public class Trainer implements Serializable{
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		if (name != null){
+			this.name = name;
+		}
 	}
 	
 	public String getName(){
@@ -103,7 +105,7 @@ public class Trainer implements Serializable{
 	
 	public static Trainer getTrainerInstance(){		// create instance variable of trainer
 		if(thisTrainer == null){
-			thisTrainer = new Trainer("Trainer Name");
+			thisTrainer = new Trainer("Ash");
 		}
 		return thisTrainer;
 	}
