@@ -34,16 +34,17 @@ public class testPokemon {
 	
 	@Test
 	public void testMakePokemon() {
-		assertEquals(PokemonType.Dragonair.toString(), dragonair.getName());
-		assertEquals(PokemonType.Dratini.toString(), dratini.getName());
-		assertEquals(PokemonType.Exeggcute.toString(), exeggcute.getName());
-		assertEquals(PokemonType.Marowak.toString(), marowak.getName());
-		assertEquals(PokemonType.Mewtwo.toString(), mewtwo.getName());
-		assertEquals(PokemonType.Paras.toString(), paras.getName());
-		assertEquals(PokemonType.Parasect.toString(), parasect.getName());
-		assertEquals(PokemonType.Pinsir.toString(), pinsir.getName());
-		assertEquals(PokemonType.Poliwag.toString(), poliwag.getName());
-		assertEquals(PokemonType.Tauros.toString(), tauros.getName());
+		assertEquals(PokemonType.DRAGONAIR.toString(), dragonair.getName());
+		//System.out.println(PokemonType.DRAGONAIR.toString());
+		assertEquals(PokemonType.DRATINI.toString(), dratini.getName());
+		assertEquals(PokemonType.EXEGGCUTE.toString(), exeggcute.getName());
+		assertEquals(PokemonType.MAROWAK.toString(), marowak.getName());
+		assertEquals(PokemonType.MEWTWO.toString(), mewtwo.getName());
+		assertEquals(PokemonType.PARAS.toString(), paras.getName());
+		assertEquals(PokemonType.PARASECT.toString(), parasect.getName());
+		assertEquals(PokemonType.PINSIR.toString(), pinsir.getName());
+		assertEquals(PokemonType.POLIWAG.toString(), poliwag.getName());
+		assertEquals(PokemonType.TAUROS.toString(), tauros.getName());
 	}
 	
 	@Test

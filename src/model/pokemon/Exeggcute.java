@@ -5,7 +5,7 @@ import model.Pokemon;
 public class Exeggcute extends Pokemon{
 
 	public Exeggcute() {
-		super(PokemonType.Exeggcute, 200, 30, PokemonRarity.COMMON);
+		super(PokemonType.EXEGGCUTE, 200, 30, PokemonRarity.COMMON);
 		// TODO Auto-generated constructor stub
 	}
 

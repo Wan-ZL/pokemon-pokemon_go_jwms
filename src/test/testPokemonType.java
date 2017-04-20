@@ -31,7 +31,7 @@ public class testPokemonType {
 
 	@Test 
 	public void TestgetSize(){ 
-		System.out.print(this.trainer.getSize());
+		//System.out.print(this.trainer.getSize());
 		assertEquals(1, this.trainer.getSize()); 
 	} 
 

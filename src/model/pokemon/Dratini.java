@@ -5,7 +5,7 @@ import model.Pokemon;
 public class Dratini extends Pokemon{
 
 	public Dratini() {
-		super(PokemonType.Dratini, 150, 35, PokemonRarity.COMMON);
+		super(PokemonType.DRATINI, 150, 35, PokemonRarity.COMMON);
 		// TODO Auto-generated constructor stub
 	}
 
