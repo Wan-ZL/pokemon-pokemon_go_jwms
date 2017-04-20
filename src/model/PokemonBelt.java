@@ -36,6 +36,9 @@ public class PokemonBelt implements ListModel<String>, Serializable{
 		return belt.size();
 	}
 
+	public void removAll() {
+		belt.clear();
+	}
 
 	@Override
 	public String getElementAt(int index) {

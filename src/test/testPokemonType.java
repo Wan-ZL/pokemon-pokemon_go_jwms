@@ -14,7 +14,7 @@ public class testPokemonType {
 	public testPokemonType(){ 
 		d = new Dragonair(); 
 		trainer = Trainer.getTrainerInstance(); 
-		//trainer.removeAllPokemoninBelt(); 
+		trainer.removeAllPokemoninBelt(); 
 		trainer.addPokemon(d); 
 	} 
 	
@@ -31,6 +31,7 @@ public class testPokemonType {
 
 	@Test 
 	public void TestgetSize(){ 
+		System.out.print(this.trainer.getSize());
 		assertEquals(1, this.trainer.getSize()); 
 	} 
 

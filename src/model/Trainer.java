@@ -140,4 +140,8 @@ public class Trainer implements Serializable{
 	public BackPack getBackpack(){
 		return this.pack;
 	}
+
+	public void removeAllPokemoninBelt() {
+		belt.removAll();
+	}
 }
