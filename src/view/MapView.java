@@ -23,7 +23,6 @@ public class MapView extends JPanel{
 	private static final long serialVersionUID = 3336864412070556704L;
 	
 	private Map theMap;
-	private int mapNum;
 	private int height = 26;
 	private int width = 36;
 	private int trainerX;
@@ -50,7 +49,6 @@ public class MapView extends JPanel{
 		//this is to get the Y axis for trainer
 		this.trainerY = trainer.getY();
 		this.theMap = new Map();
-		this.mapNum = trainer.getMapNum();
 		
 		this.setSize(20*36, 26*20);
 		
@@ -123,12 +121,13 @@ public class MapView extends JPanel{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		
+		String[][] temp = theMap.getMap(this.trainer.getMap());
+		System.out.println(temp.length);
 		for(int i=0; i<height; i++){
 			for(int j=0; j<width; j++){
 				//TODO: Data controller call getmap() to get the map, them get the location
 
-				String loc = theMap.getItemOnMap(mapNum ,i, j);
+				String loc = theMap.getItemOnMap(trainer.getMapNum() ,j, i);
 				//Draw images by compare strings
 				if (loc.equals("t")) {
 					g2.drawImage(tree, j * 20, i * 20, null);
