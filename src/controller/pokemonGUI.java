@@ -153,7 +153,7 @@ public class pokemonGUI extends JFrame {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			if(trainer.getStep() <= 0){
-				JOptionPane.showMessageDialog(null, "You can not move! You lOSE!");
+				JOptionPane.showMessageDialog(null, "Out of steps! You caught " + trainer.getSize() + " Pokemon!");
 			}
 			else if (!trainer.MoveChanged()) {
 				//boolean move = false;
