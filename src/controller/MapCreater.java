@@ -466,16 +466,27 @@ public class MapCreater {
 			{ "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t",
 					// ---22---23---24---25---26---27---28---29---30---31---32---33---34---35
 					"t", "s", "s", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t" } };
+	private String[][] switchXY(String[][] map){
+		String[][] returnStr = new String[map[0].length][map.length];
+		for(int i = 0 ; i < map.length ; i++){
+			for(int m = 0 ; m < map[i].length ; m++){
+				returnStr[m][i] = map[i][m];
+			}
+			System.out.println();
+		}
+		
+		return returnStr;
+	}
 	
 	public String[][] getMap1(){		// return the start map
-		return this.StartMap;
+		return switchXY(this.StartMap);
 	}
 	
 	public String[][] getMap2(){		// return the second map
-		return this.RightMap;
+		return switchXY(this.RightMap);
 	}
 	
 	public String[][] getMap3(){		// return the third map
-		return this.TopMap;
+		return switchXY(this.TopMap);
 	}
 }
