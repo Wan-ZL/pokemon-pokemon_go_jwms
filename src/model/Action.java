@@ -17,7 +17,7 @@ public enum Action {
 	}
 	
 	// Get a string describing the action
-	public String toString() {
+	/*public String toString() {
 		if (value == 0) {
 			return "is eating!";
 		} else if (value == 1) {
@@ -37,5 +37,5 @@ public enum Action {
 		}
 		
 		
-	}
+	}*/
 }
