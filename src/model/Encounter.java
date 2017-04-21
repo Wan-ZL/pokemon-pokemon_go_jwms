@@ -13,4 +13,10 @@ public class Encounter implements Serializable{
 		this.pokemon = pokemon;
 		this.trainer = trainer;
 	}
+	
+	// Returns the Pokemons name as a string
+	public String getPokemonName() {
+		return pokemon.getName();
+	}
+	
 }
