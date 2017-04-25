@@ -35,6 +35,7 @@ public class ItemView extends JPanel implements Observer {
 	private JPanel text;
 	private JLabel steps;
 	private JLabel name;
+	private JLabel numPokemon;
 	
 	public ItemView(Trainer trainer){
 		this.setPreferredSize(new Dimension(100,100));
@@ -42,19 +43,27 @@ public class ItemView extends JPanel implements Observer {
 		this.setBackground(Color.cyan);
 		this.trainer = trainer;
 		text = new JPanel();
+<<<<<<< HEAD
 		text.setLayout(new GridLayout(2, 1));
 		text.setBackground(Color.WHITE);
 		name = new JLabel("Trainer: " +trainer.getName());
+=======
+		text.setLayout(new GridLayout(3, 1));
+		text.setBackground(Color.cyan);
+		name = new JLabel(trainer.getName());
+>>>>>>> d4c83b1b9b1de5069edbd4201f8b5d9ff3d51b3e
 		steps = new JLabel("Steps: " + String.valueOf(trainer.getStep()));
+		numPokemon = new JLabel("Caught Pokemon: " + trainer.getPokemonBelt().getSize());
 		text.add(name);
 		text.add(steps);
+		text.add(numPokemon);
 		this.add(text);
 		//this.add(steps);
 		
 		this.setSize(200, 11*20);
 		
 		list = new JList<String>();
-		//this.add(list);
+		this.add(list);
 		list_model = trainer.getPokemonBelt();
 		System.out.println(list_model);
 

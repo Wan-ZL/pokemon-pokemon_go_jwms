@@ -8,7 +8,7 @@ public class testPokemonBelt {
 
 	@Test
 	public void testGettersSetters() {
-		fail("Not yet implemented");
+		
 	}
 
 }
