@@ -43,7 +43,8 @@ public class BattleView extends JPanel{
 	private JButton ThrowABait;
 	
 	private Image backGround;
-	private JTextArea message;
+	private JTextArea TrainerHealth;
+	private JTextArea PokemonHealth;
 	
 	public BattleView(Trainer trainer) {
 		this.trainer = trainer;
@@ -55,9 +56,11 @@ public class BattleView extends JPanel{
 		throwARock = new JButton("Throw A Rock");
 		runAway = new JButton("Run Away");
 		ThrowABait = new JButton("Throw A Bait");
-		message = new JTextArea("");
 		
-		message.setEditable(false);
+		TrainerHealth = new JTextArea("");
+		PokemonHealth = new JTextArea("");
+		
+		TrainerHealth.setEditable(false);
 		throwASafariBall.setBounds(370, 380, 150, 30);
 		throwARock.setBounds(520, 380, 150, 30);
 		runAway.setBounds(520, 420, 150, 30);
@@ -73,7 +76,7 @@ public class BattleView extends JPanel{
 		throwASafariBall.addActionListener(new ThrowASafariBallListener());
 		ThrowABait.addActionListener(new ThrowBaitListener());
 		
-		JScrollPane scroll = new JScrollPane(message);
+		JScrollPane scroll = new JScrollPane(TrainerHealth);
 		scroll.setBounds(50, 350, 300, 150);
 		this.add(scroll);
 		
