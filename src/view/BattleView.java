@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -17,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import model.Encounter;
 import model.Pokemon;
 import model.Trainer;
@@ -46,7 +49,24 @@ public class BattleView extends JPanel{
 	private JTextArea TrainerHealth;
 	private JTextArea PokemonHealth;
 	
+	private MediaPlayer sound;
+	//Sound for run away
+	private static final String RUNAWAY = Paths.get("sounds/runsAway.mp3").toUri().toString();
+
+	//Sound for throw a bait
+	private static final String THROWBAIT = Paths.get("sounds/bait.mp3").toUri().toString();
+
+	//Sound for catch a pokemon
+	private static final String POKECAUGHT = Paths.get("sounds/caught.mp3").toUri().toString();
+
+	//Sound for throw a rock
+	private static final String THROWROCK = Paths.get("sounds/rock.mp3").toUri().toString();
+	
+	//Sound for throw a safari ball
+		private static final String THROWBALL = Paths.get("sounds/throwball.mp3").toUri().toString();
+	
 	public BattleView(Trainer trainer) {
+		
 		this.trainer = trainer;
 		encounter = new Encounter(getPokemon(), trainer);
 		battlePan = new JPanel();
@@ -56,6 +76,8 @@ public class BattleView extends JPanel{
 		throwARock = new JButton("Throw A Rock");
 		runAway = new JButton("Run Away");
 		ThrowABait = new JButton("Throw A Bait");
+		
+		
 		
 		TrainerHealth = new JTextArea("");
 		PokemonHealth = new JTextArea("");
@@ -110,7 +132,7 @@ public class BattleView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			playSong(RUNAWAY);
 		}
 
 	}
@@ -122,6 +144,13 @@ public class BattleView extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
+			//throw a safari ball first
+			playSong(THROWBALL);
+			
+			//TODO: check if pokemon is caught
+			if(pokemon.iscaught()){
+				playSong(POKECAUGHT);
+			}
 		}
 		
 	}
@@ -132,7 +161,7 @@ public class BattleView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+			playSong(THROWROCK);
 		}
 		
 	}
@@ -143,8 +172,19 @@ public class BattleView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+			playSong(THROWBAIT);
 		}
 		
+	}
+	
+	private void playSong(String file) {
+		if (this.sound != null) {
+			this.sound.stop();
+			this.sound.dispose();
+		}
+		Media song = new Media(file);
+		this.sound = new MediaPlayer(song);
+		// The song will repeat forever
+		this.sound.play();
 	}
 }
