@@ -1,7 +1,5 @@
 package controller;
 
-
-
 import java.awt.Container;
 
 import java.awt.GridLayout;
@@ -22,8 +20,6 @@ import java.io.IOException;
 
 import java.io.ObjectOutputStream;
 
-
-
 import javax.swing.JFrame;
 
 import javax.swing.JMenu;
@@ -36,8 +32,6 @@ import javax.swing.JOptionPane;
 
 import javax.swing.JPanel;
 
-
-
 import model.Map;
 import model.Pokemon;
 import model.Trainer;
@@ -47,11 +41,7 @@ import view.ItemView;
 import view.LoadingView;
 import view.MapView;
 
-
-
 public class pokemonGUI extends JFrame {
-
-
 
 	private static final long serialVersionUID = -2195306133576575637L;
 
@@ -62,8 +52,7 @@ public class pokemonGUI extends JFrame {
 	private ItemView items;
 	private Map map;
 	private BattleView battleview;
-	
-	
+
 	public pokemonGUI(Trainer trainer) {
 		this.map = new Map();
 		this.trainer = trainer;
@@ -74,23 +63,23 @@ public class pokemonGUI extends JFrame {
 	private void setUpGameWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Pokemon Safari Zone");
-		this.setSize((20*11)+215, (20*11)+70);
+		this.setSize((20 * 11) + 215, (20 * 11) + 70);
 		this.setLocation(100, 100);
 		cp = getContentPane();
 		currentView = mapView;
 		currentView.setLocation(0, 0);
-		currentView.setSize(11*20, 11*20);
+		currentView.setSize(11 * 20, 11 * 20);
 		this.addKeyListener(new MoveListener());
 		cp.setLayout(null);
 		cp.add(currentView);
 		setupMenu();
 		setupItems();
 	}
-	
-	public void update(){
+
+	public void update() {
 		currentView.updatePanel();
 		items.updateSteps();
-		//this.repaint();
+		// this.repaint();
 	}
 
 	private void setupMenu() {
@@ -106,24 +95,31 @@ public class pokemonGUI extends JFrame {
 		this.setJMenuBar(menuBar);
 	}
 
-	public void redraw(){
+	public void redraw() {
 		this.repaint();
 	}
 
-	private void setupItems(){
-		items = new ItemView(trainer);
-		items.setLocation((11*20), 0);
-		cp.add(items);
-		//System.out.println("here");
+	public void mapSwitchUpdate(){
+		currentView = new MapView(trainer);;
+		currentView.setLocation(0, 0);
+		currentView.setSize(11 * 20, 11 * 20);
+		cp.add(currentView);
+		this.repaint();
 	}
-	
+	private void setupItems() {
+		items = new ItemView(trainer);
+		items.setLocation((11 * 20), 0);
+		cp.add(items);
+		// System.out.println("here");
+	}
+
 	private class SaveGame implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int userInput = JOptionPane.showConfirmDialog(null, "Save over existing file?");
 			if (userInput == JOptionPane.YES_OPTION) {
-				
+
 				FileOutputStream fos = null;
 				try {
 					fos = new FileOutputStream("saveData");
@@ -138,149 +134,163 @@ public class pokemonGUI extends JFrame {
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
-				
+
 				if (e.getActionCommand() == "Save and Quit") {
 					System.exit(DO_NOTHING_ON_CLOSE);
 				}
-				
+
 			}
 		}
-		
+
 	}
-	
+
 	private class MoveListener implements KeyListener {
 
 		@Override
 		public void keyTyped(KeyEvent e) {
-			
+
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			if(trainer.getStep() <= 0){
-				JOptionPane.showMessageDialog(null, "Out of steps! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!");
-			}
-			else if (!trainer.MoveChanged()) {
-				//boolean move = false;
-				int x = trainer.getX();
-				int y = trainer.getY();
-				int mapNum = trainer.getMapNum();
-				String[][] theMap = map.getMap(mapNum);
-				String face = trainer.getTrainerDirection();
-				
-				//press "up"
-				if(e.getKeyCode() == KeyEvent.VK_DOWN){
-					trainer.setTrainerDirection("down");
-					if(theMap[y+1][x] == "t" || theMap[y+1][x] == "a" || theMap[y+1][x] == "w" || theMap[y+1][x] == "i" || theMap[y+1][x] == "_"){
-						System.out.print("can't move because of " + theMap[y+1][x]);
+			if (!trainer.isInBattle()) {
+				if (trainer.getStep() <= 0) {
+					JOptionPane.showMessageDialog(null,
+							"Out of steps! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!");
+				} else if (!trainer.MoveChanged()) {
+					// boolean move = false;
+					int x = trainer.getX();
+					int y = trainer.getY();
+					int mapNum = trainer.getMapNum();
+					String[][] theMap = map.getMap(mapNum);
+					String face = trainer.getTrainerDirection();
+
+					// press "up"
+					if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+						trainer.setTrainerDirection("down");
+						if (theMap[y + 1][x] == "t" || theMap[y + 1][x] == "a" || theMap[y + 1][x] == "w"
+								|| theMap[y + 1][x] == "i" || theMap[y + 1][x] == "_") {
+							System.out.print("can't move because of " + theMap[y + 1][x]);
+						}
+						// else if(theMap[x][y+1] == "n" || theMap[x][y+1] ==
+						// "s"){
+						// trainer.setPosition(x, y);
+						// }
+						/*
+						 * else if(theMap[y+1][x] == "w"){
+						 * System.out.print("Walk into water now");
+						 * trainer.setPosition(x, y+1);
+						 * trainer.setChangedMove(true); }
+						 */
+						else if (theMap[y + 1][x] == "g") {
+							System.out.print("Walk into grass now");
+							trainer.setPosition(x, y + 1);
+							trainer.setChangedMove(true);
+						} else {
+							trainer.setPosition(x, y + 1);
+							trainer.setChangedMove(true);
+						}
+					} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+						trainer.setTrainerDirection("up");
+						if (theMap[y - 1][x] == "t" || theMap[y - 1][x] == "a" || theMap[y - 1][x] == "w"
+								|| theMap[y - 1][x] == "i" || theMap[y - 1][x] == "_") {
+							System.out.print("can't move because of " + theMap[y - 1][x]);
+						}
+						// else if(theMap[x][y-1] == "n" || theMap[x][y-1] ==
+						// "s"){
+						// trainer.setPosition(x, y);
+						// }
+						/*
+						 * else if(theMap[y-1][x] == "w"){
+						 * System.out.print("Walk into water now");
+						 * trainer.setPosition(x, y-1);
+						 * trainer.setChangedMove(true); }
+						 */
+						else if (theMap[y - 1][x] == "g") {
+							System.out.print("Walk into grass now");
+							trainer.setPosition(x, y - 1);
+							trainer.setChangedMove(true);
+						} else {
+							trainer.setPosition(x, y - 1);
+							trainer.setChangedMove(true);
+						}
+					} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+						trainer.setTrainerDirection("right");
+						if (theMap[y][x + 1] == "t" || theMap[y][x + 1] == "a" || theMap[y][x + 1] == "w"
+								|| theMap[y][x + 1] == "i" || theMap[y][x + 1] == "_") {
+							System.out.print("can't move because of " + theMap[y][x + 1]);
+						}
+						// else if(theMap[x+1][y] == "n" || theMap[x+1][y] ==
+						// "s"){
+						// trainer.setPosition(x, y);
+						// }
+						/*
+						 * else if(theMap[y][x+1] == "w"){
+						 * System.out.print("Walk into water now");
+						 * trainer.setPosition(x+1, y);
+						 * trainer.setChangedMove(true); }
+						 */
+						else if (theMap[y][x + 1] == "g") {
+							System.out.print("Walk into grass now");
+							trainer.setPosition(x + 1, y);
+							trainer.setChangedMove(true);
+						} else {
+							trainer.setPosition(x + 1, y);
+							trainer.setChangedMove(true);
+						}
+					} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+						trainer.setTrainerDirection("left");
+						if (theMap[y][x - 1] == "t" || theMap[y][x - 1] == "a" || theMap[y][x - 1] == "w"
+								|| theMap[y][x - 1] == "i" || theMap[y][x - 1] == "_") {
+							System.out.print("can't move because of " + theMap[y][x - 1]);
+						}
+						// else if(theMap[x-1][y] == "n" || theMap[x-1][y] ==
+						// "s"){
+						// trainer.setPosition(x, y);
+						// }
+						/*
+						 * else if(theMap[y][x-1] == "w"){
+						 * System.out.print("Walk into water now");
+						 * trainer.setPosition(x-1, y);
+						 * trainer.setChangedMove(true); }
+						 */
+						else if (theMap[y][x - 1] == "g") {
+							System.out.print("Walk into grass now");
+							trainer.setPosition(x - 1, y);
+							trainer.setChangedMove(true);
+						} else {
+							trainer.setPosition(x - 1, y);
+							trainer.setChangedMove(true);
+						}
 					}
-//					else if(theMap[x][y+1] == "n" || theMap[x][y+1] == "s"){
-//						trainer.setPosition(x, y);
-//					}
-					/*else if(theMap[y+1][x] == "w"){
-						System.out.print("Walk into water now");
-						trainer.setPosition(x, y+1);
-						trainer.setChangedMove(true);
-					}*/
-					else if(theMap[y+1][x] == "g"){
-						System.out.print("Walk into grass now");
-						trainer.setPosition(x, y+1);
-						trainer.setChangedMove(true);
-					}
-					else{
-						trainer.setPosition(x, y+1);
-						trainer.setChangedMove(true);
-					}
-				} 
-				else if (e.getKeyCode() == KeyEvent.VK_UP) {
-					trainer.setTrainerDirection("up");
-					if(theMap[y-1][x] == "t" || theMap[y-1][x] == "a" || theMap[y-1][x] == "w" || theMap[y-1][x] == "i" || theMap[y-1][x] == "_"){
-						System.out.print("can't move because of " + theMap[y-1][x]);
-					}
-//					else if(theMap[x][y-1] == "n" || theMap[x][y-1] == "s"){
-//						trainer.setPosition(x, y);
-//					}
-					/*else if(theMap[y-1][x] == "w"){
-						System.out.print("Walk into water now");
-						trainer.setPosition(x, y-1);
-						trainer.setChangedMove(true);
-					}*/
-					else if(theMap[y-1][x] == "g"){
-						System.out.print("Walk into grass now");
-						trainer.setPosition(x, y-1);
-						trainer.setChangedMove(true);
-					}
-					else{
-						trainer.setPosition(x, y-1);
-						trainer.setChangedMove(true);
-					}
-				} 
-				else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-					trainer.setTrainerDirection("right");
-					if(theMap[y][x+1] == "t" || theMap[y][x+1] == "a" || theMap[y][x+1] == "w" || theMap[y][x+1] == "i" || theMap[y][x+1] == "_"){
-						System.out.print("can't move because of " + theMap[y][x+1]);
-					}
-//					else if(theMap[x+1][y] == "n" || theMap[x+1][y] == "s"){
-//						trainer.setPosition(x, y);
-//					}
-					/*else if(theMap[y][x+1] == "w"){
-						System.out.print("Walk into water now");
-						trainer.setPosition(x+1, y);
-						trainer.setChangedMove(true);
-					}*/
-					else if(theMap[y][x+1] == "g"){
-						System.out.print("Walk into grass now");
-						trainer.setPosition(x+1, y);
-						trainer.setChangedMove(true);
-					}
-					else{
-						trainer.setPosition(x+1, y);
-						trainer.setChangedMove(true);
-					}
-				} 
-				else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-					trainer.setTrainerDirection("left");
-					if(theMap[y][x-1] == "t" || theMap[y][x-1] == "a" || theMap[y][x-1] == "w" || theMap[y][x-1] == "i" || theMap[y][x-1] == "_"){
-						System.out.print("can't move because of " + theMap[y][x-1]);
-					}
-//					else if(theMap[x-1][y] == "n" || theMap[x-1][y] == "s"){
-//						trainer.setPosition(x, y);
-//					}
-					/*else if(theMap[y][x-1] == "w"){
-						System.out.print("Walk into water now");
-						trainer.setPosition(x-1, y);
-						trainer.setChangedMove(true);
-					}*/
-					else if(theMap[y][x-1] == "g"){
-						System.out.print("Walk into grass now");
-						trainer.setPosition(x-1, y);
-						trainer.setChangedMove(true);
-					}
-					else{
-						trainer.setPosition(x-1, y);
-						trainer.setChangedMove(true);
+					//System.out.println(theMap[trainer.getY()][trainer.getX()]);
+					System.out.println("x is "+trainer.getX()+", y is "+trainer.getY());
+					update();
+
+					// int x = trainer.getX();
+					// int y = trainer.getY();
+					if (trainer.getItemNum(ItemType.SAFARI_BALL) != 0) {
+						if (trainer.meetPokemon()) {
+							System.out.println("going to battle");
+							cp.remove(currentView);
+							cp.add(battleview = new BattleView(trainer));
+
+							battleview.setVisible(true);
+							mapView.setVisible(false);
+							redraw();
+						}
 					}
 				}
-				System.out.println(theMap[trainer.getY()][trainer.getX()]);
-				update();
-				
-
-				//int x = trainer.getX();
-				//int y = trainer.getY();	
-				if(trainer.getItemNum(ItemType.SAFARI_BALL) != 0){
-					if(trainer.meetPokemon()){
-						System.out.println("going to battle");
-						cp.remove(currentView);
-						cp.add(battleview = new BattleView(trainer));
-						
-						battleview.setVisible(true);
-						mapView.setVisible(false);
-						redraw();
+				if(trainer.getX() == 5){
+					if(trainer.getY() == 17 || trainer.getY() == 18){
+						System.out.println("switch");
+						trainer.setMapNum(2);
+						mapSwitchUpdate();
 					}
 				}
 			}
 		}
-		
+
 		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub

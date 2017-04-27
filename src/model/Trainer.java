@@ -126,6 +126,10 @@ public class Trainer implements Serializable {
 	public int getMapNum() {
 		return mapIndex;
 	}
+	
+	public void setMapNum(int mapNum){
+		this.mapIndex = mapNum;
+	}
 
 	public int getX() { // return trainer x position
 		return (int) this.trainerPosition.getX();
@@ -190,7 +194,7 @@ public class Trainer implements Serializable {
 	public boolean meetPokemon() { // null means no pokemon meet
 		String[][] theMap = map.getMap(this.mapIndex);
 		if (theMap[this.getY()][this.getX()].equals("g")) {			// if in grass
-			if (Math.random() < 0.3) { // 30% chance to meet pokemon
+			if (Math.random() < 0.2) { // 30% chance to meet pokemon
 				this.isInBattle = true;
 				return true;
 			}
