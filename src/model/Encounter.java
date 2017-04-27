@@ -19,4 +19,12 @@ public class Encounter implements Serializable{
 		return pokemon.getName();
 	}
 	
+	// make a catch attempt
+	public boolean tryToCatch() {
+		if (pokemon.catchCheck()) {
+			trainer.addPokemon(pokemon);
+		}
+		return pokemon.catchCheck();
+	}
+	
 }

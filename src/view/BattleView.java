@@ -184,7 +184,7 @@ public class BattleView extends JPanel{
 			playSong(THROWBALL);
 			
 			//TODO: check if pokemon is caught
-			if(pokemon.iscaught()){
+			if(encounter.isCaught()){
 				playSong(POKECAUGHT);
 			}
 		}
