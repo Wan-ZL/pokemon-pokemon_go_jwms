@@ -1,5 +1,5 @@
 package model;
-// why do we need encounter??
+// which pokemon meets which trainer 
 public class Encounter{
 
 	private Pokemon pokemon;
@@ -15,6 +15,7 @@ public class Encounter{
 		return pokemon.getName();
 	}
 	
+
 	
 	
 	
