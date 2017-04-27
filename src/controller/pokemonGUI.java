@@ -99,13 +99,15 @@ public class pokemonGUI extends JFrame {
 		this.repaint();
 	}
 
-	public void mapSwitchUpdate(){
-		currentView = new MapView(trainer);;
+	public void mapSwitchUpdate() {
+		currentView = new MapView(trainer);
+		;
 		currentView.setLocation(0, 0);
 		currentView.setSize(11 * 20, 11 * 20);
 		cp.add(currentView);
 		this.repaint();
 	}
+
 	private void setupItems() {
 		items = new ItemView(trainer);
 		items.setLocation((11 * 20), 0);
@@ -117,28 +119,30 @@ public class pokemonGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int userInput = JOptionPane.showConfirmDialog(null, "Save over existing file?");
-			if (userInput == JOptionPane.YES_OPTION) {
+			if (!trainer.isInBattle()) {
+				int userInput = JOptionPane.showConfirmDialog(null, "Save over existing file?");
+				if (userInput == JOptionPane.YES_OPTION) {
 
-				FileOutputStream fos = null;
-				try {
-					fos = new FileOutputStream("saveData");
-				} catch (FileNotFoundException ex) {
-					ex.printStackTrace();
-				}
-				ObjectOutputStream oos = null;
-				try {
-					oos = new ObjectOutputStream(fos);
-					oos.writeObject(trainer);
-					fos.close();
-				} catch (IOException ex) {
-					ex.printStackTrace();
-				}
+					FileOutputStream fos = null;
+					try {
+						fos = new FileOutputStream("saveData");
+					} catch (FileNotFoundException ex) {
+						ex.printStackTrace();
+					}
+					ObjectOutputStream oos = null;
+					try {
+						oos = new ObjectOutputStream(fos);
+						oos.writeObject(trainer);
+						fos.close();
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
 
-				if (e.getActionCommand() == "Save and Quit") {
-					System.exit(DO_NOTHING_ON_CLOSE);
-				}
+					if (e.getActionCommand() == "Save and Quit") {
+						System.exit(DO_NOTHING_ON_CLOSE);
+					}
 
+				}
 			}
 		}
 
@@ -263,8 +267,8 @@ public class pokemonGUI extends JFrame {
 							trainer.setChangedMove(true);
 						}
 					}
-					//System.out.println(theMap[trainer.getY()][trainer.getX()]);
-					System.out.println("x is "+trainer.getX()+", y is "+trainer.getY());
+					// System.out.println(theMap[trainer.getY()][trainer.getX()]);
+					System.out.println("x is " + trainer.getX() + ", y is " + trainer.getY());
 					update();
 
 					// int x = trainer.getX();
@@ -281,8 +285,8 @@ public class pokemonGUI extends JFrame {
 						}
 					}
 				}
-				if(trainer.getX() == 5){
-					if(trainer.getY() == 17 || trainer.getY() == 18){
+				if (trainer.getX() == 5) {
+					if (trainer.getY() == 17 || trainer.getY() == 18) {
 						System.out.println("switch");
 						trainer.setMapNum(2);
 						mapSwitchUpdate();
