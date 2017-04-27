@@ -256,7 +256,7 @@ public class pokemonGUI extends JFrame {
 						trainer.setChangedMove(true);
 					}
 				}
-				System.out.println("x: "+trainer.getX()+", y: "+trainer.getY());
+				System.out.println(theMap[trainer.getY()][trainer.getX()]);
 				update();
 				
 				//int x = trainer.getX();
