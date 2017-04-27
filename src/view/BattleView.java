@@ -23,6 +23,16 @@ import javafx.scene.media.MediaPlayer;
 import model.Encounter;
 import model.Pokemon;
 import model.Trainer;
+import model.pokemon.Dragonair;
+import model.pokemon.Dratini;
+import model.pokemon.Exeggcute;
+import model.pokemon.Marowak;
+import model.pokemon.Mewtwo;
+import model.pokemon.Paras;
+import model.pokemon.Parasect;
+import model.pokemon.Pinsir;
+import model.pokemon.Poliwag;
+import model.pokemon.Tauros;
 
 public class BattleView extends JPanel{
 
@@ -124,7 +134,33 @@ public class BattleView extends JPanel{
 	private Pokemon getPokemon() {
 		// TODO get a random int to choose which pokemon to create for the
 		//      encounter.
-		return null;
+		int rarity = rand.nextInt(10);
+		if (rarity == 0) {                   // Rare Pokemon
+			return new Mewtwo();
+		} else if (rarity < 4) {             // uncommon
+			int num = rand.nextInt(2);
+			if (num == 0) 
+				return new Dragonair();
+			else if (num == 1)
+				return new Pinsir();
+			else 
+				return new Marowak();
+		} else {                             // common
+			int num = rand.nextInt(5);
+			if (num == 0)
+				return new Tauros();
+			else if (num == 1)
+				return new Poliwag();
+			else if (num == 2)
+				return new Paras();
+			else if (num == 3)
+				return new Exeggcute();
+			else if (num == 4)
+				return new Parasect();
+			else
+				return new Dratini();
+		}
+		
 	}
 	
 	// Listener for run away
