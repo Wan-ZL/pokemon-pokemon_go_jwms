@@ -20,11 +20,13 @@ public class Encounter implements Serializable{
 	}
 	
 	// make a catch attempt
-	public boolean tryToCatch() {
+	public boolean isCaught() {
 		if (pokemon.catchCheck()) {
 			trainer.addPokemon(pokemon);
 		}
 		return pokemon.catchCheck();
 	}
+	
+	
 	
 }
