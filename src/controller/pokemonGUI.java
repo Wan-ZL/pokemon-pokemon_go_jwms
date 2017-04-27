@@ -100,8 +100,8 @@ public class pokemonGUI extends JFrame {
 	}
 
 	public void mapSwitchUpdate() {
+		cp.remove(currentView);
 		currentView = new MapView(trainer);
-		;
 		currentView.setLocation(0, 0);
 		currentView.setSize(11 * 20, 11 * 20);
 		cp.add(currentView);
@@ -289,7 +289,7 @@ public class pokemonGUI extends JFrame {
 					if (trainer.getY() == 17 || trainer.getY() == 18) {
 						System.out.println("switch");
 						trainer.setMapNum(2);
-						trainer.setPosition(trainer.getX()+5, trainer.getY()+5);
+						trainer.setPosition(5, 27);
 						mapSwitchUpdate();
 					}
 				}
