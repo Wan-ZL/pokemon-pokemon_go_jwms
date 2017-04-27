@@ -3,7 +3,7 @@ package model;
 public class Encounter{
 
 	private Pokemon pokemon;
-	private Trainer trainer;
+	private Trainer trainer; //get from the battle view 
 	
 	public Encounter(Pokemon pokemon, Trainer trainer) {
 		this.pokemon = pokemon;
@@ -14,6 +14,7 @@ public class Encounter{
 	public String getPokemonName() {
 		return pokemon.getName();
 	}
+	
 	
 
 	
