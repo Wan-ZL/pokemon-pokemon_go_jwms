@@ -39,9 +39,10 @@ import javax.swing.JPanel;
 
 
 import model.Map;
-
+import model.Pokemon;
 import model.Trainer;
-
+import model.items.ItemType;
+import view.BattleView;
 import view.ItemView;
 
 import view.MapView;
@@ -261,6 +262,14 @@ public class pokemonGUI extends JFrame {
 				
 				//int x = trainer.getX();
 				//int y = trainer.getY();	
+				if(trainer.getItemNum(ItemType.SAFARI_BALL) != 0){
+					Pokemon poke = trainer.meetPokemon();
+					if(poke != null){
+						System.out.println(poke.getName());
+						cp.remove(currentView);
+						cp.add(new BattleView(trainer));
+					}
+				}
 			}
 		}
 		

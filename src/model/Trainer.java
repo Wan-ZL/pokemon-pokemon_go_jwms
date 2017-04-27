@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import model.items.Item;
+import model.items.ItemType;
 import model.items.SafariBall;
 import model.pokemon.Dragonair;
 import model.pokemon.Dratini;
@@ -173,6 +174,10 @@ public class Trainer implements Serializable {
 
 	public void removeAllPokemoninBelt() {
 		belt.removAll();
+	}
+	
+	public int getItemNum(ItemType type){
+		return this.pack.numItem(type);
 	}
 
 
