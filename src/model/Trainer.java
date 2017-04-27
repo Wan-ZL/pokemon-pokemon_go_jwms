@@ -3,10 +3,20 @@ package model;
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 import model.items.Item;
 import model.items.SafariBall;
+import model.pokemon.Dragonair;
+import model.pokemon.Dratini;
+import model.pokemon.Exeggcute;
+import model.pokemon.Marowak;
+import model.pokemon.Mewtwo;
 import model.pokemon.Paras;
+import model.pokemon.Parasect;
+import model.pokemon.Pinsir;
+import model.pokemon.Poliwag;
+import model.pokemon.Tauros;
 
 public class Trainer implements Serializable{
 	
@@ -116,7 +126,7 @@ public class Trainer implements Serializable{
 	public boolean addPokemon(Pokemon pokemon){		// add a pokemon to belt, return true if success
 		return this.belt.addPokemon(pokemon);
 	}
-	/*
+	
 	public boolean removePokemon(Pokemon pokemon){	// remove a pokemon from belt, if have multi same pokemon, remove the first one.
 		return this.belt.removePokemon(pokemon);
 	}
@@ -124,8 +134,8 @@ public class Trainer implements Serializable{
 	public Pokemon removePokemon(int index){		// remove a pokemon on specific index, return the removed pokemon object.
 		return this.belt.removePokemon(index);
 	}
-	*/
-	/*
+	
+	
 	public ArrayList<Pokemon> getBeltArray(){		// return the whole belt
 		return this.belt.getBeltArray();
 	}
@@ -133,12 +143,12 @@ public class Trainer implements Serializable{
 	public ArrayList<Item> getBackpackArray(){		// return the whole backpack
 		return this.pack.getBackpackArray();
 	}
-	*/
-	/*
+	
+	
 	public int getSize(){							// return the number of pokemon on belt.
 		return this.belt.getSize();
 	}
-	*/
+	
 	public PokemonBelt getPokemonBelt(){
 		return belt;
 	}
@@ -146,9 +156,54 @@ public class Trainer implements Serializable{
 	public BackPack getBackpack(){
 		return this.pack;
 	}
-	/*
+	
 	public void removeAllPokemoninBelt() {
 		belt.removAll();
 	}
-	*/
+	
+	public Pokemon meetPokemon(){			// null means no pokemon meet
+		Random rand = new Random();
+		if(Math.random() < 0.3){			// 30% chance to meet pokemon
+			if(Math.random() < 0.1){		// rare (10% chance to meet rare
+				return new Mewtwo();
+			}
+			else if(Math.random() < 0.3){	// uncommon	(30% chance to meet uncommon)
+				int index = rand.nextInt(2);
+				if(index == 0){
+					return new Dragonair();
+				}
+				else if(index == 1){
+					return new Marowak();
+				}
+				else{
+					return new Pinsir();
+				}
+			}
+			else{								// common
+				int index = rand.nextInt(5);
+				if(index == 0){
+					return new Dratini();
+				}
+				else if(index == 1){
+					return new Exeggcute();
+				}
+				else if(index == 2){
+					return new Paras();
+				}
+				else if(index == 3){
+					return new Parasect();
+				}
+				else if(index == 4){
+					return new Poliwag();
+				}
+				else{
+					return new Tauros();
+				}
+			}
+		}
+		else{									// safe ( no pokemon)
+		return null;
+		}
+	}
+	
 }
