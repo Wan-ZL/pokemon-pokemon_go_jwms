@@ -89,6 +89,7 @@ public class pokemonGUI extends JFrame {
 	
 	public void update(){
 		currentView.updatePanel();
+		//battleview.updatePanel();
 		items.updateSteps();
 		//this.repaint();
 	}
@@ -107,7 +108,7 @@ public class pokemonGUI extends JFrame {
 	}
 
 	public void redraw(){
-		this.repaint();
+		battleview.updatePanel();
 	}
 
 	private void setupItems(){
@@ -271,9 +272,11 @@ public class pokemonGUI extends JFrame {
 					Pokemon poke = trainer.meetPokemon();
 					if(poke != null){
 						System.out.println(poke.getName());
+						cp.remove(items);
 						cp.remove(currentView);
 						cp.add(battleview = new BattleView(trainer));
-						
+						battleview.setSize(battleview.getPreferredSize());
+						battleview.setLocation(0, 0);
 						battleview.setVisible(true);
 						mapView.setVisible(false);
 						redraw();

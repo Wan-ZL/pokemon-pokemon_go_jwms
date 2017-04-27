@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -73,15 +74,16 @@ public class BattleView extends JPanel{
 	private static final String THROWROCK = Paths.get("sounds/rock.mp3").toUri().toString();
 	
 	//Sound for throw a safari ball
-		private static final String THROWBALL = Paths.get("sounds/throwball.mp3").toUri().toString();
+	private static final String THROWBALL = Paths.get("sounds/throwball.mp3").toUri().toString();
 	
 	public BattleView(Trainer trainer) {
 		
 		this.trainer = trainer;
 		encounter = new Encounter(getPokemon(), trainer);
 		battlePan = new JPanel();
-		this.setPreferredSize(new Dimension(20*11, 20*11));
+		this.setPreferredSize(new Dimension((20*11)+215, 20*11));
 		this.setLayout(null);
+		//this.setBackground(Color.BLACK);
 		throwASafariBall = new JButton("Throw A Safari Ball");
 		throwARock = new JButton("Throw A Rock");
 		runAway = new JButton("Run Away");
@@ -93,24 +95,45 @@ public class BattleView extends JPanel{
 		PokemonHealth = new JTextArea("");
 		
 		TrainerHealth.setEditable(false);
-		throwASafariBall.setBounds(370, 380, 150, 30);
-		throwARock.setBounds(520, 380, 150, 30);
-		runAway.setBounds(520, 420, 150, 30);
-		ThrowABait.setBounds(370, 420, 150, 30);
+		throwASafariBall.setSize(215, 45);
+		throwASafariBall.setLocation(215, 0);
+		throwARock.setSize(215, 45);
+		throwARock.setLocation(215, 45);
+		ThrowABait.setSize(215, 45);
+		ThrowABait.setLocation(215, 90);
+		runAway.setSize(215, 45);
+		runAway.setLocation(215, 135);
+		
+		TrainerHealth.setSize((int) 107.5, 40);
+		TrainerHealth.setLocation(215, 180);
+		TrainerHealth.setBackground(Color.WHITE);
+		TrainerHealth.replaceSelection("Trainer: ");
+		//TrainerHealth.setAlignmentX(CENTER_ALIGNMENT);
+		//TrainerHealth.setAlignmentY(CENTER_ALIGNMENT);
+		PokemonHealth.setSize((int) 107.5, 40);
+		PokemonHealth.setLocation((int) 322.5, 180);
+		PokemonHealth.setBackground(Color.WHITE);
+		PokemonHealth.replaceSelection("Pokemon: ");
+		//throwASafariBall.setBounds(370, 380, 150, 30);
+		//throwARock.setBounds(520, 380, 150, 30);
+		//runAway.setBounds(520, 420, 150, 30);
+		//ThrowABait.setBounds(370, 420, 150, 30);
 		
 		this.add(ThrowABait);
 		this.add(runAway);
 		this.add(throwARock);
 		this.add(throwASafariBall);
+		this.add(PokemonHealth);
+		this.add(TrainerHealth);
 		
 		runAway.addActionListener(new RunAwayListener());
 		throwARock.addActionListener(new ThrowARocklListener());
 		throwASafariBall.addActionListener(new ThrowASafariBallListener());
 		ThrowABait.addActionListener(new ThrowBaitListener());
 		
-		JScrollPane scroll = new JScrollPane(TrainerHealth);
+		/*JScrollPane scroll = new JScrollPane(TrainerHealth);
 		scroll.setBounds(50, 350, 300, 150);
-		this.add(scroll);
+		this.add(scroll);*/
 		
 		try {
 			backGround = ImageIO.read(new File("image/battle_bg.jpg"));
@@ -118,7 +141,7 @@ public class BattleView extends JPanel{
 			System.out.println("Cannot find the image file!");
 			e.printStackTrace();
 		}
-		
+		repaint();
 	}
 	
 	//Four buttons: Throw a rock; Throw bait; Throw Pokeball; Run
@@ -161,6 +184,10 @@ public class BattleView extends JPanel{
 				return new Dratini();
 		}
 		
+	}
+	
+	public void updatePanel() {
+				repaint();
 	}
 	
 	// Listener for run away
