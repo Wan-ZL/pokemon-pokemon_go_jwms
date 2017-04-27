@@ -1,10 +1,6 @@
 package model;
-
-import java.io.Serializable;
-
-public class Encounter implements Serializable{
-
-	private static final long serialVersionUID = 1781411409588048334L;
+// why do we need encounter??
+public class Encounter{
 
 	private Pokemon pokemon;
 	private Trainer trainer;
@@ -14,9 +10,12 @@ public class Encounter implements Serializable{
 		this.trainer = trainer;
 	}
 	
-	// Returns the Pokemons name as a string
+	// Returns the Pokemon name as a string
 	public String getPokemonName() {
 		return pokemon.getName();
 	}
+	
+	
+	
 	
 }

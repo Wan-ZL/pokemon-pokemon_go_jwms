@@ -23,11 +23,11 @@ public class PokemonBelt implements ListModel<String>, Serializable{
 	public boolean removePokemon(Pokemon pokemon){	// remove a pokemon from belt, if have multi same pokemon, remove the first one.
 		return belt.remove(pokemon);
 	}
-	
+	/*
 	public Pokemon removePokemon(int index){		// remove a pokemon on specific index, return the removed pokemon object.
 		return belt.remove(index);
 	}
-	
+	*/
 	public ArrayList<Pokemon> getBeltArray(){				// return the whole pokemon on belt, type is array of pokemon
 		return this.belt;
 	}

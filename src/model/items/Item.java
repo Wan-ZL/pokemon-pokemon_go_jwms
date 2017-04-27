@@ -6,9 +6,9 @@ public abstract class Item implements Serializable{
 
 	private static final long serialVersionUID = 2794282350305690429L;
 	
-	private ItemType type;
-	private int value;
-	private int amt;
+	protected ItemType type;
+	protected int value;
+	protected int amt;
 	
 	public Item(ItemType type, int value, int amt) {
 		this.type = type;

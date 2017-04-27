@@ -18,12 +18,14 @@ public class Trainer implements Serializable{
 	private boolean positionChanged;
 	private boolean moved;
 	private int step;
+	private int health;
 	
 	private int map;	// 1 means trainer in map1, 2 means trainer in map2
 	
 	private static Trainer thisTrainer;
 	
 	private Trainer(String name) {
+		this.health = 100;
 		this.map = 1;
 		this.step = 500;
 		this.pack = new BackPack();
@@ -116,24 +118,7 @@ public class Trainer implements Serializable{
 	public boolean addPokemon(Pokemon pokemon){		// add a pokemon to belt, return true if success
 		return this.belt.addPokemon(pokemon);
 	}
-	/*
-	public boolean removePokemon(Pokemon pokemon){	// remove a pokemon from belt, if have multi same pokemon, remove the first one.
-		return this.belt.removePokemon(pokemon);
-	}
-	
-	public Pokemon removePokemon(int index){		// remove a pokemon on specific index, return the removed pokemon object.
-		return this.belt.removePokemon(index);
-	}
-	*/
-	/*
-	public ArrayList<Pokemon> getBeltArray(){		// return the whole belt
-		return this.belt.getBeltArray();
-	}
-	
-	public ArrayList<Item> getBackpackArray(){		// return the whole backpack
-		return this.pack.getBackpackArray();
-	}
-	*/
+
 	/*
 	public int getSize(){							// return the number of pokemon on belt.
 		return this.belt.getSize();
