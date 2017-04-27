@@ -9,13 +9,18 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import model.Trainer;
+import view.LoadingView;
 
 public class pokemonGO {
 	// have a trainer instance 
 	private static Trainer trainer;
-	
+	private static LoadingView loadingview;
 	public static void main(String[] args){
 		setUpModel();
+		loadingview = new LoadingView();
+		loadingview.setBounds(0, 0, 1000, 570);
+		loadingview.setFocusable(false);
+		loadingview.setVisible(true);
 		pokemonGUI g = new pokemonGUI(trainer);
 		g.setFocusable(true);
 		g.requestFocusInWindow();

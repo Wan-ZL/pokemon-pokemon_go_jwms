@@ -41,9 +41,9 @@ import javax.swing.JPanel;
 import model.Map;
 
 import model.Trainer;
-
+import view.BattleView;
 import view.ItemView;
-
+import view.LoadingView;
 import view.MapView;
 
 
@@ -60,7 +60,9 @@ public class pokemonGUI extends JFrame {
 	private Container cp;
 	private ItemView items;
 	private Map map;
-
+	private BattleView battleview;
+	
+	
 	public pokemonGUI(Trainer trainer) {
 		this.map = new Map();
 		this.trainer = trainer;
@@ -259,8 +261,26 @@ public class pokemonGUI extends JFrame {
 				System.out.println("x: "+trainer.getX()+", y: "+trainer.getY());
 				update();
 				
-				//int x = trainer.getX();
-				//int y = trainer.getY();	
+				int X = trainer.getX();
+				int Y = trainer.getY();
+
+				if (trainer.MoveChanged() && trainer.getSafariBall() > 0) {
+					if (theMap[X][Y].equals("g")) {
+						// only find pokemon in grass
+						if (Math.random() * 100 < 15) {
+							// show which pokemon on battle
+							System.out.println(pokemon.getName());
+							cp.remove(currentView);
+							cp.add(new BattleView(trainer));
+							battleview.setVisible(true);
+							mapView.setVisible(false);
+							// need to more things here
+
+						}
+					} else {
+						battleview.setVisible(false);
+					}
+				}
 			}
 		}
 		
