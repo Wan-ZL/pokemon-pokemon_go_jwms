@@ -2,7 +2,8 @@ package model.pokemon;
 
 public enum PokemonType {
 
-	MEWTWO(0), DRAGONAIR(1), PINSIR(2), MAROWAK(3), TAUROS(4), POLIWAG(5), PARAS(6), EXEGGCUTE(7), PARASECT(8), DRATINI(9);
+	MEWTWO(0), DRAGONAIR(1), PINSIR(2), MAROWAK(3), TAUROS(4), 
+	POLIWAG(5), PARAS(6), EXEGGCUTE(7), PARASECT(8), DRATINI(9);
 	
 	private int value;
 	
