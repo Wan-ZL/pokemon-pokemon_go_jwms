@@ -33,10 +33,12 @@ public class Trainer implements Serializable {
 
 	private int mapIndex; // 1 means trainer in map1, 2 means trainer in map2
 	private Map map; // the map
+	private boolean isInBattle;
 
 	private static Trainer thisTrainer;
 
 	private Trainer(String name) {
+		isInBattle = false;
 		this.map = new Map();
 		this.mapIndex = 1;
 		this.step = 500;
@@ -124,6 +126,10 @@ public class Trainer implements Serializable {
 	public int getMapNum() {
 		return mapIndex;
 	}
+	
+	public void setMapNum(int mapNum){
+		this.mapIndex = mapNum;
+	}
 
 	public int getX() { // return trainer x position
 		return (int) this.trainerPosition.getX();
@@ -136,6 +142,7 @@ public class Trainer implements Serializable {
 
 	public boolean addPokemon(Pokemon pokemon) { // add a pokemon to belt,
 													// return true if success
+		this.isInBattle = false;
 		return this.belt.addPokemon(pokemon);
 	}
 
@@ -180,45 +187,22 @@ public class Trainer implements Serializable {
 		return this.pack.numItem(type);
 	}
 
+	public boolean isInBattle(){
+		return this.isInBattle;
+	}
 
-	public Pokemon meetPokemon() { // null means no pokemon meet
+	public boolean meetPokemon() { // null means no pokemon meet
 		String[][] theMap = map.getMap(this.mapIndex);
 		if (theMap[this.getY()][this.getX()].equals("g")) {			// if in grass
-			Random rand = new Random();
-			if (Math.random() < 0.3) { // 30% chance to meet pokemon
-				if (Math.random() < 0.1) { // rare (10% chance to meet rare
-					return new Mewtwo();
-				} else if (Math.random() < 0.3) { // uncommon (30% chance to
-													// meet uncommon)
-					int index = rand.nextInt(2);
-					if (index == 0) {
-						return new Dragonair();
-					} else if (index == 1) {
-						return new Marowak();
-					} else {
-						return new Pinsir();
-					}
-				} else { // common
-					int index = rand.nextInt(5);
-					if (index == 0) {
-						return new Dratini();
-					} else if (index == 1) {
-						return new Exeggcute();
-					} else if (index == 2) {
-						return new Paras();
-					} else if (index == 3) {
-						return new Parasect();
-					} else if (index == 4) {
-						return new Poliwag();
-					} else {
-						return new Tauros();
-					}
-				}
-			} else { // safe ( no pokemon)
-				return null;
+			if (Math.random() < 0.2) { // 30% chance to meet pokemon
+				this.isInBattle = true;
+				return true;
+			}
+			else{
+				return false;
 			}
 		} else {	// not in grass
-			return null;
+			return false;
 		}
 	}
 
