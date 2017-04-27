@@ -39,8 +39,9 @@ import javax.swing.JPanel;
 
 
 import model.Map;
-
+import model.Pokemon;
 import model.Trainer;
+import model.items.ItemType;
 import view.BattleView;
 import view.ItemView;
 import view.LoadingView;
@@ -105,7 +106,9 @@ public class pokemonGUI extends JFrame {
 		this.setJMenuBar(menuBar);
 	}
 
-	
+	public void redraw(){
+		this.repaint();
+	}
 
 	private void setupItems(){
 		items = new ItemView(trainer);
@@ -258,27 +261,22 @@ public class pokemonGUI extends JFrame {
 						trainer.setChangedMove(true);
 					}
 				}
-				System.out.println("x: "+trainer.getX()+", y: "+trainer.getY());
+				System.out.println(theMap[trainer.getY()][trainer.getX()]);
 				update();
 				
-				int X = trainer.getX();
-				int Y = trainer.getY();
 
-				if (trainer.MoveChanged() && trainer.getSafariBall() > 0) {
-					if (theMap[X][Y].equals("g")) {
-						// only find pokemon in grass
-						if (Math.random() * 100 < 15) {
-							// show which pokemon on battle
-							System.out.println(pokemon.getName());
-							cp.remove(currentView);
-							cp.add(new BattleView(trainer));
-							battleview.setVisible(true);
-							mapView.setVisible(false);
-							// need to more things here
-
-						}
-					} else {
-						battleview.setVisible(false);
+				//int x = trainer.getX();
+				//int y = trainer.getY();	
+				if(trainer.getItemNum(ItemType.SAFARI_BALL) != 0){
+					Pokemon poke = trainer.meetPokemon();
+					if(poke != null){
+						System.out.println(poke.getName());
+						cp.remove(currentView);
+						cp.add(battleview = new BattleView(trainer));
+						
+						battleview.setVisible(true);
+						mapView.setVisible(false);
+						redraw();
 					}
 				}
 			}

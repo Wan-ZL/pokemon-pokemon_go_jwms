@@ -16,7 +16,7 @@ public abstract class Pokemon implements Serializable{
 	private Random rand = new Random();
 	private PokemonType type;
 	private PokemonRarity rarity;
-	private int hp, lvl, speed, damage, fleeChance, catchChance;
+	protected int hp, lvl, speed, damage, fleeChance, catchChance;
 	private boolean eatingBait;
 	
 	// super class constructor
