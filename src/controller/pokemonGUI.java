@@ -289,6 +289,7 @@ public class pokemonGUI extends JFrame {
 					if (trainer.getY() == 17 || trainer.getY() == 18) {
 						System.out.println("switch");
 						trainer.setMapNum(2);
+						trainer.setPosition(trainer.getX()+5, trainer.getY()+5);
 						mapSwitchUpdate();
 					}
 				}
