@@ -99,6 +99,13 @@ public class pokemonGUI extends JFrame {
 		this.repaint();
 	}
 
+	public void mapSwitchUpdate(){
+		currentView = new MapView(trainer);;
+		currentView.setLocation(0, 0);
+		currentView.setSize(11 * 20, 11 * 20);
+		cp.add(currentView);
+		this.repaint();
+	}
 	private void setupItems() {
 		items = new ItemView(trainer);
 		items.setLocation((11 * 20), 0);
@@ -256,7 +263,8 @@ public class pokemonGUI extends JFrame {
 							trainer.setChangedMove(true);
 						}
 					}
-					System.out.println(theMap[trainer.getY()][trainer.getX()]);
+					//System.out.println(theMap[trainer.getY()][trainer.getX()]);
+					System.out.println("x is "+trainer.getX()+", y is "+trainer.getY());
 					update();
 
 					// int x = trainer.getX();
@@ -271,6 +279,13 @@ public class pokemonGUI extends JFrame {
 							mapView.setVisible(false);
 							redraw();
 						}
+					}
+				}
+				if(trainer.getX() == 5){
+					if(trainer.getY() == 17 || trainer.getY() == 18){
+						System.out.println("switch");
+						trainer.setMapNum(2);
+						mapSwitchUpdate();
 					}
 				}
 			}
