@@ -151,4 +151,5 @@ public class Trainer implements Serializable{
 		belt.removAll();
 	}
 	*/
+
 }
