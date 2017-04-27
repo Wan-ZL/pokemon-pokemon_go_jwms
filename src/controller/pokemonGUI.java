@@ -268,9 +268,8 @@ public class pokemonGUI extends JFrame {
 				//int x = trainer.getX();
 				//int y = trainer.getY();	
 				if(trainer.getItemNum(ItemType.SAFARI_BALL) != 0){
-					Pokemon poke = trainer.meetPokemon();
-					if(poke != null){
-						System.out.println(poke.getName());
+					if(trainer.meetPokemon()){
+						System.out.println("going to battle");
 						cp.remove(currentView);
 						cp.add(battleview = new BattleView(trainer));
 						
