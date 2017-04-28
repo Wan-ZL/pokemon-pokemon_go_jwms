@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.io.ObjectOutputStream;
+import java.nio.file.Paths;
 
 import javax.swing.JFrame;
 
@@ -32,6 +33,9 @@ import javax.swing.JOptionPane;
 
 import javax.swing.JPanel;
 
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import model.Map;
 import model.Pokemon;
 import model.Trainer;
@@ -52,11 +56,19 @@ public class pokemonGUI extends JFrame {
 	private ItemView items;
 	private Map map;
 	private BattleView battleview;
-
+	private LoadingView loadingview;
+	private JFXPanel fxPanel;
+	private MediaPlayer mediaPlayer;
+	private static final String BATTLESONG = Paths.get("sounds/battlemus.mp3").toUri().toString();
+	private static final String BGM = Paths.get("sounds/bgm.mp3").toUri().toString();
+	private boolean inMap;
+	private boolean inBattle;
 	public pokemonGUI(Trainer trainer) {
+		JFXPanel fxPanel = new JFXPanel();
 		this.mainFrame = this;
 		this.map = new Map();
 		this.trainer = trainer;
+		this.loadingview = new LoadingView();
 		this.mapView = new MapView(trainer);
 		setUpGameWindow();
 	}
@@ -66,17 +78,31 @@ public class pokemonGUI extends JFrame {
 		this.setTitle("Pokemon Safari Zone");
 		this.setSize((20 * 11) + 215, (20 * 11) + 70);
 		this.setLocation(100, 100);
+		this.inMap = true;
+		this.inBattle = false;
+		//playSong(BGM);*/
+		setBGM();
 		cp = getContentPane();
 		currentView = mapView;
 		currentView.setLocation(0, 0);
 		currentView.setSize(11 * 20, 11 * 20);
 		this.addKeyListener(new MoveListener());
+		//cp.add(loadingview);
 		cp.setLayout(null);
 		cp.add(currentView);
 		setupMenu();
 		setupItems();
 	}
 
+	public void setBGM(){
+		if(inMap){
+			playSong(BGM);
+		}
+		else{
+			playSong(BATTLESONG);
+		}
+	}
+	
 	public void update() {
 		currentView.updatePanel();
 		//battleview.updatePanel();
@@ -236,16 +262,6 @@ public class pokemonGUI extends JFrame {
 								|| theMap[y][x + 1] == "i" || theMap[y][x + 1] == "_") {
 							System.out.print("can't move because of " + theMap[y][x + 1]);
 						}
-						// else if(theMap[x+1][y] == "n" || theMap[x+1][y] ==
-						// "s"){
-						// trainer.setPosition(x, y);
-						// }
-						/*
-						 * else if(theMap[y][x+1] == "w"){
-						 * System.out.print("Walk into water now");
-						 * trainer.setPosition(x+1, y);
-						 * trainer.setChangedMove(true); }
-						 */
 						else if (theMap[y][x + 1] == "g") {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x + 1, y);
@@ -260,16 +276,6 @@ public class pokemonGUI extends JFrame {
 								|| theMap[y][x - 1] == "i" || theMap[y][x - 1] == "_") {
 							System.out.print("can't move because of " + theMap[y][x - 1]);
 						}
-						// else if(theMap[x-1][y] == "n" || theMap[x-1][y] ==
-						// "s"){
-						// trainer.setPosition(x, y);
-						// }
-						/*
-						 * else if(theMap[y][x-1] == "w"){
-						 * System.out.print("Walk into water now");
-						 * trainer.setPosition(x-1, y);
-						 * trainer.setChangedMove(true); }
-						 */
 						else if (theMap[y][x - 1] == "g") {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x - 1, y);
@@ -292,6 +298,10 @@ public class pokemonGUI extends JFrame {
 							//
 							cp.remove(currentView);
 							cp.add(battleview = new BattleView(trainer, mainFrame));
+							//playSong(BATTLESONG);
+							inMap = false;
+							inBattle = true;
+							setBGM();
 							battleview.setSize(battleview.getPreferredSize());
 							battleview.setLocation(0, 0);
 							battleview.setVisible(true);
@@ -336,6 +346,17 @@ public class pokemonGUI extends JFrame {
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
 		}
+	}
+	
+	private void playSong(String location) {
+		if (this.mediaPlayer != null) {
+			this.mediaPlayer.stop();
+			this.mediaPlayer.dispose();
+		}
+		Media song = new Media(location);
+		this.mediaPlayer = new MediaPlayer(song);
+		this.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		this.mediaPlayer.play();
 	}
 
 }
