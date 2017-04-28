@@ -23,6 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.Timer;
 
 import controller.pokemonGUI;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.Encounter;
@@ -82,6 +83,7 @@ public class BattleView extends JPanel{
 	
 	private pokemonGUI mainFrame;
 	public BattleView(Trainer trainer, pokemonGUI mainFrame) {
+		JFXPanel fxPanel = new JFXPanel();
 		this.mainFrame = mainFrame;
 		this.trainer = trainer;
 		encounter = new Encounter(getPokemon(), trainer);
@@ -205,7 +207,7 @@ public class BattleView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			//playSong(RUNAWAY);
+			playSong(RUNAWAY);
 			mainFrame.getBattleView().setVisible(false);
 			mainFrame.getMapView().setVisible(true);
 		}

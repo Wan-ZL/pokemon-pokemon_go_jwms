@@ -289,7 +289,8 @@ public class pokemonGUI extends JFrame {
 						if (trainer.meetPokemon()) {
 							System.out.println("going to battle");
 							cp.remove(items);
-							//cp.remove(currentView);
+							//
+							cp.remove(currentView);
 							cp.add(battleview = new BattleView(trainer, mainFrame));
 							battleview.setSize(battleview.getPreferredSize());
 							battleview.setLocation(0, 0);
