@@ -99,7 +99,7 @@ public class BattleView extends JPanel{
 		
 		
 		TrainerHealth = new JTextArea(trainer.getCurrHP() + "/" + trainer.getMaxHP());
-		PokemonHealth = new JTextArea("");
+		PokemonHealth = new JTextArea(encounter.getPokemonHP());
 		
 		TrainerHealth.setEditable(false);
 		throwASafariBall.setSize(215, 45);
