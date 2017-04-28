@@ -40,6 +40,7 @@ import model.Map;
 import model.Pokemon;
 import model.Trainer;
 import model.items.ItemType;
+import model.items.SafariBall;
 import view.BattleView;
 import view.ItemView;
 import view.LoadingView;
@@ -141,7 +142,7 @@ public class pokemonGUI extends JFrame {
 		this.repaint();
 	}
 
-	private void setupItems() {
+	public void setupItems() {
 		items = new ItemView(trainer);
 		items.setLocation((11 * 20), 0);
 		cp.add(items);
@@ -232,7 +233,17 @@ public class pokemonGUI extends JFrame {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
-						} else {
+						}
+						else if(theMap[y+1][x] == "p"){
+							System.out.print("You find a safari ball!!");
+							trainer.setPosition(x, y + 1);
+							trainer.setChangedMove(true);
+							trainer.getBackpack().addItem(new SafariBall(1));
+							//trainer.getBackpack().notify();
+							//TODO: need to set the map back to "g"
+							
+						}
+						else {
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
 						}
