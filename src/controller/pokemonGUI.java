@@ -83,6 +83,10 @@ public class pokemonGUI extends JFrame {
 		items.updateSteps();
 		// this.repaint();
 	}
+	
+	public void outOfBattle(){
+		this.trainer.outOfBattle();
+	}
 
 	private void setupMenu() {
 		JMenu menu = new JMenu("Menu");
