@@ -100,7 +100,7 @@ public class BattleView extends JPanel{
 		
 		
 		TrainerHealth = new JTextArea(trainer.getCurrHP() + "/" + trainer.getMaxHP());
-		PokemonHealth = new JTextArea("");
+		PokemonHealth = new JTextArea(encounter.getPokemonHP());
 		
 		TrainerHealth.setEditable(false);
 		throwASafariBall.setSize(215, 45);
@@ -115,13 +115,13 @@ public class BattleView extends JPanel{
 		TrainerHealth.setSize((int) 107.5, 40);
 		TrainerHealth.setLocation(215, 180);
 		TrainerHealth.setBackground(Color.WHITE);
-		TrainerHealth.replaceSelection("Trainer: ");
+		TrainerHealth.replaceSelection(trainer.getName() + ": ");
 		//TrainerHealth.setAlignmentX(CENTER_ALIGNMENT);
 		//TrainerHealth.setAlignmentY(CENTER_ALIGNMENT);
 		PokemonHealth.setSize((int) 107.5, 40);
 		PokemonHealth.setLocation((int) 322.5, 180);
 		PokemonHealth.setBackground(Color.WHITE);
-		PokemonHealth.replaceSelection("Pokemon: ");
+		PokemonHealth.replaceSelection(" " + encounter.getPokemonName() + ": ");
 		//throwASafariBall.setBounds(370, 380, 150, 30);
 		//throwARock.setBounds(520, 380, 150, 30);
 		//runAway.setBounds(520, 420, 150, 30);

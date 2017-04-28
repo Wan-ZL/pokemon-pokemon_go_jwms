@@ -27,6 +27,10 @@ public class Encounter implements Serializable{
 		return pokemon.catchCheck();
 	}
 	
+	// get the pokemons health
+	public String getPokemonHP() {
+		return pokemon.getCurHP() + "/" + pokemon.getMaxHP();
+	}
 	
 	
 }

@@ -34,7 +34,7 @@ public enum PokemonType {
 			return "Tauros";
 		}
 		else if(value == 5){
-			return "Poliwag";
+			return "Pikachu";
 		}
 		else if(value == 6){
 			return "Paras";
