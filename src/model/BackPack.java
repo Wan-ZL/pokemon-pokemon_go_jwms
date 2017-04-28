@@ -85,7 +85,12 @@ public class BackPack implements Serializable, TableModel{
 	
 	// Use an item from the pack. (remove the item from pack)
 	public void useItem(ItemType type) {
-		this.pack.remove(type);
+	for(Item item : this.pack){
+		if(item.getType().equals(type)){
+			item.useItem();
+			return;
+		}
+	}
 	}
 	
 	// return the Item at index

@@ -8,7 +8,6 @@ public class SafariBall extends Item{
 
 	@Override
 	public void useItem() {
-		// TODO Auto-generated method stub
 		
 	}
 
