@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -13,7 +14,9 @@ import java.nio.file.Paths;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -80,7 +83,7 @@ public class BattleView extends JPanel{
 		
 		this.trainer = trainer;
 		encounter = new Encounter(getPokemon(), trainer);
-		battlePan = new JPanel();
+		//battlePan = new JPanel();
 		this.setPreferredSize(new Dimension((20*11)+215, 20*11));
 		this.setLayout(null);
 		//this.setBackground(Color.BLACK);
@@ -118,7 +121,6 @@ public class BattleView extends JPanel{
 		//throwARock.setBounds(520, 380, 150, 30);
 		//runAway.setBounds(520, 420, 150, 30);
 		//ThrowABait.setBounds(370, 420, 150, 30);
-		
 		this.add(ThrowABait);
 		this.add(runAway);
 		this.add(throwARock);
@@ -134,25 +136,31 @@ public class BattleView extends JPanel{
 		/*JScrollPane scroll = new JScrollPane(TrainerHealth);
 		scroll.setBounds(50, 350, 300, 150);
 		this.add(scroll);*/
+		ImageIcon image = new ImageIcon("image/rsz_battle_bg.jpg");
+		JLabel label = new JLabel("", image, JLabel.CENTER);
+		label.setLocation(0, 0);
+		label.setSize(215, 220);
 		
-		try {
+		this.add(label);
+		
+		/*try {
 			backGround = ImageIO.read(new File("image/battle_bg.jpg"));
 		} catch (IOException e) {
 			System.out.println("Cannot find the image file!");
 			e.printStackTrace();
-		}
-		repaint();
+		}*/
+		//repaint();
 	}
 	
 	//Four buttons: Throw a rock; Throw bait; Throw Pokeball; Run
 	
-	@Override
+	/*@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
 		g2.drawImage(backGround, 11*20, 11*20, null);
-	}
+	}*/
 
 	private Pokemon getPokemon() {
 		// TODO get a random int to choose which pokemon to create for the
