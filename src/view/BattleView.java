@@ -98,7 +98,7 @@ public class BattleView extends JPanel{
 		
 		
 		
-		TrainerHealth = new JTextArea("");
+		TrainerHealth = new JTextArea(trainer.getCurrHP() + "/" + trainer.getMaxHP());
 		PokemonHealth = new JTextArea("");
 		
 		TrainerHealth.setEditable(false);
