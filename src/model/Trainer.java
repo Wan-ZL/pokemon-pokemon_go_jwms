@@ -178,6 +178,10 @@ public class Trainer implements Serializable {
 	public PokemonBelt getPokemonBelt() {
 		return belt;
 	}
+	
+	public void useItem(ItemType type){
+		this.pack.useItem(type);
+	}
 
 	public BackPack getBackpack() {
 		return this.pack;
