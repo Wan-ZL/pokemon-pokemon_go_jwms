@@ -231,6 +231,11 @@ public class BattleView extends JPanel{
 			
 			//TODO: check if pokemon is caught
 			if(encounter.isCaught()){
+				mainFrame.outOfBattle();
+				mainFrame.getBattleView().setVisible(false);
+				mainFrame.getMapView().setVisible(true);
+				mainFrame.mapSwitchUpdate();
+				mainFrame.setupItems();
 				playSong(POKECAUGHT);
 			}
 		}

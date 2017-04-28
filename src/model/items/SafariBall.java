@@ -6,9 +6,4 @@ public class SafariBall extends Item{
 		super(ItemType.SAFARI_BALL, 50, amt);
 	}
 
-	@Override
-	public void useItem() {
-		
-	}
-
 }
