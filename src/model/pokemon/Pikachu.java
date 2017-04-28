@@ -2,10 +2,10 @@ package model.pokemon;
 
 import model.Pokemon;
 
-public class Poliwag extends Pokemon{
+public class Pikachu extends Pokemon{
 
-	public Poliwag() {
-		super(PokemonType.POLIWAG, 200, 25, PokemonRarity.COMMON);
+	public Pikachu() {
+		super(PokemonType.PIKACHU, 200, 25, PokemonRarity.COMMON);
 		// TODO Auto-generated constructor stub
 	}
 

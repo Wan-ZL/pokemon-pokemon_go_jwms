@@ -2,10 +2,10 @@ package model.pokemon;
 
 import model.Pokemon;
 
-public class Parasect extends Pokemon{
+public class Primeape extends Pokemon{
 
-	public Parasect() {
-		super(PokemonType.PARASECT, 300, 20, PokemonRarity.COMMON);
+	public Primeape() {
+		super(PokemonType.PRIMEAPE, 300, 20, PokemonRarity.COMMON);
 		// TODO Auto-generated constructor stub
 	}
 

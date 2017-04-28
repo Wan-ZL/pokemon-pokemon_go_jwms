@@ -35,9 +35,9 @@ import model.pokemon.Exeggcute;
 import model.pokemon.Marowak;
 import model.pokemon.Mewtwo;
 import model.pokemon.Paras;
-import model.pokemon.Parasect;
+import model.pokemon.Primeape;
 import model.pokemon.Pinsir;
-import model.pokemon.Poliwag;
+import model.pokemon.Pikachu;
 import model.pokemon.Tauros;
 
 public class BattleView extends JPanel{
@@ -185,13 +185,13 @@ public class BattleView extends JPanel{
 			if (num == 0)
 				return new Tauros();
 			else if (num == 1)
-				return new Poliwag();
+				return new Pikachu();
 			else if (num == 2)
 				return new Paras();
 			else if (num == 3)
 				return new Exeggcute();
 			else if (num == 4)
-				return new Parasect();
+				return new Primeape();
 			else
 				return new Dratini();
 		}
