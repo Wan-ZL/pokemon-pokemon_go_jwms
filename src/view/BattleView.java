@@ -22,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
+import controller.pokemonGUI;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.Encounter;
@@ -79,8 +80,9 @@ public class BattleView extends JPanel{
 	//Sound for throw a safari ball
 	private static final String THROWBALL = Paths.get("sounds/throwball.mp3").toUri().toString();
 	
-	public BattleView(Trainer trainer) {
-		
+	private pokemonGUI mainFrame;
+	public BattleView(Trainer trainer, pokemonGUI mainFrame) {
+		this.mainFrame = mainFrame;
 		this.trainer = trainer;
 		encounter = new Encounter(getPokemon(), trainer);
 		//battlePan = new JPanel();
@@ -203,7 +205,9 @@ public class BattleView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			playSong(RUNAWAY);
+			//playSong(RUNAWAY);
+			mainFrame.getBattleView().setVisible(false);
+			mainFrame.getMapView().setVisible(true);
 		}
 
 	}

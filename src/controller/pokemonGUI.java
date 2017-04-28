@@ -44,7 +44,7 @@ import view.MapView;
 public class pokemonGUI extends JFrame {
 
 	private static final long serialVersionUID = -2195306133576575637L;
-
+	private pokemonGUI mainFrame;
 	private MapView currentView;
 	private Trainer trainer;
 	private MapView mapView;
@@ -54,6 +54,7 @@ public class pokemonGUI extends JFrame {
 	private BattleView battleview;
 
 	public pokemonGUI(Trainer trainer) {
+		this.mainFrame = this;
 		this.map = new Map();
 		this.trainer = trainer;
 		this.mapView = new MapView(trainer);
@@ -115,6 +116,15 @@ public class pokemonGUI extends JFrame {
 		items.setLocation((11 * 20), 0);
 		cp.add(items);
 		// System.out.println("here");
+	}
+	
+	public BattleView getBattleView(){
+		return battleview;
+	}
+	
+	
+	public MapView getMapView(){
+		return currentView;
 	}
 
 	private class SaveGame implements ActionListener {
@@ -279,8 +289,8 @@ public class pokemonGUI extends JFrame {
 						if (trainer.meetPokemon()) {
 							System.out.println("going to battle");
 							cp.remove(items);
-							cp.remove(currentView);
-							cp.add(battleview = new BattleView(trainer));
+							//cp.remove(currentView);
+							cp.add(battleview = new BattleView(trainer, mainFrame));
 							battleview.setSize(battleview.getPreferredSize());
 							battleview.setLocation(0, 0);
 							battleview.setVisible(true);
