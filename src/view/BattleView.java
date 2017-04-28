@@ -208,6 +208,7 @@ public class BattleView extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
 			playSong(RUNAWAY);
+			mainFrame.outOfBattle();
 			mainFrame.getBattleView().setVisible(false);
 			mainFrame.getMapView().setVisible(true);
 		}

@@ -145,6 +145,10 @@ public class Trainer implements Serializable {
 		this.isInBattle = false;
 		return this.belt.addPokemon(pokemon);
 	}
+	
+	public void outOfBattle(){						// call this function when battle end
+		this.isInBattle = false;
+	}
 
 	public boolean removePokemon(Pokemon pokemon) { // remove a pokemon from
 													// belt, if have multi same
