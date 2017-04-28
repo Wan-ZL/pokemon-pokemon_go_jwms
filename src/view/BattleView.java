@@ -211,6 +211,8 @@ public class BattleView extends JPanel{
 			mainFrame.outOfBattle();
 			mainFrame.getBattleView().setVisible(false);
 			mainFrame.getMapView().setVisible(true);
+			mainFrame.mapSwitchUpdate();
+			mainFrame.setupItems();
 		}
 
 	}
