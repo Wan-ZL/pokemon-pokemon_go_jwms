@@ -30,6 +30,8 @@ public class Trainer implements Serializable {
 	private boolean positionChanged;
 	private boolean moved;
 	private int step;
+	private int hp;
+	private int damage;
 
 	private int mapIndex; // 1 means trainer in map1, 2 means trainer in map2
 	private Map map; // the map
@@ -42,6 +44,8 @@ public class Trainer implements Serializable {
 		this.map = new Map();
 		this.mapIndex = 1;
 		this.step = 500;
+		this.hp = 1000;
+		this.damage = 0;
 		this.pack = new BackPack();
 		pack.addItem(new SafariBall(30));
 		this.belt = new PokemonBelt();
@@ -138,6 +142,21 @@ public class Trainer implements Serializable {
 	public int getY() { // return trainer y position
 		return (int) this.trainerPosition.getY();
 
+	}
+	
+	// get the trainers max hp
+	public int getMaxHP() {
+		return hp;
+	}
+	
+	// get the trainers current hp
+	public int getCurrHP() {
+		return hp-damage;
+	}
+	
+	// take damage
+	public void takeDamage(int damage) {
+		this.damage += damage;
 	}
 
 	public boolean addPokemon(Pokemon pokemon) { // add a pokemon to belt,
