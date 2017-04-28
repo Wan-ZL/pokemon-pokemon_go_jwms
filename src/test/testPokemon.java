@@ -12,11 +12,11 @@ import model.pokemon.Exeggcute;
 import model.pokemon.Marowak;
 import model.pokemon.Mewtwo;
 import model.pokemon.Paras;
-import model.pokemon.Parasect;
+import model.pokemon.Primeape;
 import model.pokemon.Pinsir;
 import model.pokemon.PokemonRarity;
 import model.pokemon.PokemonType;
-import model.pokemon.Poliwag;
+import model.pokemon.Pikachu;
 import model.pokemon.Tauros;
 
 public class testPokemon {
@@ -27,9 +27,9 @@ public class testPokemon {
 	Pokemon marowak = new Marowak();
 	Pokemon mewtwo = new Mewtwo();
 	Pokemon paras = new Paras();
-	Pokemon parasect = new Parasect();
+	Pokemon parasect = new Primeape();
 	Pokemon pinsir = new Pinsir();
-	Pokemon poliwag = new Poliwag();
+	Pokemon poliwag = new Pikachu();
 	Pokemon tauros = new Tauros();
 	
 	@Test
@@ -41,9 +41,9 @@ public class testPokemon {
 		assertEquals(PokemonType.MAROWAK.toString(), marowak.getName());
 		assertEquals(PokemonType.MEWTWO.toString(), mewtwo.getName());
 		assertEquals(PokemonType.PARAS.toString(), paras.getName());
-		assertEquals(PokemonType.PARASECT.toString(), parasect.getName());
+		assertEquals(PokemonType.PRIMEAPE.toString(), parasect.getName());
 		assertEquals(PokemonType.PINSIR.toString(), pinsir.getName());
-		assertEquals(PokemonType.POLIWAG.toString(), poliwag.getName());
+		assertEquals(PokemonType.PIKACHU.toString(), poliwag.getName());
 		assertEquals(PokemonType.TAUROS.toString(), tauros.getName());
 	}
 	

@@ -14,9 +14,9 @@ import model.pokemon.Exeggcute;
 import model.pokemon.Marowak;
 import model.pokemon.Mewtwo;
 import model.pokemon.Paras;
-import model.pokemon.Parasect;
+import model.pokemon.Primeape;
 import model.pokemon.Pinsir;
-import model.pokemon.Poliwag;
+import model.pokemon.Pikachu;
 import model.pokemon.Tauros;
 
 public class Trainer implements Serializable {

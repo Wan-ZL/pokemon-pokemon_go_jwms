@@ -3,7 +3,7 @@ package model.pokemon;
 public enum PokemonType {
 
 	MEWTWO(0), DRAGONAIR(1), PINSIR(2), MAROWAK(3), TAUROS(4), 
-	POLIWAG(5), PARAS(6), EXEGGCUTE(7), PARASECT(8), DRATINI(9);
+	PIKACHU(5), PARAS(6), EXEGGCUTE(7), PRIMEAPE(8), DRATINI(9);
 	
 	private int value;
 	
@@ -43,7 +43,7 @@ public enum PokemonType {
 			return "Exeggcute";
 		}
 		else if(value == 8){
-			return "Parasect";
+			return "Primeape";
 		}
 		else if(value == 9){
 			return "Dratini";
