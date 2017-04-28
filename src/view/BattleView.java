@@ -225,6 +225,7 @@ public class BattleView extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
+			
 			trainer.useItem(ItemType.SAFARI_BALL);
 			//throw a safari ball first
 			playSong(THROWBALL);
