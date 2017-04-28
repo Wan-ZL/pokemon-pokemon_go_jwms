@@ -149,7 +149,7 @@ public class Trainer implements Serializable {
 		return hp;
 	}
 	
-	// get the trainers current hp
+	// get the trainers current hp 
 	public int getCurrHP() {
 		return hp-damage;
 	}
