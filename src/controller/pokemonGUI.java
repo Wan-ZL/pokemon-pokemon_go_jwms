@@ -69,7 +69,6 @@ public class pokemonGUI extends JFrame {
 		this.mainFrame = this;
 		this.map = new Map();
 		this.trainer = trainer;
-		this.loadingview = new LoadingView();
 		this.mapView = new MapView(trainer);
 		setUpGameWindow();
 	}

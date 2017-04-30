@@ -37,5 +37,7 @@ public abstract class Item implements Serializable{
 	}
 	
 	// uses the item
-	public abstract void useItem();
+	public void useItem(){
+		amt--;
+	}
 }

@@ -21,10 +21,11 @@ public class Encounter implements Serializable{
 	
 	// make a catch attempt
 	public boolean isCaught() {
-		if (pokemon.catchCheck()) {
+		boolean temp = pokemon.catchCheck();
+		if (temp) {
 			trainer.addPokemon(pokemon);
 		}
-		return pokemon.catchCheck();
+		return temp;
 	}
 	
 	// get the pokemons health

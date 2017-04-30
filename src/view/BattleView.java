@@ -29,6 +29,7 @@ import javafx.scene.media.MediaPlayer;
 import model.Encounter;
 import model.Pokemon;
 import model.Trainer;
+import model.items.ItemType;
 import model.pokemon.Dragonair;
 import model.pokemon.Dratini;
 import model.pokemon.Exeggcute;
@@ -224,11 +225,18 @@ public class BattleView extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
+			
+			trainer.useItem(ItemType.SAFARI_BALL);
 			//throw a safari ball first
 			playSong(THROWBALL);
 			
 			//TODO: check if pokemon is caught
 			if(encounter.isCaught()){
+				mainFrame.outOfBattle();
+				mainFrame.getBattleView().setVisible(false);
+				mainFrame.getMapView().setVisible(true);
+				mainFrame.mapSwitchUpdate();
+				mainFrame.setupItems();
 				playSong(POKECAUGHT);
 			}
 		}
@@ -241,6 +249,7 @@ public class BattleView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			trainer.useItem(ItemType.ROCK);
 			playSong(THROWROCK);
 		}
 		
@@ -252,6 +261,7 @@ public class BattleView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			trainer.useItem(ItemType.BAIT);
 			playSong(THROWBAIT);
 		}
 		

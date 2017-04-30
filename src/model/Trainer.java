@@ -130,8 +130,8 @@ public class Trainer implements Serializable {
 	public int getMapNum() {
 		return mapIndex;
 	}
-	
-	public void setMapNum(int mapNum){
+
+	public void setMapNum(int mapNum) {
 		this.mapIndex = mapNum;
 	}
 
@@ -143,17 +143,17 @@ public class Trainer implements Serializable {
 		return (int) this.trainerPosition.getY();
 
 	}
-	
+
 	// get the trainers max hp
 	public int getMaxHP() {
 		return hp;
 	}
-	
+
 	// get the trainers current hp
 	public int getCurrHP() {
-		return hp-damage;
+		return hp - damage;
 	}
-	
+
 	// take damage
 	public void takeDamage(int damage) {
 		this.damage += damage;
@@ -164,8 +164,8 @@ public class Trainer implements Serializable {
 		this.isInBattle = false;
 		return this.belt.addPokemon(pokemon);
 	}
-	
-	public void outOfBattle(){						// call this function when battle end
+
+	public void outOfBattle() { // call this function when battle end
 		this.isInBattle = false;
 	}
 
@@ -198,6 +198,10 @@ public class Trainer implements Serializable {
 		return belt;
 	}
 
+	public void useItem(ItemType type) {
+		this.pack.useItem(type);
+	}
+
 	public BackPack getBackpack() {
 		return this.pack;
 	}
@@ -205,26 +209,25 @@ public class Trainer implements Serializable {
 	public void removeAllPokemoninBelt() {
 		belt.removAll();
 	}
-	
-	public int getItemNum(ItemType type){
+
+	public int getItemNum(ItemType type) {
 		return this.pack.numItem(type);
 	}
 
-	public boolean isInBattle(){
+	public boolean isInBattle() {
 		return this.isInBattle;
 	}
 
 	public boolean meetPokemon() { // null means no pokemon meet
 		String[][] theMap = map.getMap(this.mapIndex);
-		if (theMap[this.getY()][this.getX()].equals("g")) {			// if in grass
+		if (theMap[this.getY()][this.getX()].equals("g")) { // if in grass
 			if (Math.random() < 0.2) { // 30% chance to meet pokemon
 				this.isInBattle = true;
 				return true;
-			}
-			else{
+			} else {
 				return false;
 			}
-		} else {	// not in grass
+		} else { // not in grass
 			return false;
 		}
 	}
