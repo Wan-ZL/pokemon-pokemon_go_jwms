@@ -227,7 +227,6 @@ public class BattleView extends JPanel{
 			}
 			
 		}
-
 	}
 	
 	//Listener for throw a safari ball
@@ -240,7 +239,6 @@ public class BattleView extends JPanel{
 				trainer.useItem(ItemType.SAFARI_BALL);
 				//throw a safari ball first
 				playSong(THROWBALL);
-				
 				//TODO: check if pokemon is caught
 				if(encounter.isCaught()){
 					mainFrame.outOfBattle();

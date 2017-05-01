@@ -58,9 +58,10 @@ public class ItemView extends JPanel implements Observer {
 		list_model = trainer.getPokemonBelt();
 		System.out.println(list_model);
 
+		//JScrollPane scrollPane1 = new JScrollPane();
 		list.setModel(list_model);
 		list.setBackground(Color.red);
-		
+		//scrollPane1.setViewportView(list);
 		
 		table = new JTable();
 		//this.add(table);
