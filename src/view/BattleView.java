@@ -47,7 +47,7 @@ public class BattleView extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = -4796227636732972155L;
-
+	private Pokemon pokemon;
 	private Trainer trainer;
 	private Encounter encounter;
 	private Random rand = new Random();
@@ -88,6 +88,8 @@ public class BattleView extends JPanel{
 		this.mainFrame = mainFrame;
 		this.trainer = trainer;
 		encounter = new Encounter(getPokemon(), trainer);
+		this.pokemon = encounter.getPokemon();
+		
 		//battlePan = new JPanel();
 		this.setPreferredSize(new Dimension((20*11)+215, 20*11));
 		this.setLayout(null);
@@ -203,20 +205,31 @@ public class BattleView extends JPanel{
 				repaint();
 	}
 	
+	
+	private void switchBackToMap(){
+		mainFrame.outOfBattle();
+		mainFrame.getBattleView().setVisible(false);
+		mainFrame.getMapView().setVisible(true);
+		mainFrame.mapSwitchUpdate();
+		mainFrame.setupItems();
+		mainFrame.reverseSound();
+	}
+	
 	// Listener for run away
 	private class RunAwayListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 			playSong(RUNAWAY);
-			mainFrame.outOfBattle();
-			mainFrame.getBattleView().setVisible(false);
-			mainFrame.getMapView().setVisible(true);
-			mainFrame.mapSwitchUpdate();
-			mainFrame.setupItems();
+			switchBackToMap();
+
 		}
+		
+		// if the trainer runs away, the pokemon does nothing
 
 	}
+	
+	
+	
 	
 	//Listener for throw a safari ball
 	private class ThrowASafariBallListener implements ActionListener {
@@ -232,12 +245,19 @@ public class BattleView extends JPanel{
 			
 			//TODO: check if pokemon is caught
 			if(encounter.isCaught()){
-				mainFrame.outOfBattle();
-				mainFrame.getBattleView().setVisible(false);
-				mainFrame.getMapView().setVisible(true);
-				mainFrame.mapSwitchUpdate();
-				mainFrame.setupItems();
 				playSong(POKECAUGHT);
+				switchBackToMap();
+			}else{
+				// it's pokemon's turn to attack or run away
+				if(Math.random() > 0.5)
+					// pokemon attack
+					pokemon.chooseAttack();
+				else{
+					// pokemon run away 
+					switchBackToMap();
+				}
+					
+				
 			}
 		}
 		
@@ -251,6 +271,17 @@ public class BattleView extends JPanel{
 			// TODO Auto-generated method stub
 			trainer.useItem(ItemType.ROCK);
 			playSong(THROWROCK);
+			
+			// pokemon gets attacked
+			pokemon.HitByRock();
+			// pokemon's turn to attack or run away
+			if(Math.random() > 0.5)
+				// pokemon attack
+				pokemon.chooseAttack();
+			else{
+				// pokemon run away 
+				switchBackToMap();
+			}
 		}
 		
 	}
@@ -263,6 +294,16 @@ public class BattleView extends JPanel{
 			// TODO Auto-generated method stub
 			trainer.useItem(ItemType.BAIT);
 			playSong(THROWBAIT);
+			// pokemon eats the bait
+			pokemon.eatBait();
+			// pokemon's turn to attack to run away
+			if(Math.random() > 0.5)
+				// pokemon attack
+				pokemon.chooseAttack();
+			else{
+				// pokemon run away 
+				switchBackToMap();
+			}
 		}
 		
 	}

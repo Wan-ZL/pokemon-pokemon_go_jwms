@@ -14,6 +14,11 @@ public class Encounter implements Serializable{
 		this.trainer = trainer;
 	}
 	
+	public Pokemon getPokemon(){
+		return this.pokemon;
+	}
+	
+	
 	// Returns the Pokemons name as a string
 	public String getPokemonName() {
 		return pokemon.getName();
@@ -32,6 +37,9 @@ public class Encounter implements Serializable{
 	public String getPokemonHP() {
 		return pokemon.getCurHP() + "/" + pokemon.getMaxHP();
 	}
-	
+	// need to do something for the pokemon's turn 
+	// pokemon do: eat the bait, hit by the rock
+	// then pokemon's action: get caught, run away, attack the trainer
+	// 
 	
 }

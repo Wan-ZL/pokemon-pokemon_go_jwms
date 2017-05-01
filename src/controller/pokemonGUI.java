@@ -62,8 +62,11 @@ public class pokemonGUI extends JFrame {
 	private MediaPlayer mediaPlayer;
 	private static final String BATTLESONG = Paths.get("sounds/battlemus.mp3").toUri().toString();
 	private static final String BGM = Paths.get("sounds/bgm.mp3").toUri().toString();
+	
+	// these two boolean values are for sounds
 	private boolean inMap;
 	private boolean inBattle;
+	
 	public pokemonGUI(Trainer trainer) {
 		JFXPanel fxPanel = new JFXPanel();
 		this.mainFrame = this;
@@ -132,7 +135,7 @@ public class pokemonGUI extends JFrame {
 	public void redraw(){
 		battleview.updatePanel();
 	}
-
+	// walk into map 2?
 	public void mapSwitchUpdate() {
 		cp.remove(currentView);
 		currentView = new MapView(trainer);
@@ -156,6 +159,13 @@ public class pokemonGUI extends JFrame {
 	
 	public MapView getMapView(){
 		return currentView;
+	}
+	
+	
+	public void reverseSound(){
+		this.inMap = ! this.inMap;
+		this.inBattle  = ! this.inBattle;
+		setBGM();
 	}
 
 	private class SaveGame implements ActionListener {
@@ -314,9 +324,7 @@ public class pokemonGUI extends JFrame {
 							cp.remove(currentView);
 							cp.add(battleview = new BattleView(trainer, mainFrame));
 							//playSong(BATTLESONG);
-							inMap = false;
-							inBattle = true;
-							setBGM();
+							reverseSound();
 							battleview.setSize(battleview.getPreferredSize());
 							battleview.setLocation(0, 0);
 							battleview.setVisible(true);

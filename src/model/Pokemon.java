@@ -121,12 +121,7 @@ public abstract class Pokemon implements Serializable{
 		this.catchChance += amt;
 	}
 	
-	// Increases catchChance but also fleeChance
-	public abstract void eatBait();
-	
-	// Decreases fleeCHance but also catchChance
-	public abstract void HitByRock();
-	
+
 	// Choose an action 
 	public Action chooseAction() {
 		if (isEating()) {
@@ -141,6 +136,11 @@ public abstract class Pokemon implements Serializable{
 	// Choose an attack to use
 	public abstract void chooseAttack();
 	
+	// Increases catchChance but also fleeChance
+	public abstract void eatBait();
+	
+	// Decreases fleeCHance but also catchChance
+	public abstract void HitByRock();
 	
 	
 	
