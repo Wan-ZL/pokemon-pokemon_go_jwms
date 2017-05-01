@@ -6,7 +6,9 @@ public class Pinsir extends Pokemon{
 
 	public Pinsir() {
 		super(PokemonType.PINSIR, 800, 30, PokemonRarity.UNCOMMON);
-		// TODO Auto-generated constructor stub
+		this.setPics("image/PokemonSprites/pinsir-1.png", "image/PokemonSprites/pinsir-2.png", 
+				"image/PokemonSprites/pinsir-3.png", "image/PokemonSprites/pinsir-4.png", 
+				"image/PokemonSprites/pinsir-5.png");
 	}
 
 	@Override
@@ -29,8 +31,8 @@ public class Pinsir extends Pokemon{
 	}
 
 	@Override
-	public void chooseAttack() {
-		// TODO Auto-generated method stub
+	public int chooseAttack() {
+		return 15;
 		
 	}
 

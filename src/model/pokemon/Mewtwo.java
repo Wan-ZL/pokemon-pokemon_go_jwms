@@ -6,7 +6,9 @@ public class Mewtwo extends Pokemon{
 
 	public Mewtwo() {
 		super(PokemonType.MEWTWO, 1000, 100, PokemonRarity.RARE);
-		// TODO Auto-generated constructor stub
+		this.setPics("image/PokemonSprites/mewtwo-1.png", "image/PokemonSprites/mewtwo-2.png", 
+				"image/PokemonSprites/mewtwo-3.png", "image/PokemonSprites/mewtwo-4.png", 
+				"image/PokemonSprites/mewtwo-5.png");
 	}
 
 	@Override
@@ -29,8 +31,8 @@ public class Mewtwo extends Pokemon{
 	}
 
 	@Override
-	public void chooseAttack() {
-		// TODO Auto-generated method stub
+	public int chooseAttack() {
+		return 40;
 		
 	}
 

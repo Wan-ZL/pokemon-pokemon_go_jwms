@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Image;
 import java.io.Serializable;
 import java.util.Random;
 
@@ -18,6 +19,7 @@ public abstract class Pokemon implements Serializable{
 	private PokemonRarity rarity;
 	protected int hp, lvl, speed, damage, fleeChance, catchChance;
 	private boolean eatingBait;
+	private String[] pics;
 	
 	// super class constructor
 	public Pokemon(PokemonType type, int baseHP, int baseSpeed, PokemonRarity rarity) {
@@ -29,6 +31,21 @@ public abstract class Pokemon implements Serializable{
 		this.hp = baseHP + rand.nextInt(75) + (lvl*rand.nextInt(4));
 		this.fleeChance = 12 * this.rarity.getValue();
 		this.catchChance = 42 / this.rarity.getValue();
+	}
+	
+	// set all the pic pocations
+	public void setPics(String pic1, String pic2, String pic3, String pic4, String pic5) {
+		pics = new String[5];
+		this.pics[0] = pic1;
+		this.pics[1] = pic2;
+		this.pics[2] = pic3;
+		this.pics[3] = pic4;
+		this.pics[4] = pic5;
+	}
+	
+	// get a list of picture locations
+	public String getPic(int index) {
+		return pics[index];
 	}
 	
 	// returns the type of the Pokemon as a string
@@ -134,7 +151,7 @@ public abstract class Pokemon implements Serializable{
 	}
 	
 	// Choose an attack to use
-	public abstract void chooseAttack();
+	public abstract int chooseAttack();
 	
 	// Increases catchChance but also fleeChance
 	public abstract void eatBait();

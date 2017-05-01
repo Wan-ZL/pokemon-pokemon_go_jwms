@@ -6,7 +6,9 @@ public class Dragonair extends Pokemon{
 
 	public Dragonair() {
 		super(PokemonType.DRAGONAIR, 400, 80, PokemonRarity.UNCOMMON);
-		// TODO Auto-generated constructor stub
+		this.setPics("image/PokemonSprites/dragonair-1.png", "image/PokemonSprites/dragonair-2.png", 
+				"image/PokemonSprites/dragonair-3.png", "image/PokemonSprites/dragonair-4.png", 
+				"image/PokemonSprites/dragonair-5.png");
 	}
 
 	@Override
@@ -29,8 +31,8 @@ public class Dragonair extends Pokemon{
 	}
 
 	@Override
-	public void chooseAttack() {
-		// TODO Auto-generated method stub
+	public int chooseAttack() {
+		return 10;
 		
 	}
 

@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
+import javax.imageio.ImageIO;
 
 import controller.pokemonGUI;
 import javafx.embed.swing.JFXPanel;
@@ -52,6 +53,7 @@ public class BattleView extends JPanel{
 	private Encounter encounter;
 	private Random rand = new Random();
 	private Timer timer;
+	private int phase, count;
 	private JPanel battlePan;
 	// a button shows "throw A safari ball".
 	private JButton throwASafariBall;
@@ -62,9 +64,11 @@ public class BattleView extends JPanel{
 	// a button shows "give bait".
 	private JButton ThrowABait;
 	
-	private Image backGround;
+	private Image background;
 	private JTextArea TrainerHealth;
 	private JTextArea PokemonHealth;
+	private boolean drawing;
+	private Image trainerBase, tr1, tr2, tr3, tr4, safariBall;
 	
 	private MediaPlayer sound;
 	//Sound for run away
@@ -84,6 +88,9 @@ public class BattleView extends JPanel{
 	
 	private pokemonGUI mainFrame;
 	public BattleView(Trainer trainer, pokemonGUI mainFrame) {
+		drawing = false;
+		phase = 0;
+		count = 0;
 		JFXPanel fxPanel = new JFXPanel();
 		this.mainFrame = mainFrame;
 		this.trainer = trainer;
@@ -99,7 +106,7 @@ public class BattleView extends JPanel{
 		runAway = new JButton("Run Away");
 		ThrowABait = new JButton("Throw A Bait");
 		
-		
+		timer = new Timer(100, new animationListener());
 		
 		TrainerHealth = new JTextArea(trainer.getCurrHP() + "/" + trainer.getMaxHP());
 		PokemonHealth = new JTextArea(encounter.getPokemonHP());
@@ -140,34 +147,59 @@ public class BattleView extends JPanel{
 		throwASafariBall.addActionListener(new ThrowASafariBallListener());
 		ThrowABait.addActionListener(new ThrowBaitListener());
 		
+		try {
+			trainerBase = ImageIO.read(new File("image/TrainerSprites/trainer-base.png"));
+			tr1 = ImageIO.read(new File("image/TrainerSprites/trainer-1.png"));
+			tr2 = ImageIO.read(new File("image/TrainerSprites/trainer-2.png"));
+			tr3 = ImageIO.read(new File("image/TrainerSprites/trainer-3.png"));
+			tr4 = ImageIO.read(new File("image/TrainerSprites/trainer-4.png"));
+			safariBall = ImageIO.read(new File("image/TrainerSprites/safari-ball.png"));
+		} catch (IOException e1) {
+			System.out.println("Cannot find the image file.");
+			e1.printStackTrace();
+		}
+		
 		/*JScrollPane scroll = new JScrollPane(TrainerHealth);
 		scroll.setBounds(50, 350, 300, 150);
 		this.add(scroll);*/
-		ImageIcon image = new ImageIcon("image/rsz_battle_bg.jpg");
-		JLabel label = new JLabel("", image, JLabel.CENTER);
-		label.setLocation(0, 0);
-		label.setSize(215, 220);
+//		ImageIcon image = new ImageIcon("image/rsz_battle_bg.jpg");
+//		JLabel label = new JLabel("", image, JLabel.CENTER);
+//		label.setLocation(0, 0);
+//		label.setSize(215, 220);
+//		
+//		this.add(label);
 		
-		this.add(label);
-		
-		/*try {
-			backGround = ImageIO.read(new File("image/battle_bg.jpg"));
+		try {
+			background = ImageIO.read(new File("image/battle_bg.jpg"));
 		} catch (IOException e) {
 			System.out.println("Cannot find the image file!");
 			e.printStackTrace();
-		}*/
+		}
+		timer.start();
 		//repaint();
 	}
 	
 	//Four buttons: Throw a rock; Throw bait; Throw Pokeball; Run
 	
-	/*@Override
+	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
-		g2.drawImage(backGround, 11*20, 11*20, null);
-	}*/
+		g2.drawImage(background, 0, 0, 215, 220, null);
+		
+		if (phase == 0) { // Intro animations
+			g2.drawImage(encounter.getPokeImg(count), 20*6, 50, null);
+			g2.drawImage(trainerBase, count*10-50, 156, null);
+		}
+		else if (phase == 1) { // still animations
+			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+			g2.drawImage(trainerBase, 0, 156, null);
+		}
+		else if (phase == 2) {
+			
+		}
+	}
 
 	private Pokemon getPokemon() {
 		// TODO get a random int to choose which pokemon to create for the
@@ -219,9 +251,12 @@ public class BattleView extends JPanel{
 	private class RunAwayListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			playSong(RUNAWAY);
-			switchBackToMap();
 
+			if (!drawing) { // disable button while drawing
+				playSong(RUNAWAY);
+				switchBackToMap();
+			}
+			
 		}
 		
 		// if the trainer runs away, the pokemon does nothing
@@ -236,29 +271,31 @@ public class BattleView extends JPanel{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			
-			
-			trainer.useItem(ItemType.SAFARI_BALL);
-			//throw a safari ball first
-			playSong(THROWBALL);
-			
-			//TODO: check if pokemon is caught
-			if(encounter.isCaught()){
-				playSong(POKECAUGHT);
-				switchBackToMap();
-			}else{
-				// it's pokemon's turn to attack or run away
-				if(Math.random() > 0.5)
-					// pokemon attack
-					pokemon.chooseAttack();
-				else{
-					// pokemon run away 
-					switchBackToMap();
-				}
-					
+			if (!drawing) { // disable button while drawing
+				trainer.useItem(ItemType.SAFARI_BALL);
+				//throw a safari ball first
+				playSong(THROWBALL);
 				
+				//TODO: check if pokemon is caught
+				if(encounter.isCaught()){
+					playSong(POKECAUGHT);
+					switchBackToMap();
+				}else{
+					// it's pokemon's turn to attack or run away
+					if(Math.random() > 0.5)
+						// pokemon attack
+						encounter.trainerTakeDamage();
+					else{
+						// pokemon run away 
+						switchBackToMap();
+					}
+						
+					
+				}
 			}
+			
+			
 		}
 		
 	}
@@ -268,29 +305,34 @@ public class BattleView extends JPanel{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+		if(!drawing){ // disable the button while drawing 
 			// TODO Auto-generated method stub
 			trainer.useItem(ItemType.ROCK);
 			playSong(THROWROCK);
 			
 			// pokemon gets attacked
 			pokemon.HitByRock();
+			// pokemon's turn
 			// pokemon's turn to attack or run away
 			if(Math.random() > 0.5)
 				// pokemon attack
-				pokemon.chooseAttack();
+				encounter.trainerTakeDamage();
 			else{
 				// pokemon run away 
 				switchBackToMap();
+
 			}
-		}
 		
+		}
 	}
-	
+	}
 	//Listener for throw a bait
 	private class ThrowBaitListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+
+	if(!drawing ){
 			// TODO Auto-generated method stub
 			trainer.useItem(ItemType.BAIT);
 			playSong(THROWBAIT);
@@ -299,13 +341,16 @@ public class BattleView extends JPanel{
 			// pokemon's turn to attack to run away
 			if(Math.random() > 0.5)
 				// pokemon attack
-				pokemon.chooseAttack();
+				encounter.trainerTakeDamage();
+				
 			else{
 				// pokemon run away 
 				switchBackToMap();
 			}
+
 		}
 		
+	}
 	}
 	
 	private void playSong(String file) {
@@ -318,4 +363,26 @@ public class BattleView extends JPanel{
 		// The song will repeat forever
 		this.sound.play();
 	}
+	
+	private class animationListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			
+			drawing = true;
+			if (count < 4) {
+				repaint();
+				count++;
+			} else {
+				phase = 1;
+				repaint();
+				count = 0;
+				timer.stop();
+				drawing = false;
+			}
+			
+		}
+		
+	}
+
 }

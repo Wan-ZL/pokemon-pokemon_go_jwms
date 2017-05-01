@@ -6,7 +6,9 @@ public class Dratini extends Pokemon{
 
 	public Dratini() {
 		super(PokemonType.DRATINI, 150, 35, PokemonRarity.COMMON);
-		// TODO Auto-generated constructor stub
+		this.setPics("image/PokemonSprites/dratini-1.png", "image/PokemonSprites/dratini-2.png", 
+				"image/PokemonSprites/dratini-3.png", "image/PokemonSprites/dratini-4.png", 
+				"image/PokemonSprites/dratini-5.png");
 	}
 
 	@Override
@@ -29,8 +31,8 @@ public class Dratini extends Pokemon{
 	}
 
 	@Override
-	public void chooseAttack() {
-		// TODO Auto-generated method stub
+	public int chooseAttack() {
+		return 20;
 		
 	}
 

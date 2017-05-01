@@ -6,7 +6,9 @@ public class Exeggcute extends Pokemon{
 
 	public Exeggcute() {
 		super(PokemonType.EXEGGCUTE, 200, 30, PokemonRarity.COMMON);
-		// TODO Auto-generated constructor stub
+		this.setPics("image/PokemonSprites/exeggcute-1.png", "image/PokemonSprites/exeggcute-2.png", 
+				"image/PokemonSprites/exeggcute-3.png", "image/PokemonSprites/exeggcute-4.png", 
+				"image/PokemonSprites/exeggcute-5.png");
 	}
 
 	@Override
@@ -29,8 +31,8 @@ public class Exeggcute extends Pokemon{
 	}
 
 	@Override
-	public void chooseAttack() {
-		// TODO Auto-generated method stub
+	public int chooseAttack() {
+		return 20;
 		
 	}
 

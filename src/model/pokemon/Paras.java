@@ -6,7 +6,9 @@ public class Paras extends Pokemon{
 
 	public Paras() {
 		super(PokemonType.PARAS, 200, 20, PokemonRarity.COMMON);
-		// TODO Auto-generated constructor stub
+		this.setPics("image/PokemonSprites/paras-1.png", "image/PokemonSprites/paras-2.png", 
+				"image/PokemonSprites/paras-3.png", "image/PokemonSprites/paras-4.png", 
+				"image/PokemonSprites/paras-5.png");
 	}
 
 	@Override
@@ -29,8 +31,8 @@ public class Paras extends Pokemon{
 	}
 
 	@Override
-	public void chooseAttack() {
-		// TODO Auto-generated method stub
+	public int chooseAttack() {
+		return 10;
 		
 	}
 
