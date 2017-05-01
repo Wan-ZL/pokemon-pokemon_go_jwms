@@ -64,6 +64,7 @@ public class pokemonGUI extends JFrame {
 	private static final String BGM = Paths.get("sounds/bgm.mp3").toUri().toString();
 	private boolean inMap;
 	private boolean inBattle;
+
 	public pokemonGUI(Trainer trainer) {
 		JFXPanel fxPanel = new JFXPanel();
 		this.mainFrame = this;
@@ -80,37 +81,36 @@ public class pokemonGUI extends JFrame {
 		this.setLocation(100, 100);
 		this.inMap = true;
 		this.inBattle = false;
-		//playSong(BGM);*/
+		// playSong(BGM);*/
 		setBGM();
 		cp = getContentPane();
 		currentView = mapView;
 		currentView.setLocation(0, 0);
 		currentView.setSize(11 * 20, 11 * 20);
 		this.addKeyListener(new MoveListener());
-		//cp.add(loadingview);
+		// cp.add(loadingview);
 		cp.setLayout(null);
 		cp.add(currentView);
 		setupMenu();
 		setupItems();
 	}
 
-	public void setBGM(){
-		if(inMap){
+	public void setBGM() {
+		if (inMap) {
 			playSong(BGM);
-		}
-		else{
+		} else {
 			playSong(BATTLESONG);
 		}
 	}
-	
+
 	public void update() {
 		currentView.updatePanel();
-		//battleview.updatePanel();
+		// battleview.updatePanel();
 		items.updateSteps();
 		// this.repaint();
 	}
-	
-	public void outOfBattle(){
+
+	public void outOfBattle() {
 		this.trainer.outOfBattle();
 	}
 
@@ -127,8 +127,7 @@ public class pokemonGUI extends JFrame {
 		this.setJMenuBar(menuBar);
 	}
 
-
-	public void redraw(){
+	public void redraw() {
 		battleview.updatePanel();
 	}
 
@@ -147,13 +146,12 @@ public class pokemonGUI extends JFrame {
 		cp.add(items);
 		// System.out.println("here");
 	}
-	
-	public BattleView getBattleView(){
+
+	public BattleView getBattleView() {
 		return battleview;
 	}
-	
-	
-	public MapView getMapView(){
+
+	public MapView getMapView() {
 		return currentView;
 	}
 
@@ -232,17 +230,15 @@ public class pokemonGUI extends JFrame {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
-						}
-						else if(theMap[y+1][x] == "p"){
+						} else if (theMap[y + 1][x] == "p") {
 							System.out.print("You find a safari ball!!");
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
 							trainer.getBackpack().addItem(new SafariBall(1));
-							//trainer.getBackpack().notify();
-							//TODO: need to set the map back to "g"
-							
-						}
-						else {
+							// trainer.getBackpack().notify();
+							// TODO: need to set the map back to "g"
+
+						} else {
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
 						}
@@ -275,8 +271,7 @@ public class pokemonGUI extends JFrame {
 						if (theMap[y][x + 1] == "t" || theMap[y][x + 1] == "a" || theMap[y][x + 1] == "w"
 								|| theMap[y][x + 1] == "i" || theMap[y][x + 1] == "_") {
 							System.out.print("can't move because of " + theMap[y][x + 1]);
-						}
-						else if (theMap[y][x + 1] == "g") {
+						} else if (theMap[y][x + 1] == "g") {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x + 1, y);
 							trainer.setChangedMove(true);
@@ -289,8 +284,7 @@ public class pokemonGUI extends JFrame {
 						if (theMap[y][x - 1] == "t" || theMap[y][x - 1] == "a" || theMap[y][x - 1] == "w"
 								|| theMap[y][x - 1] == "i" || theMap[y][x - 1] == "_") {
 							System.out.print("can't move because of " + theMap[y][x - 1]);
-						}
-						else if (theMap[y][x - 1] == "g") {
+						} else if (theMap[y][x - 1] == "g") {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x - 1, y);
 							trainer.setChangedMove(true);
@@ -312,7 +306,7 @@ public class pokemonGUI extends JFrame {
 							//
 							cp.remove(currentView);
 							cp.add(battleview = new BattleView(trainer, mainFrame));
-							//playSong(BATTLESONG);
+							// playSong(BATTLESONG);
 							inMap = false;
 							inBattle = true;
 							setBGM();
@@ -324,33 +318,38 @@ public class pokemonGUI extends JFrame {
 						}
 					}
 				}
-				/*//System.out.println(theMap[trainer.getY()][trainer.getX()]);
-				update();
-				
+				/*
+				 * //System.out.println(theMap[trainer.getY()][trainer.getX()]);
+				 * update();
+				 * 
+				 * 
+				 * //int x = trainer.getX(); //int y = trainer.getY();
+				 * if(trainer.getItemNum(ItemType.SAFARI_BALL) != 0){ Pokemon
+				 * poke = trainer.meetPokemon(); if(poke != null){
+				 * System.out.println(poke.getName()); cp.remove(items);
+				 * cp.remove(currentView); cp.add(battleview = new
+				 * BattleView(trainer));
+				 * battleview.setSize(battleview.getPreferredSize());
+				 * battleview.setLocation(0, 0); battleview.setVisible(true);
+				 * mapView.setVisible(false); redraw(); } }
+				 */
 
-				//int x = trainer.getX();
-				//int y = trainer.getY();	
-				if(trainer.getItemNum(ItemType.SAFARI_BALL) != 0){
-					Pokemon poke = trainer.meetPokemon();
-					if(poke != null){
-						System.out.println(poke.getName());
-						cp.remove(items);
-						cp.remove(currentView);
-						cp.add(battleview = new BattleView(trainer));
-						battleview.setSize(battleview.getPreferredSize());
-						battleview.setLocation(0, 0);
-						battleview.setVisible(true);
-						mapView.setVisible(false);
-						redraw();
-					}
-				}*/
-						
 				if (trainer.getX() == 5) {
 					if (trainer.getY() == 17 || trainer.getY() == 18) {
 						System.out.println("switch");
 						trainer.setMapNum(2);
 						trainer.setPosition(5, 27);
+						trainer.setTrainerDirection("right");
 						mapSwitchUpdate();
+					}
+					else{
+						if (trainer.getY() == 26 || trainer.getY() == 27) {
+							System.out.println("switch");
+							trainer.setMapNum(1);
+							trainer.setPosition(5, 18);
+							trainer.setTrainerDirection("right");
+							mapSwitchUpdate();
+						}
 					}
 				}
 			}
@@ -361,7 +360,7 @@ public class pokemonGUI extends JFrame {
 			// TODO Auto-generated method stub
 		}
 	}
-	
+
 	private void playSong(String location) {
 		if (this.mediaPlayer != null) {
 			this.mediaPlayer.stop();

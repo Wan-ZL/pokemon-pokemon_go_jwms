@@ -110,6 +110,7 @@ public class LoadingView extends JPanel {
 			pokemonGUI g = new pokemonGUI(trainer);
 			g.setFocusable(true);
 			g.requestFocusInWindow();
+			g.setLocation(beginFrame.getLocation());
 			g.setVisible(true);
 			removeBeginFrame();
 		}
@@ -159,6 +160,7 @@ public class LoadingView extends JPanel {
 			pokemonGUI g = new pokemonGUI(trainer);
 			g.setFocusable(true);
 			g.requestFocusInWindow();
+			g.setLocation(beginFrame.getLocation());
 			g.setVisible(true);
 			removeBeginFrame();
 		}
