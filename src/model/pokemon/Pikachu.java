@@ -6,7 +6,9 @@ public class Pikachu extends Pokemon{
 
 	public Pikachu() {
 		super(PokemonType.PIKACHU, 200, 25, PokemonRarity.COMMON);
-		// TODO Auto-generated constructor stub
+		this.setPics("image/PokemonSprites/pikachu-1.png", "image/PokemonSprites/pikachu-2.png", 
+				"image/PokemonSprites/pikachu-3.png", "image/PokemonSprites/pikachu-4.png", 
+				"image/PokemonSprites/pikachu-5.png");
 	}
 
 	@Override

@@ -6,7 +6,9 @@ public class Marowak extends Pokemon{
 
 	public Marowak() {
 		super(PokemonType.MAROWAK, 500, 60, PokemonRarity.UNCOMMON);
-		// TODO Auto-generated constructor stub
+		this.setPics("image/PokemonSprites/marowak-1.png", "image/PokemonSprites/marowak-2.png", 
+				"image/PokemonSprites/marowak-3.png", "image/PokemonSprites/marowak-4.png", 
+				"image/PokemonSprites/marowak-5.png");
 	}
 
 	@Override

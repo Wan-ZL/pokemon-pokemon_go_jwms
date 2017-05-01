@@ -6,7 +6,9 @@ public class Primeape extends Pokemon{
 
 	public Primeape() {
 		super(PokemonType.PRIMEAPE, 300, 20, PokemonRarity.COMMON);
-		// TODO Auto-generated constructor stub
+		this.setPics("image/PokemonSprites/primeape-1.png", "image/PokemonSprites/primeape-2.png", 
+				"image/PokemonSprites/primeape-3.png", "image/PokemonSprites/primeape-4.png", 
+				"image/PokemonSprites/primeape-5.png");
 	}
 
 	@Override

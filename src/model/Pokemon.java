@@ -36,16 +36,16 @@ public abstract class Pokemon implements Serializable{
 	// set all the pic pocations
 	public void setPics(String pic1, String pic2, String pic3, String pic4, String pic5) {
 		pics = new String[5];
-		this.pics[1] = pic1;
-		this.pics[2] = pic2;
-		this.pics[3] = pic3;
-		this.pics[4] = pic4;
-		this.pics[5] = pic5;
+		this.pics[0] = pic1;
+		this.pics[1] = pic2;
+		this.pics[2] = pic3;
+		this.pics[3] = pic4;
+		this.pics[4] = pic5;
 	}
 	
 	// get a list of picture locations
-	public String[] getPics() {
-		return pics;
+	public String getPic(int index) {
+		return pics[index];
 	}
 	
 	// returns the type of the Pokemon as a string

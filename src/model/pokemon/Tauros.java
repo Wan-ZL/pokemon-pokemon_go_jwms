@@ -6,6 +6,9 @@ public class Tauros extends Pokemon{
 
 	public Tauros() {
 		super(PokemonType.TAUROS, 250, 30, PokemonRarity.COMMON);
+		this.setPics("image/PokemonSprites/tauros-1.png", "image/PokemonSprites/tauros-2.png", 
+				"image/PokemonSprites/tauros-3.png", "image/PokemonSprites/tauros-4.png", 
+				"image/PokemonSprites/tauros-5.png");
 	}
 
 	@Override
