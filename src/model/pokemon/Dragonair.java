@@ -31,8 +31,8 @@ public class Dragonair extends Pokemon{
 	}
 
 	@Override
-	public void chooseAttack() {
-		// TODO Auto-generated method stub
+	public int performAttack() {
+		return 50;
 		
 	}
 

@@ -68,5 +68,15 @@ public class Encounter implements Serializable{
 		pokemon.eatBait();;
 	}
 	
+	// get a pokemon action
+	public int performPokeAction() {
+		Action action = pokemon.chooseAction();
+		if (action == Action.ATTACK) {
+			trainer.takeDamage(pokemon.performAttack());
+		}
+		return action.getValue();
+		//return Action.ATTACK.getValue();
+	}
+	
 	
 }

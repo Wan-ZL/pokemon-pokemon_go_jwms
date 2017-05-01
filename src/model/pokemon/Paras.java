@@ -31,9 +31,9 @@ public class Paras extends Pokemon{
 	}
 
 	@Override
-	public void chooseAttack() {
+	public int performAttack() {
 		// TODO Auto-generated method stub
-		
+		return 12;
 	}
 
 }

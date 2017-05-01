@@ -157,7 +157,7 @@ public abstract class Pokemon implements Serializable{
 	}
 	
 	// Choose an attack to use
-	public abstract void chooseAttack();
+	public abstract int performAttack();
 	
 	
 	
