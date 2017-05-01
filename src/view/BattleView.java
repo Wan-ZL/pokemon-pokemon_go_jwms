@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
+import javax.imageio.ImageIO;
 
 import controller.pokemonGUI;
 import javafx.embed.swing.JFXPanel;
@@ -67,6 +68,7 @@ public class BattleView extends JPanel{
 	private JTextArea TrainerHealth;
 	private JTextArea PokemonHealth;
 	private boolean drawing;
+	private Image trainerBase, tr1, tr2, tr3, tr4, safariBall;
 	
 	private MediaPlayer sound;
 	//Sound for run away
@@ -143,6 +145,18 @@ public class BattleView extends JPanel{
 		throwASafariBall.addActionListener(new ThrowASafariBallListener());
 		ThrowABait.addActionListener(new ThrowBaitListener());
 		
+		try {
+			trainerBase = ImageIO.read(new File("image/TrainerSprites/trainer-base.png"));
+			tr1 = ImageIO.read(new File("image/TrainerSprites/trainer-1.png"));
+			tr2 = ImageIO.read(new File("image/TrainerSprites/trainer-2.png"));
+			tr3 = ImageIO.read(new File("image/TrainerSprites/trainer-3.png"));
+			tr4 = ImageIO.read(new File("image/TrainerSprites/trainer-4.png"));
+			safariBall = ImageIO.read(new File("image/TrainerSprites/safari-ball.png"));
+		} catch (IOException e1) {
+			System.out.println("Cannot find the image file.");
+			e1.printStackTrace();
+		}
+		
 		/*JScrollPane scroll = new JScrollPane(TrainerHealth);
 		scroll.setBounds(50, 350, 300, 150);
 		this.add(scroll);*/
@@ -174,6 +188,14 @@ public class BattleView extends JPanel{
 		
 		if (phase == 0) { // Intro animations
 			g2.drawImage(encounter.getPokeImg(count), 20*6, 50, null);
+			g2.drawImage(trainerBase, count*10-50, 156, null);
+		}
+		else if (phase == 1) { // still animations
+			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+			g2.drawImage(trainerBase, 0, 156, null);
+		}
+		else if (phase == 2) {
+			
 		}
 	}
 
@@ -304,6 +326,7 @@ public class BattleView extends JPanel{
 				repaint();
 				count++;
 			} else {
+				phase = 1;
 				repaint();
 				count = 0;
 				timer.stop();
