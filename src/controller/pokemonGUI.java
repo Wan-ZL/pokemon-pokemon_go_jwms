@@ -311,6 +311,11 @@ public class pokemonGUI extends JFrame {
 							cp.remove(items);
 							//
 							cp.remove(currentView);
+							/*try{
+								Thread.sleep(200);
+							}catch(Exception e1){
+								
+							}*/
 							cp.add(battleview = new BattleView(trainer, mainFrame));
 							//playSong(BATTLESONG);
 							inMap = false;
