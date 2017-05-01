@@ -64,9 +64,9 @@ public class Encounter implements Serializable{
 	}
 	
 	// Trainer throws a bait at the pokemon
-		public void throwBait() {
-			pokemon.eatBait();;
-		}
+	public void throwBait() {
+		pokemon.eatBait();;
+	}
 	
 	
 }

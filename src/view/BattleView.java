@@ -233,6 +233,10 @@ public class BattleView extends JPanel{
 			}
 			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);	
 		}
+		else if (phase == 5) {
+			g2.drawImage(trainerBase, 0 - (count*10), 156, null);
+			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+		}
 	}
 
 	private Pokemon getPokemon() {
@@ -277,11 +281,8 @@ public class BattleView extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			if (!drawing) { // disable button while drawing
 				playSong(RUNAWAY);
-				mainFrame.outOfBattle();
-				mainFrame.getBattleView().setVisible(false);
-				mainFrame.getMapView().setVisible(true);
-				mainFrame.mapSwitchUpdate();
-				mainFrame.setupItems();
+				phase = 5;
+				timer.start();
 			}
 			
 		}
@@ -370,11 +371,7 @@ public class BattleView extends JPanel{
 				repaint();
 				count++;
 			} else {
-				if (phase != 4) {
-					phase = 1;
-				}
-				else {
-					//TODO: check if pokemon is caught
+				if (phase == 4) {
 					if(encounter.isCaught()){
 						mainFrame.outOfBattle();
 						mainFrame.getBattleView().setVisible(false);
@@ -385,6 +382,16 @@ public class BattleView extends JPanel{
 					} else {
 						phase = 1;
 					}
+				}
+				else if (phase == 5) {
+					mainFrame.outOfBattle();
+					mainFrame.getBattleView().setVisible(false);
+					mainFrame.getMapView().setVisible(true);
+					mainFrame.mapSwitchUpdate();
+					mainFrame.setupItems();
+				} 
+				else {
+					phase = 1;
 				}
 				repaint();
 				count = 0;
