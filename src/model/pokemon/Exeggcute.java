@@ -13,8 +13,8 @@ public class Exeggcute extends Pokemon{
 
 	@Override
 	public void eatBait() {
-		changeFleeChance(15);
-		changeCatchChance(20);
+		changeFleeChance(-16);
+		changeCatchChance(-12);
 		setEating(true);
 		// TODO Auto-generated method stub
 		
@@ -22,8 +22,8 @@ public class Exeggcute extends Pokemon{
 
 	@Override
 	public void HitByRock() {
-		changeFleeChance(-20);
-		changeCatchChance(-15);
+		changeFleeChance(13);
+		changeCatchChance(20);
 		takeDamage(20);
 		setEating(false);
 		// TODO Auto-generated method stub

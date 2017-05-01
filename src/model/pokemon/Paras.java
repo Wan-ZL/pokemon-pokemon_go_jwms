@@ -13,8 +13,8 @@ public class Paras extends Pokemon{
 
 	@Override
 	public void eatBait() {
-		changeFleeChance(15);
-		changeCatchChance(20);
+		changeFleeChance(-15);
+		changeCatchChance(-15);
 		setEating(true);
 		// TODO Auto-generated method stub
 		
@@ -22,9 +22,9 @@ public class Paras extends Pokemon{
 
 	@Override
 	public void HitByRock() {
-		changeFleeChance(-20);
-		changeCatchChance(-15);
-		takeDamage(20);
+		changeFleeChance(20);
+		changeCatchChance(25);
+		takeDamage(35);
 		setEating(false);
 		// TODO Auto-generated method stub
 		
