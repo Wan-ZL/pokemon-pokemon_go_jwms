@@ -54,27 +54,33 @@ public class ItemView extends JPanel implements Observer {
 		this.setSize(200, 11*20);
 		
 		list = new JList<String>();
-		this.add(list);
+		//this.add(list);
 		list_model = trainer.getPokemonBelt();
 		System.out.println(list_model);
 
 		list.setModel(list_model);
 		list.setBackground(Color.red);
+		list.setFocusable(false);
+		JScrollPane listScroll = new JScrollPane(list);		// make pokemon list scroll here
+		listScroll.setVisible(true);
+		this.add(listScroll);
+		//listScroll.setViewportView(list);
 		
 		
 		table = new JTable();
+		table.setFocusable(false);			// make table unselectable
+		table.setRowSelectionAllowed(false);
 		//this.add(table);
 		table_model = trainer.getBackpack();
 		System.out.println(trainer.getBackpack().toString());
 		table.setModel(table_model);
 		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setVisible(true);
 	    this.add(scrollPane); 
 	    RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table_model);
 	    table.setRowSorter(sorter);
 	    table.setMaximumSize(new Dimension(30, 30));
-	    table.setBackground(Color.blue);
-	    
-	    System.out.println("in the items");
+	    table.setBackground(Color.white);
 	   
 	}
 	
