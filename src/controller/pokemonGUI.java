@@ -472,7 +472,7 @@ public class pokemonGUI extends JFrame {
 				 */
 
 
-				if (trainer.getX() == 5) { // map change
+				/*if (trainer.getX() == 5) { // map change
 					if (trainer.getY() == 17 || trainer.getY() == 18) {
 						System.out.println("switch");
 						trainer.setMapNum(2);
@@ -489,7 +489,7 @@ public class pokemonGUI extends JFrame {
 						}
 					}
 				}
-
+*/
 				/*
 				 * if (trainer.getX() == 5) { // map change if (trainer.getY()
 				 * == 17 || trainer.getY() == 18) {
