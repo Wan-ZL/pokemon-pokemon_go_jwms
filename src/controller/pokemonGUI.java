@@ -187,6 +187,13 @@ public class pokemonGUI extends JFrame {
 		}
 
 	}
+	
+	// set up the music after a battle
+	public void setUpMusic() {
+		inMap = true;
+		inBattle = false;
+		setBGM();
+	}
 
 	private class MoveListener implements KeyListener {
 
