@@ -232,6 +232,7 @@ public class pokemonGUI extends JFrame {
 							trainer.setChangedMove(true);
 						} else if (theMap[y + 1][x] == "p") {
 							System.out.print("You find a safari ball!!");
+							trainer.getBackpack().addItem(new SafariBall(1));
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
 							trainer.getBackpack().addItem(new SafariBall(1));
