@@ -40,6 +40,7 @@ import model.Map;
 import model.Pokemon;
 import model.Trainer;
 import model.items.ItemType;
+import model.items.MaxPotion;
 import model.items.SafariBall;
 import view.BattleView;
 import view.ItemView;
@@ -350,10 +351,24 @@ public class pokemonGUI extends JFrame {
 							trainer.setChangedMove(true);
 							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
 							if(userInput == JOptionPane.YES_OPTION){
-								//TODO: do something and set the image back
+								if(Math.random() < 0.1){
+									JOptionPane.showMessageDialog(null, "YOU token 1000 damage");
+									trainer.takeDamage(1000);
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new SafariBall(1));
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new MaxPotion(1));
+								}
+								else{
+									JOptionPane.showMessageDialog(null, "Nothing");
+								}
 							}
 							else{
-								//TODO: set the image back
+								JOptionPane.showMessageDialog(null, "Smart! You may die if open the box");
 							}
 						}
 						else {
@@ -382,10 +397,24 @@ public class pokemonGUI extends JFrame {
 							trainer.setChangedMove(true);
 							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
 							if(userInput == JOptionPane.YES_OPTION){
-								//TODO: do something and set the image back
+								if(Math.random() < 0.1){
+									JOptionPane.showMessageDialog(null, "YOU token 1000 damage");
+									trainer.takeDamage(1000);
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new SafariBall(1));
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new MaxPotion(1));
+								}
+								else{
+									JOptionPane.showMessageDialog(null, "Nothing");
+								}
 							}
 							else{
-								//TODO: set the image back
+								JOptionPane.showMessageDialog(null, "Smart! You may die if open the box");
 							}
 						}
 						else {
@@ -415,10 +444,24 @@ public class pokemonGUI extends JFrame {
 							trainer.setChangedMove(true);
 							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
 							if(userInput == JOptionPane.YES_OPTION){
-								//TODO: do something and set the image back
+								if(Math.random() < 0.1){
+									JOptionPane.showMessageDialog(null, "YOU token 1000 damage");
+									trainer.takeDamage(1000);
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new SafariBall(1));
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new MaxPotion(1));
+								}
+								else{
+									JOptionPane.showMessageDialog(null, "Nothing");
+								}
 							}
 							else{
-								//TODO: set the image back
+								JOptionPane.showMessageDialog(null, "Smart! You may die if open the box");
 							}
 						}
 						else {
@@ -447,10 +490,24 @@ public class pokemonGUI extends JFrame {
 							trainer.setChangedMove(true);
 							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
 							if(userInput == JOptionPane.YES_OPTION){
-								//TODO: do something and set the image back
+								if(Math.random() < 0.1){
+									JOptionPane.showMessageDialog(null, "YOU token 1000 damage");
+									trainer.takeDamage(1000);
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new SafariBall(1));
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new MaxPotion(1));
+								}
+								else{
+									JOptionPane.showMessageDialog(null, "Nothing");
+								}
 							}
 							else{
-								//TODO: set the image back
+								JOptionPane.showMessageDialog(null, "Smart! You may die if open the box");
 							}
 						}  
 						else {
