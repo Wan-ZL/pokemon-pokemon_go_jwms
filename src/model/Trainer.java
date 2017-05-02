@@ -77,6 +77,10 @@ public class Trainer implements Serializable {
 		this.trainerPosition.setLocation(x, y);
 		step--;
 	}
+	
+	public boolean addItem(Item item){
+		return this.pack.addItem(item);
+	}
 
 	// ******
 	public boolean MoveChanged() {
