@@ -17,18 +17,24 @@ public class pokemonGO {
 	private static LoadingView loadingview;
 
 	public static void main(String[] args) {
-		setUpModel();
-		loadingview = new LoadingView();
+		//setUpModel();
+		beginWindow();
+		/*loadingview = new LoadingView();
 		loadingview.setBounds(0, 0, 1000, 570);
 		loadingview.setFocusable(false);
-		loadingview.setVisible(true);
-		pokemonGUI g = new pokemonGUI(trainer);
+		loadingview.setVisible(true);*/
+		/*pokemonGUI g = new pokemonGUI(trainer);
 		g.setFocusable(true);
 		g.requestFocusInWindow();
+		g.setVisible(true);*/
+	}
+	
+	private static void beginWindow(){
+		beginWindow g = new beginWindow();
 		g.setVisible(true);
 	}
 
-	private static void setUpModel() {
+	/*private static void setUpModel() {
 		int userInput = JOptionPane.showConfirmDialog(null, "Continue from a saved game?");
 		if (userInput == JOptionPane.YES_OPTION) {
 
@@ -69,5 +75,5 @@ public class pokemonGO {
 		}
 
 	}
-
+*/
 }

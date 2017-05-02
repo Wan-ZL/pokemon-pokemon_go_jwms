@@ -54,7 +54,7 @@ public class Trainer implements Serializable {
 		this.trainerPosition = new Point();
 
 		// initial position
-		this.trainerPosition.setLocation(15, 5);
+		this.trainerPosition.setLocation(15, 6);
 		this.positionChanged = false;
 		this.moved = false;
 		// this.addPokemon(new Paras()); // For testing
@@ -64,7 +64,7 @@ public class Trainer implements Serializable {
 	public static Trainer getTrainerInstance() { // create instance variable of
 													// trainer
 		if (thisTrainer == null) {
-			thisTrainer = new Trainer("default name");
+			thisTrainer = new Trainer("Ash");
 		}
 		return thisTrainer;
 	}
@@ -83,8 +83,10 @@ public class Trainer implements Serializable {
 		return this.moved;
 	}
 
+	@SuppressWarnings("null")
 	public void setName(String name) {
-		if (name != null) {
+		//System.out.println("name: " + name + ".");
+		if (name.compareTo("") != 0) {
 			this.name = name;
 		}
 	}
