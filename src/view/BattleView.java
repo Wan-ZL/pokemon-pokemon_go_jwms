@@ -268,8 +268,34 @@ public class BattleView extends JPanel{
 		}
 		else if (phase == 9) { // pokemon not caught
 			g2.drawImage(trainerBase, 0, 156, null);
-			if (count < 5) {
-				
+			if (count == 0) {
+				g2.drawImage(safariBall, (20*6), 60, null);
+			}
+			else if (count < 5) {
+				if (count % 2 == 0) {
+					g2.drawImage(safariBall, (20*6) + 10, 60, null);
+				} else {
+					g2.drawImage(safariBall, (20*6) - 10, 60, null);
+				}
+			}
+			else if (count == 5) {
+				g2.drawImage(encounter.getPokeImg(4), (20*6), 50, null);
+			}
+		}
+		else if (phase == 10) { // pokemon caught
+			g2.drawImage(trainerBase, 0, 156, null);
+			if (count == 0) {
+				g2.drawImage(safariBall, (20*6), 60, null);
+			}
+			else if (count < 5) {
+				if (count % 2 == 0) {
+					g2.drawImage(safariBall, (20*6) + 10, 60, null);
+				} else {
+					g2.drawImage(safariBall, (20*6) - 10, 60, null);
+				}
+			}
+			else if (count == 5) {
+				g2.drawImage(safariBall, (20*6), 60, null);
 			}
 		}
 	}
@@ -331,6 +357,11 @@ public class BattleView extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			
 			if (!drawing) { // disable button while drawing
+				if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
+					phase = 1;
+					endOfBattle();
+					mainFrame.outOfBalls();
+				}
 				trainer.useItem(ItemType.SAFARI_BALL);
 				//throw a safari ball first
 				phase = 4;
@@ -396,6 +427,16 @@ public class BattleView extends JPanel{
 		this.sound.play();
 	}
 	
+	// exit the battleview and set up the map view
+	private void endOfBattle() {
+		mainFrame.outOfBattle();
+		mainFrame.getBattleView().setVisible(false);
+		mainFrame.getMapView().setVisible(true);
+		mainFrame.mapSwitchUpdate();
+		mainFrame.setupItems();
+		mainFrame.setUpMusic();
+	}
+	
 	private class animationListener implements ActionListener {
 
 		@Override
@@ -411,31 +452,26 @@ public class BattleView extends JPanel{
 				}
 				else if (phase == 4) {
 					if(encounter.isCaught()){
-						mainFrame.outOfBattle();
-						mainFrame.getBattleView().setVisible(false);
-						mainFrame.getMapView().setVisible(true);
-						mainFrame.mapSwitchUpdate();
-						mainFrame.setupItems();
-						playSong(POKECAUGHT);
+						phase = 10;
 					} else {
-						phase = 1;
+						phase = 9;
 					}
 				}
 				else if (phase == 5) {
 					phase = 1;
-					mainFrame.outOfBattle();
-					mainFrame.getBattleView().setVisible(false);
-					mainFrame.getMapView().setVisible(true);
-					mainFrame.mapSwitchUpdate();
-					mainFrame.setupItems();
+					endOfBattle();
 				} 
 				else if (phase == 8) {
 					phase = 1;
-					mainFrame.outOfBattle();
-					mainFrame.getBattleView().setVisible(false);
-					mainFrame.getMapView().setVisible(true);
-					mainFrame.mapSwitchUpdate();
-					mainFrame.setupItems();
+					endOfBattle();
+				}
+				else if (phase == 9) {
+					phase = encounter.performPokeAction();
+				}
+				else if (phase == 10) {
+					phase = 1;
+					endOfBattle();
+					playSong(POKECAUGHT);
 				}
 				else {
 					phase = 1;

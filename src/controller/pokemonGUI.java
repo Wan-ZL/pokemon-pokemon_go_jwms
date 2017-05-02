@@ -187,6 +187,19 @@ public class pokemonGUI extends JFrame {
 		}
 
 	}
+	
+	// set up the music after a battle
+	public void setUpMusic() {
+		inMap = true;
+		inBattle = false;
+		setBGM();
+	}
+	
+	// if out of balls end the game
+	public void outOfBalls() {
+		JOptionPane.showMessageDialog(null,
+				"Out of safari balls! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!");
+	}
 
 	private class MoveListener implements KeyListener {
 
@@ -201,6 +214,8 @@ public class pokemonGUI extends JFrame {
 				if (trainer.getStep() <= 0) {
 					JOptionPane.showMessageDialog(null,
 							"Out of steps! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!");
+				} else if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
+					outOfBalls();
 				} else if (!trainer.MoveChanged()) {
 					if (trainer.getMapNum() == 1) { // map1
 						if (trainer.getX() == 40 && trainer.getY() == 15) { // right

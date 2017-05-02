@@ -33,7 +33,7 @@ public class Marowak extends Pokemon{
 	@Override
 	public int performAttack() {
 		// TODO Auto-generated method stub
-		return 32;
+		return 170;
 	}
 
 }

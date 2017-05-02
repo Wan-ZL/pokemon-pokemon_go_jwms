@@ -34,6 +34,7 @@ public class pokemonGO {
 		g.setVisible(true);
 	}
 
+	
 	/*private static void setUpModel() {
 		int userInput = JOptionPane.showConfirmDialog(null, "Continue from a saved game?");
 		if (userInput == JOptionPane.YES_OPTION) {

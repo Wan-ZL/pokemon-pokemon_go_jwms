@@ -60,13 +60,16 @@ public class ItemView extends JPanel implements Observer {
 
 		list.setModel(list_model);
 		list.setBackground(Color.red);
-		JScrollPane listScroll = new JScrollPane(list);
+		list.setFocusable(false);
+		JScrollPane listScroll = new JScrollPane(list);		// make pokemon list scroll here
 		listScroll.setVisible(true);
 		this.add(listScroll);
 		//listScroll.setViewportView(list);
 		
 		
 		table = new JTable();
+		table.setFocusable(false);			// make table unselectable
+		table.setRowSelectionAllowed(false);
 		//this.add(table);
 		table_model = trainer.getBackpack();
 		System.out.println(trainer.getBackpack().toString());
