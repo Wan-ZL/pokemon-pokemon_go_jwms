@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -39,6 +40,9 @@ public class ItemView extends JPanel implements Observer {
 		this.setLayout(new GridLayout(3, 1));
 		this.setBackground(Color.cyan);
 		this.trainer = trainer;
+		/*ImageIcon image = new ImageIcon("image/rsz_battle_bg.jpg");
+		JLabel label = new JLabel("", image, JLabel.CENTER);*/
+		//this.add(label);
 		text = new JPanel();
 		text.setLayout(new GridLayout(3, 1));
 		text.setBackground(Color.cyan);
@@ -74,9 +78,12 @@ public class ItemView extends JPanel implements Observer {
 	    table.setRowSorter(sorter);
 	    table.setMaximumSize(new Dimension(30, 30));
 	    table.setBackground(Color.blue);
-	    
 	    System.out.println("in the items");
-	   
+	    
+	}
+	
+	public void updateTable(){
+		table.updateUI();
 	}
 	
 	public void updateSteps() {

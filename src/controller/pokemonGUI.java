@@ -107,6 +107,7 @@ public class pokemonGUI extends JFrame {
 		currentView.updatePanel();
 		// battleview.updatePanel();
 		items.updateSteps();
+		items.updateTable();
 		// this.repaint();
 	}
 
@@ -215,59 +216,67 @@ public class pokemonGUI extends JFrame {
 						if (theMap[y + 1][x] == "t" || theMap[y + 1][x] == "a" || theMap[y + 1][x] == "w"
 								|| theMap[y + 1][x] == "i" || theMap[y + 1][x] == "_") {
 							System.out.print("can't move because of " + theMap[y + 1][x]);
-						}
-						// else if(theMap[x][y+1] == "n" || theMap[x][y+1] ==
-						// "s"){
-						// trainer.setPosition(x, y);
-						// }
-						/*
-						 * else if(theMap[y+1][x] == "w"){
-						 * System.out.print("Walk into water now");
-						 * trainer.setPosition(x, y+1);
-						 * trainer.setChangedMove(true); }
-						 */
-						else if (theMap[y + 1][x] == "g") {
+						} else if (theMap[y + 1][x] == "g") {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
 						} else if (theMap[y + 1][x] == "p") {
-							System.out.print("You find a safari ball!!");
-							trainer.getBackpack().addItem(new SafariBall(1));
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
+							System.out.print("You find a safari ball!!");
+							JOptionPane.showMessageDialog(null, "You find a safari ball!!");
 							trainer.getBackpack().addItem(new SafariBall(1));
-							// trainer.getBackpack().notify();
-							// TODO: need to set the map back to "g"
-
-						} else {
+							//update();
+						}else if (theMap[y + 1][x] == "r"){ 
+							trainer.setPosition(x, y+1);
+							trainer.setChangedMove(true);
+							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
+							if(userInput == JOptionPane.YES_OPTION){
+								//TODO: do something and set the image back
+							}
+							else{
+								//TODO: set the image back
+							}
+						}
+						else {
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
 						}
-					} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+					}
+
+					else if (e.getKeyCode() == KeyEvent.VK_UP) {
 						trainer.setTrainerDirection("up");
 						if (theMap[y - 1][x] == "t" || theMap[y - 1][x] == "a" || theMap[y - 1][x] == "w"
 								|| theMap[y - 1][x] == "i" || theMap[y - 1][x] == "_") {
 							System.out.print("can't move because of " + theMap[y - 1][x]);
-						}
-						// else if(theMap[x][y-1] == "n" || theMap[x][y-1] ==
-						// "s"){
-						// trainer.setPosition(x, y);
-						// }
-						/*
-						 * else if(theMap[y-1][x] == "w"){
-						 * System.out.print("Walk into water now");
-						 * trainer.setPosition(x, y-1);
-						 * trainer.setChangedMove(true); }
-						 */
-						else if (theMap[y - 1][x] == "g") {
+						} else if (theMap[y - 1][x] == "g") {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x, y - 1);
 							trainer.setChangedMove(true);
-						} else {
+						} else if (theMap[y - 1][x] == "p") {
+							trainer.setPosition(x, y - 1);
+							trainer.setChangedMove(true);
+							JOptionPane.showMessageDialog(null, "You find a safari ball!!");
+							trainer.getBackpack().addItem(new SafariBall(1));
+							//update();
+						}else if (theMap[y - 1][x] == "r"){ 
+							trainer.setPosition(x, y-1);
+							trainer.setChangedMove(true);
+							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
+							if(userInput == JOptionPane.YES_OPTION){
+								//TODO: do something and set the image back
+							}
+							else{
+								//TODO: set the image back
+							}
+						}
+						else {
 							trainer.setPosition(x, y - 1);
 							trainer.setChangedMove(true);
 						}
-					} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					}
+
+					else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 						trainer.setTrainerDirection("right");
 						if (theMap[y][x + 1] == "t" || theMap[y][x + 1] == "a" || theMap[y][x + 1] == "w"
 								|| theMap[y][x + 1] == "i" || theMap[y][x + 1] == "_") {
@@ -276,11 +285,31 @@ public class pokemonGUI extends JFrame {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x + 1, y);
 							trainer.setChangedMove(true);
-						} else {
+						} else if (theMap[y][x + 1] == "p") {
+							// System.out.print("Walk into grass now");
+							trainer.setPosition(x + 1, y);
+							trainer.setChangedMove(true);
+							JOptionPane.showMessageDialog(null, "You find a safari ball!!");
+							trainer.getBackpack().addItem(new SafariBall(1));
+							//update();
+						} else if (theMap[y][x + 1] == "r"){
+							trainer.setPosition(x + 1, y);
+							trainer.setChangedMove(true);
+							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
+							if(userInput == JOptionPane.YES_OPTION){
+								//TODO: do something and set the image back
+							}
+							else{
+								//TODO: set the image back
+							}
+						}
+						else {
 							trainer.setPosition(x + 1, y);
 							trainer.setChangedMove(true);
 						}
-					} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					}
+
+					else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 						trainer.setTrainerDirection("left");
 						if (theMap[y][x - 1] == "t" || theMap[y][x - 1] == "a" || theMap[y][x - 1] == "w"
 								|| theMap[y][x - 1] == "i" || theMap[y][x - 1] == "_") {
@@ -289,12 +318,28 @@ public class pokemonGUI extends JFrame {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x - 1, y);
 							trainer.setChangedMove(true);
-						} else {
+						} else if (theMap[y][x - 1] == "p") {
+							trainer.setPosition(x - 1, y);
+							trainer.setChangedMove(true);
+							JOptionPane.showMessageDialog(null, "You find a safari ball!!");
+							trainer.getBackpack().addItem(new SafariBall(1));
+							//update();
+						}else if (theMap[y][x - 1] == "r") {
+							trainer.setPosition(x - 1, y);
+							trainer.setChangedMove(true);
+							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
+							if(userInput == JOptionPane.YES_OPTION){
+								//TODO: do something and set the image back
+							}
+							else{
+								//TODO: set the image back
+							}
+						}  
+						else {
 							trainer.setPosition(x - 1, y);
 							trainer.setChangedMove(true);
 						}
 					}
-					// System.out.println(theMap[trainer.getY()][trainer.getX()]);
 					System.out.println("x is " + trainer.getX() + ", y is " + trainer.getY());
 					update();
 
@@ -306,11 +351,11 @@ public class pokemonGUI extends JFrame {
 							cp.remove(items);
 							//
 							cp.remove(currentView);
-							/*try{
-								Thread.sleep(200);
-							}catch(Exception e1){
-								
-							}*/
+							/*
+							 * try{ Thread.sleep(200); }catch(Exception e1){
+							 * 
+							 * }
+							 */
 							cp.add(battleview = new BattleView(trainer, mainFrame));
 							// playSong(BATTLESONG);
 							inMap = false;
@@ -340,15 +385,14 @@ public class pokemonGUI extends JFrame {
 				 * mapView.setVisible(false); redraw(); } }
 				 */
 
-				if (trainer.getX() == 5) {	// map change
+				if (trainer.getX() == 5) { // map change
 					if (trainer.getY() == 17 || trainer.getY() == 18) {
 						System.out.println("switch");
 						trainer.setMapNum(2);
 						trainer.setPosition(5, 27);
 						trainer.setTrainerDirection("right");
 						mapSwitchUpdate();
-					}
-					else{
+					} else {
 						if (trainer.getY() == 26 || trainer.getY() == 27) {
 							System.out.println("switch");
 							trainer.setMapNum(1);
