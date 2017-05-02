@@ -242,6 +242,7 @@ public class BattleView extends JPanel{
 			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
 		}
 		else if (phase == 6) { // pokemon attack
+			TrainerHealth.setText(trainer.getName() + ": " + trainer.getCurrHP() + "/" + trainer.getMaxHP());
 			if (count % 2 == 0) {
 				g2.drawImage(trainerBase, 0, 156, null);
 			} else {
