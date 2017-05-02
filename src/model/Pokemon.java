@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Image;
 import java.io.Serializable;
 import java.util.Random;
 
@@ -16,8 +17,9 @@ public abstract class Pokemon implements Serializable{
 	private Random rand = new Random();
 	private PokemonType type;
 	private PokemonRarity rarity;
-	private int hp, lvl, speed, damage, fleeChance, catchChance;
+	protected int hp, lvl, speed, damage, fleeChance, catchChance;
 	private boolean eatingBait;
+	private String[] pics;
 	
 	// super class constructor
 	public Pokemon(PokemonType type, int baseHP, int baseSpeed, PokemonRarity rarity) {
@@ -29,6 +31,21 @@ public abstract class Pokemon implements Serializable{
 		this.hp = baseHP + rand.nextInt(75) + (lvl*rand.nextInt(4));
 		this.fleeChance = 12 * this.rarity.getValue();
 		this.catchChance = 42 / this.rarity.getValue();
+	}
+	
+	// set all the pic pocations
+	public void setPics(String pic1, String pic2, String pic3, String pic4, String pic5) {
+		pics = new String[5];
+		this.pics[0] = pic1;
+		this.pics[1] = pic2;
+		this.pics[2] = pic3;
+		this.pics[3] = pic4;
+		this.pics[4] = pic5;
+	}
+	
+	// get a list of picture locations
+	public String getPic(int index) {
+		return pics[index];
 	}
 	
 	// returns the type of the Pokemon as a string
@@ -85,9 +102,22 @@ public abstract class Pokemon implements Serializable{
 			return false;
 	}
 	
+	// check if the Pokemon flees
+	public boolean catchCheck() {
+		if (rand.nextInt(100) < catchChance) 
+			return true;
+		else
+			return false;
+	}
+	
 	// returns true if the pokemon is eating
 	public boolean isEating() {
 		return eatingBait;
+	}
+	
+	// Set eatingBait
+	public void setEating(Boolean eating) {
+		eatingBait = eating;
 	}
 	
 	// Take damage
@@ -117,6 +147,7 @@ public abstract class Pokemon implements Serializable{
 	// Choose an action 
 	public Action chooseAction() {
 		if (isEating()) {
+			eatingBait = false;
 			return Action.EAT;
 		} else if (fleeCheck()) {
 			return Action.RUN_AWAY_SUCCED;
@@ -126,7 +157,7 @@ public abstract class Pokemon implements Serializable{
 	}
 	
 	// Choose an attack to use
-	public abstract void chooseAttack();
+	public abstract int performAttack();
 	
 	
 	

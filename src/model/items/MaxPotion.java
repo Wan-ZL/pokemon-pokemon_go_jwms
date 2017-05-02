@@ -6,10 +6,5 @@ public class MaxPotion extends Item{
 		super(ItemType.MAX_POTION, 75, amt);
 	}
 
-	@Override
-	public void useItem() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

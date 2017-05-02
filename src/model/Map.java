@@ -16,7 +16,7 @@ public class Map implements Serializable{								// this class store the two map
 		MapCreater creater = new MapCreater();
 		map1 = creater.getMap1();
 		map2 = creater.getMap2();
-		map2 = creater.getMap3();
+		map3 = creater.getMap3();
 	}
 	
 	public String[][] getMap(int i){		// return the whole map

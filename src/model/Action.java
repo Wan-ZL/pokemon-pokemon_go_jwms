@@ -2,7 +2,7 @@ package model;
 
 public enum Action {
 
-	EAT(0), RUN_AWAY_FAIL(1), RUN_AWAY_SUCCED(2), ATTACK(3), THROW_ROCK(4),
+	EAT(7), RUN_AWAY_FAIL(12), RUN_AWAY_SUCCED(8), ATTACK(6), THROW_ROCK(4),
 	THROW_BAIT(5), THROW_POKEBALL(6), NONE(-1);
 	
 	private int value;
@@ -17,7 +17,7 @@ public enum Action {
 	}
 	
 	// Get a string describing the action
-	public String toString() {
+	/*public String toString() {
 		if (value == 0) {
 			return "is eating!";
 		} else if (value == 1) {
@@ -37,5 +37,5 @@ public enum Action {
 		}
 		
 		
-	}
+	}*/
 }

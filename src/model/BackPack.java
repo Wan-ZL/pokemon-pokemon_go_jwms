@@ -28,8 +28,8 @@ public class BackPack implements Serializable, TableModel{
 	// Add an item to the pack
 	public boolean addItem(Item item) {
 		if (hasSpace(item.getAmount())) {
-			if (pack.contains(item)) {
-				pack.get(pack.indexOf(item)).addAmount(item.getAmount());
+			if (checkItem(item.getType())) {
+				pack.get(indexOf(item.getType())).addAmount(item.getAmount());
 			} else {
 				pack.add(item);
 			}
@@ -38,6 +38,18 @@ public class BackPack implements Serializable, TableModel{
 		} else {
 			return false;
 		}
+	}
+	
+	public int getSize(){
+		return currAmt;
+	}
+	private boolean checkItem(ItemType type){
+		for(int i = 0 ; i < pack.size() ; i++){
+			if(pack.get(i).getType().equals(type)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	// Discards the given amount of an item
@@ -59,7 +71,7 @@ public class BackPack implements Serializable, TableModel{
 	// Return the index of the item in the pack
 	private int indexOf(ItemType type) {
 		for (int i = 0; i < pack.size(); i++) {
-			if (pack.get(i).getType() == type) {
+			if (pack.get(i).getType().equals(type)) {
 				return i;
 			}
 		}
@@ -73,7 +85,12 @@ public class BackPack implements Serializable, TableModel{
 	
 	// Use an item from the pack. (remove the item from pack)
 	public void useItem(ItemType type) {
-		this.pack.remove(type);
+	for(Item item : this.pack){
+		if(item.getType().equals(type)){
+			item.useItem();
+			return;
+		}
+	}
 	}
 	
 	// return the Item at index

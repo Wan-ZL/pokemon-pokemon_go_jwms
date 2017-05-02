@@ -28,7 +28,7 @@ public class MapView extends JPanel{
 	private int trainerX;
 	private int trainerY;
 	//Images
-	private Image grass, RoadOne, RoadTwo, sand, water, tree, sign, RoughRoad, Rock, stairs, emptySquare;
+	private Image grass, pokeball,RoadOne, RoadTwo, sand, water, tree, sign, RoughRoad, Rock, stairs, emptySquare;
 	private BufferedImage trainerImg, forward, backward, left, right, forward_walking_left, forward_walking_right,
 			backward_walking_left, backward_walking_right, left_walking_left, left_walking_right, right_walking_left,
 			right_walking_right;
@@ -65,7 +65,7 @@ public class MapView extends JPanel{
 			Rock = ImageIO.read(new File("image/Rock.png"));
 			stairs = ImageIO.read(new File("image/Stair.png"));
 			emptySquare = ImageIO.read(new File("image/black.square.jpg"));
-
+			pokeball = ImageIO.read(new File("image/pokeballsmallnew.png"));
 			trainerImg = ImageIO.read(new File("image/TrainerMove.png"));
 
 			forward = trainerImg.getSubimage(0, 64, spriteSize, spriteSize);
@@ -153,6 +153,8 @@ public class MapView extends JPanel{
 					g2.drawImage(RoughRoad, c * 20, r * 20, null);
 				} else if (loc.equals("_")) {
 					g2.drawImage(emptySquare, c * 20, r * 20, null);
+				}else if (loc.equals("p")) {
+					g2.drawImage(pokeball, c * 20, r * 20, null);
 				}
 			}
 		}

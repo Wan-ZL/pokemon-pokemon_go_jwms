@@ -6,10 +6,6 @@ public class Nugget extends Item{
 		super(ItemType.NUGGET, 300, amt);
 	}
 
-	@Override
-	public void useItem() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

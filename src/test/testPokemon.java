@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import model.Action;
 import model.Pokemon;
 import model.pokemon.Dragonair;
 import model.pokemon.Dratini;
@@ -11,11 +12,11 @@ import model.pokemon.Exeggcute;
 import model.pokemon.Marowak;
 import model.pokemon.Mewtwo;
 import model.pokemon.Paras;
-import model.pokemon.Parasect;
+import model.pokemon.Primeape;
 import model.pokemon.Pinsir;
 import model.pokemon.PokemonRarity;
 import model.pokemon.PokemonType;
-import model.pokemon.Poliwag;
+import model.pokemon.Pikachu;
 import model.pokemon.Tauros;
 
 public class testPokemon {
@@ -26,23 +27,24 @@ public class testPokemon {
 	Pokemon marowak = new Marowak();
 	Pokemon mewtwo = new Mewtwo();
 	Pokemon paras = new Paras();
-	Pokemon parasect = new Parasect();
+	Pokemon parasect = new Primeape();
 	Pokemon pinsir = new Pinsir();
-	Pokemon poliwag = new Poliwag();
+	Pokemon poliwag = new Pikachu();
 	Pokemon tauros = new Tauros();
 	
 	@Test
 	public void testMakePokemon() {
-		assertEquals(PokemonType.Dragonair.toString(), dragonair.getName());
-		assertEquals(PokemonType.Dratini.toString(), dratini.getName());
-		assertEquals(PokemonType.Exeggcute.toString(), exeggcute.getName());
-		assertEquals(PokemonType.Marowak.toString(), marowak.getName());
-		assertEquals(PokemonType.Mewtwo.toString(), mewtwo.getName());
-		assertEquals(PokemonType.Paras.toString(), paras.getName());
-		assertEquals(PokemonType.Parasect.toString(), parasect.getName());
-		assertEquals(PokemonType.Pinsir.toString(), pinsir.getName());
-		assertEquals(PokemonType.Poliwag.toString(), poliwag.getName());
-		assertEquals(PokemonType.Tauros.toString(), tauros.getName());
+		assertEquals(PokemonType.DRAGONAIR.toString(), dragonair.getName());
+		//System.out.println(PokemonType.DRAGONAIR.toString());
+		assertEquals(PokemonType.DRATINI.toString(), dratini.getName());
+		assertEquals(PokemonType.EXEGGCUTE.toString(), exeggcute.getName());
+		assertEquals(PokemonType.MAROWAK.toString(), marowak.getName());
+		assertEquals(PokemonType.MEWTWO.toString(), mewtwo.getName());
+		assertEquals(PokemonType.PARAS.toString(), paras.getName());
+		assertEquals(PokemonType.PRIMEAPE.toString(), parasect.getName());
+		assertEquals(PokemonType.PINSIR.toString(), pinsir.getName());
+		assertEquals(PokemonType.PIKACHU.toString(), poliwag.getName());
+		assertEquals(PokemonType.TAUROS.toString(), tauros.getName());
 	}
 	
 	@Test
@@ -89,6 +91,46 @@ public class testPokemon {
 		dratini.changeFleeChance(76);
 		assertEquals(100, dratini.getFleeChance());
 		assertTrue(dratini.fleeCheck());
+		
+		dratini.changeFleeChance(-100);
+		assertEquals(0, dratini.getFleeChance());
+		assertFalse(dratini.fleeCheck());
+	}
+	
+	@Test
+	public void testCatch() {
+		assertEquals(42, dratini.getCatchChance());
+		assertEquals(21, dragonair.getCatchChance());
+		assertEquals(14, mewtwo.getCatchChance());
+		
+		dratini.changeCatchChance(8);
+		assertEquals(50, dratini.getCatchChance());
+		
+		dratini.changeCatchChance(50);
+		assertEquals(100, dratini.getCatchChance());
+		assertTrue(dratini.catchCheck());
+		
+		dratini.changeCatchChance(-100);
+		assertEquals(0, dratini.getCatchChance());
+		assertFalse(dratini.catchCheck());
+	}
+	
+	@Test
+	public void testEatingOrAction() {
+		assertFalse(tauros.isEating());
+		tauros.setEating(true);
+		assertTrue(tauros.isEating());
+		tauros.HitByRock();
+		assertFalse(tauros.isEating());
+		tauros.eatBait();
+		assertTrue(tauros.isEating());
+		assertEquals(Action.EAT, tauros.chooseAction());
+		
+		dratini.changeFleeChance(-12);
+		assertEquals(0, dratini.getFleeChance());
+		assertEquals(Action.ATTACK, dratini.chooseAction());
+		dratini.changeFleeChance(100);
+		assertEquals(Action.RUN_AWAY_SUCCED, dratini.chooseAction());
 	}
 
 }
