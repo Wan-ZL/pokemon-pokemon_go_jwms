@@ -69,6 +69,7 @@ public class BattleView extends JPanel{
 	private JTextArea PokemonHealth;
 	private boolean drawing;
 	private Image trainerBase, trainerDamage, trThrow[], safariBall, rock, bait;
+	private Image burst1, burst2;
 	
 	private MediaPlayer sound;
 	//Sound for run away
@@ -89,7 +90,7 @@ public class BattleView extends JPanel{
 	private pokemonGUI mainFrame;
 	public BattleView(Trainer trainer, pokemonGUI mainFrame) {
 		drawing = false;
-		phase = 0;
+		phase = 11;
 		count = 0;
 		JFXPanel fxPanel = new JFXPanel();
 		this.mainFrame = mainFrame;
@@ -156,6 +157,8 @@ public class BattleView extends JPanel{
 			safariBall = ImageIO.read(new File("image/TrainerSprites/safari-ball.png"));
 			rock       = ImageIO.read(new File("image/TrainerSprites/rock.png"));
 			bait       = ImageIO.read(new File("image/TrainerSprites/bait.png"));
+			burst1     = ImageIO.read(new File("image/burst-1.jpg"));
+			burst2     = ImageIO.read(new File("image/burst-2.jpg"));
 		} catch (IOException e1) {
 			System.out.println("Cannot find the image file.");
 			e1.printStackTrace();
@@ -188,9 +191,16 @@ public class BattleView extends JPanel{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
-		g2.drawImage(background, 0, 0, 215, 220, null);
-		
-		if (phase == 0) { // Intro animations
+		if (phase == 11) {
+			if (count % 2 == 0) {
+				g2.drawImage(burst1, 0, 0, 215, 220, null);
+			} else {
+				g2.drawImage(burst2, 0, 0, 215, 220, null);
+			}
+			
+		}
+		else if (phase == 0) { // Intro animations
+			g2.drawImage(background, 0, 0, 215, 220, null);
 			if (count < 5) {
 				g2.drawImage(encounter.getPokeImg(count), 20*6, 50, null);
 				g2.drawImage(trainerBase, count*10-50, 156, null);
@@ -200,10 +210,12 @@ public class BattleView extends JPanel{
 			}
 		}
 		else if (phase == 1) { // still animations
+			g2.drawImage(background, 0, 0, 215, 220, null);
 			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
 			g2.drawImage(trainerBase, 0, 156, null);
 		}
 		else if (phase == 2) { // throw rock 
+			g2.drawImage(background, 0, 0, 215, 220, null);
 			if (count < 4) {
 				if (count > 0) {
 					g2.drawImage(rock, 8 + (50*(count-1)), 156 - (40*(count-1)), null);
@@ -216,6 +228,7 @@ public class BattleView extends JPanel{
 			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
 		}
 		else if (phase == 3) { // throw bait
+			g2.drawImage(background, 0, 0, 215, 220, null);
 			if (count < 4) {
 				if (count > 0) {
 					g2.drawImage(bait, 8 + (50*(count-1)), 156 - (40*(count-1)), null);
@@ -227,6 +240,7 @@ public class BattleView extends JPanel{
 			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);	
 		}
 		else if (phase == 4) { // throw safari ball
+			g2.drawImage(background, 0, 0, 215, 220, null);
 			if (count < 4) {
 				if (count > 0) {
 					g2.drawImage(safariBall, 8 + (50*(count-1)), 156 - (40*(count-1)), null);
@@ -238,10 +252,13 @@ public class BattleView extends JPanel{
 			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);	
 		}
 		else if (phase == 5) { // Trainer run away
+			g2.drawImage(background, 0, 0, 215, 220, null);
 			g2.drawImage(trainerBase, 0 - (count*10), 156, null);
 			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
 		}
 		else if (phase == 6) { // pokemon attack
+			g2.drawImage(background, 0, 0, 215, 220, null);
+			TrainerHealth.setText(trainer.getName() + ": " + trainer.getCurrHP() + "/" + trainer.getMaxHP());
 			if (count % 2 == 0) {
 				g2.drawImage(trainerBase, 0, 156, null);
 			} else {
@@ -255,6 +272,7 @@ public class BattleView extends JPanel{
 			}
 		}
 		else if (phase == 7) { // pokemon eat
+			g2.drawImage(background, 0, 0, 215, 220, null);
 			g2.drawImage(trainerBase, 0, 156, null);
 			if (count % 2 == 0) {
 				g2.drawImage(encounter.getPokeImg(4), 20*6, 60, null);
@@ -263,10 +281,12 @@ public class BattleView extends JPanel{
 			}
 		}
 		else if (phase == 8) { // pokemon run
+			g2.drawImage(background, 0, 0, 215, 220, null);
 			g2.drawImage(trainerBase, 0, 156, null);
 			g2.drawImage(encounter.getPokeImg(4), (20*6) + (count*20), 60, null);
 		}
 		else if (phase == 9) { // pokemon not caught
+			g2.drawImage(background, 0, 0, 215, 220, null);
 			g2.drawImage(trainerBase, 0, 156, null);
 			if (count == 0) {
 				g2.drawImage(safariBall, (20*6), 60, null);
@@ -283,6 +303,7 @@ public class BattleView extends JPanel{
 			}
 		}
 		else if (phase == 10) { // pokemon caught
+			g2.drawImage(background, 0, 0, 215, 220, null);
 			g2.drawImage(trainerBase, 0, 156, null);
 			if (count == 0) {
 				g2.drawImage(safariBall, (20*6), 60, null);
@@ -347,7 +368,6 @@ public class BattleView extends JPanel{
 			}
 			
 		}
-
 	}
 	
 	//Listener for throw a safari ball
@@ -367,16 +387,17 @@ public class BattleView extends JPanel{
 				phase = 4;
 				timer.start();
 				playSong(THROWBALL);
-				
-//				//TODO: check if pokemon is caught
-//				if(encounter.isCaught()){
-//					mainFrame.outOfBattle();
-//					mainFrame.getBattleView().setVisible(false);
-//					mainFrame.getMapView().setVisible(true);
-//					mainFrame.mapSwitchUpdate();
-//					mainFrame.setupItems();
-//					playSong(POKECAUGHT);
-//				}
+
+				//TODO: check if pokemon is caught
+				if(encounter.isCaught()){
+					mainFrame.outOfBattle();
+					mainFrame.getBattleView().setVisible(false);
+					mainFrame.getMapView().setVisible(true);
+					mainFrame.mapSwitchUpdate();
+					mainFrame.setupItems();
+					playSong(POKECAUGHT);
+				}
+
 			}
 			
 			
@@ -447,7 +468,10 @@ public class BattleView extends JPanel{
 				repaint();
 				count++;
 			} else {
-				if (phase == 2 || phase == 3) {
+				if (phase == 11) {
+					phase = 0;
+				}
+				else if (phase == 2 || phase == 3) {
 					phase = encounter.performPokeAction();
 				}
 				else if (phase == 4) {
@@ -479,7 +503,7 @@ public class BattleView extends JPanel{
 				repaint();
 				count = 0;
 				timer.stop();
-				if (phase > 5) {
+				if (phase > 5 || phase == 0) {
 					timer.start();
 				}
 				drawing = false;
