@@ -33,7 +33,7 @@ public class Pinsir extends Pokemon{
 	@Override
 	public int performAttack() {
 		// TODO Auto-generated method stub
-		return 43;
+		return 160;
 	}
 
 }

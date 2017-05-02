@@ -24,7 +24,7 @@ public class Mewtwo extends Pokemon{
 	public void HitByRock() {
 		changeFleeChance(13);
 		changeCatchChance(12);
-		takeDamage(10);
+		takeDamage(25);
 		setEating(false);
 		// TODO Auto-generated method stub
 		
@@ -33,7 +33,7 @@ public class Mewtwo extends Pokemon{
 	@Override
 	public int performAttack() {
 		// TODO Auto-generated method stub
-		return 100;
+		return 250;
 	}
 
 }
