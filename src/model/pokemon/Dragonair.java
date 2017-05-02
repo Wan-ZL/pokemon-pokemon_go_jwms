@@ -32,7 +32,7 @@ public class Dragonair extends Pokemon{
 
 	@Override
 	public int performAttack() {
-		return 50;
+		return 150;
 		
 	}
 
