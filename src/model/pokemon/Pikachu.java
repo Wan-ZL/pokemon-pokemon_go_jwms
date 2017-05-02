@@ -6,13 +6,15 @@ public class Pikachu extends Pokemon{
 
 	public Pikachu() {
 		super(PokemonType.PIKACHU, 200, 25, PokemonRarity.COMMON);
-		// TODO Auto-generated constructor stub
+		this.setPics("image/PokemonSprites/pikachu-1.png", "image/PokemonSprites/pikachu-2.png", 
+				"image/PokemonSprites/pikachu-3.png", "image/PokemonSprites/pikachu-4.png", 
+				"image/PokemonSprites/pikachu-5.png");
 	}
 
 	@Override
 	public void eatBait() {
-		changeFleeChance(15);
-		changeCatchChance(20);
+		changeFleeChance(-15);
+		changeCatchChance(-12);
 		setEating(true);
 		// TODO Auto-generated method stub
 		
@@ -20,8 +22,8 @@ public class Pikachu extends Pokemon{
 
 	@Override
 	public void HitByRock() {
-		changeFleeChance(-20);
-		changeCatchChance(-15);
+		changeFleeChance(14);
+		changeCatchChance(21);
 		takeDamage(20);
 		setEating(false);
 		// TODO Auto-generated method stub
@@ -29,9 +31,9 @@ public class Pikachu extends Pokemon{
 	}
 
 	@Override
-	public void chooseAttack() {
+	public int performAttack() {
 		// TODO Auto-generated method stub
-		
+		return 25;
 	}
 
 }
