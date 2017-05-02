@@ -13,8 +13,8 @@ public class Dragonair extends Pokemon{
 
 	@Override
 	public void eatBait() {
-		changeFleeChance(15);
-		changeCatchChance(20);
+		changeFleeChance(-18);
+		changeCatchChance(-12);
 		setEating(true);
 		// TODO Auto-generated method stub
 		
@@ -22,17 +22,17 @@ public class Dragonair extends Pokemon{
 
 	@Override
 	public void HitByRock() {
-		changeFleeChance(-20);
-		changeCatchChance(-15);
-		takeDamage(20);
+		changeFleeChance(13);
+		changeCatchChance(16);
+		takeDamage(15);
 		setEating(false);
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void chooseAttack() {
-		// TODO Auto-generated method stub
+	public int performAttack() {
+		return 50;
 		
 	}
 

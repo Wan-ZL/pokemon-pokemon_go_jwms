@@ -13,8 +13,8 @@ public class Pinsir extends Pokemon{
 
 	@Override
 	public void eatBait() {
-		changeFleeChance(15);
-		changeCatchChance(20);
+		changeFleeChance(-23);
+		changeCatchChance(-14);
 		setEating(true);
 		// TODO Auto-generated method stub
 		
@@ -22,18 +22,18 @@ public class Pinsir extends Pokemon{
 
 	@Override
 	public void HitByRock() {
-		changeFleeChance(-20);
-		changeCatchChance(-15);
-		takeDamage(20);
+		changeFleeChance(13);
+		changeCatchChance(17);
+		takeDamage(18);
 		setEating(false);
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void chooseAttack() {
+	public int performAttack() {
 		// TODO Auto-generated method stub
-		
+		return 43;
 	}
 
 }

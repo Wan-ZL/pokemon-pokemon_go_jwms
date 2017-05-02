@@ -147,6 +147,7 @@ public abstract class Pokemon implements Serializable{
 	// Choose an action 
 	public Action chooseAction() {
 		if (isEating()) {
+			eatingBait = false;
 			return Action.EAT;
 		} else if (fleeCheck()) {
 			return Action.RUN_AWAY_SUCCED;
@@ -156,7 +157,7 @@ public abstract class Pokemon implements Serializable{
 	}
 	
 	// Choose an attack to use
-	public abstract void chooseAttack();
+	public abstract int performAttack();
 	
 	
 	

@@ -68,7 +68,7 @@ public class BattleView extends JPanel{
 	private JTextArea TrainerHealth;
 	private JTextArea PokemonHealth;
 	private boolean drawing;
-	private Image trainerBase, tr1, tr2, tr3, tr4, safariBall;
+	private Image trainerBase, trainerDamage, trThrow[], safariBall, rock, bait;
 	
 	private MediaPlayer sound;
 	//Sound for run away
@@ -144,14 +144,18 @@ public class BattleView extends JPanel{
 		throwARock.addActionListener(new ThrowARocklListener());
 		throwASafariBall.addActionListener(new ThrowASafariBallListener());
 		ThrowABait.addActionListener(new ThrowBaitListener());
+		trThrow = new Image[4];
 		
 		try {
 			trainerBase = ImageIO.read(new File("image/TrainerSprites/trainer-base.png"));
-			tr1 = ImageIO.read(new File("image/TrainerSprites/trainer-1.png"));
-			tr2 = ImageIO.read(new File("image/TrainerSprites/trainer-2.png"));
-			tr3 = ImageIO.read(new File("image/TrainerSprites/trainer-3.png"));
-			tr4 = ImageIO.read(new File("image/TrainerSprites/trainer-4.png"));
+			trainerDamage = ImageIO.read(new File("image/TrainerSprites/trainer-damage.png"));
+			trThrow[0] = ImageIO.read(new File("image/TrainerSprites/trainer-1.png"));
+			trThrow[1] = ImageIO.read(new File("image/TrainerSprites/trainer-2.png"));
+			trThrow[2] = ImageIO.read(new File("image/TrainerSprites/trainer-3.png"));
+			trThrow[3] = ImageIO.read(new File("image/TrainerSprites/trainer-4.png"));
 			safariBall = ImageIO.read(new File("image/TrainerSprites/safari-ball.png"));
+			rock       = ImageIO.read(new File("image/TrainerSprites/rock.png"));
+			bait       = ImageIO.read(new File("image/TrainerSprites/bait.png"));
 		} catch (IOException e1) {
 			System.out.println("Cannot find the image file.");
 			e1.printStackTrace();
@@ -187,15 +191,112 @@ public class BattleView extends JPanel{
 		g2.drawImage(background, 0, 0, 215, 220, null);
 		
 		if (phase == 0) { // Intro animations
-			g2.drawImage(encounter.getPokeImg(count), 20*6, 50, null);
-			g2.drawImage(trainerBase, count*10-50, 156, null);
+			if (count < 5) {
+				g2.drawImage(encounter.getPokeImg(count), 20*6, 50, null);
+				g2.drawImage(trainerBase, count*10-50, 156, null);
+			} else {
+				g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+				g2.drawImage(trainerBase, 0, 156, null);
+			}
 		}
 		else if (phase == 1) { // still animations
 			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
 			g2.drawImage(trainerBase, 0, 156, null);
 		}
-		else if (phase == 2) {
+		else if (phase == 2) { // throw rock 
+			if (count < 4) {
+				if (count > 0) {
+					g2.drawImage(rock, 8 + (50*(count-1)), 156 - (40*(count-1)), null);
+				}
+				g2.drawImage(trThrow[count], 0, 156, null);
+			} else {
+				g2.drawImage(trThrow[3], 0, 156, null);
+				PokemonHealth.setText(" " +encounter.getPokemonName() + ": " +encounter.getPokemonHP());
+			}
+			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+		}
+		else if (phase == 3) { // throw bait
+			if (count < 4) {
+				if (count > 0) {
+					g2.drawImage(bait, 8 + (50*(count-1)), 156 - (40*(count-1)), null);
+				}
+				g2.drawImage(trThrow[count], 0, 156, null);
+			} else {
+				g2.drawImage(trThrow[3], 0, 156, null);
+			}
+			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);	
+		}
+		else if (phase == 4) { // throw safari ball
+			if (count < 4) {
+				if (count > 0) {
+					g2.drawImage(safariBall, 8 + (50*(count-1)), 156 - (40*(count-1)), null);
+				}
+				g2.drawImage(trThrow[count], 0, 156, null);
+			} else {
+				g2.drawImage(trThrow[3], 0, 156, null);
+			}
+			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);	
+		}
+		else if (phase == 5) { // Trainer run away
+			g2.drawImage(trainerBase, 0 - (count*10), 156, null);
+			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+		}
+		else if (phase == 6) { // pokemon attack
+			if (count % 2 == 0) {
+				g2.drawImage(trainerBase, 0, 156, null);
+			} else {
+				g2.drawImage(trainerDamage, 0, 156, null);
+			}
 			
+			if (count < 5) {
+				g2.drawImage(encounter.getPokeImg(count), 20*6, 50, null);
+			} else {
+				g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+			}
+		}
+		else if (phase == 7) { // pokemon eat
+			g2.drawImage(trainerBase, 0, 156, null);
+			if (count % 2 == 0) {
+				g2.drawImage(encounter.getPokeImg(4), 20*6, 60, null);
+			} else {
+				g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+			}
+		}
+		else if (phase == 8) { // pokemon run
+			g2.drawImage(trainerBase, 0, 156, null);
+			g2.drawImage(encounter.getPokeImg(4), (20*6) + (count*20), 60, null);
+		}
+		else if (phase == 9) { // pokemon not caught
+			g2.drawImage(trainerBase, 0, 156, null);
+			if (count == 0) {
+				g2.drawImage(safariBall, (20*6), 60, null);
+			}
+			else if (count < 5) {
+				if (count % 2 == 0) {
+					g2.drawImage(safariBall, (20*6) + 10, 60, null);
+				} else {
+					g2.drawImage(safariBall, (20*6) - 10, 60, null);
+				}
+			}
+			else if (count == 5) {
+				g2.drawImage(encounter.getPokeImg(4), (20*6), 50, null);
+			}
+		}
+		else if (phase == 10) { // pokemon caught
+			g2.drawImage(trainerBase, 0, 156, null);
+			if (count == 0) {
+				g2.drawImage(safariBall, (20*6), 60, null);
+			}
+			else if (count < 5) {
+				if (count % 2 == 0) {
+					g2.drawImage(safariBall, (20*6) + 10, 60, null);
+				} else {
+					g2.drawImage(safariBall, (20*6) - 10, 60, null);
+				}
+			}
+			else if (count == 5) {
+				g2.drawImage(safariBall, (20*6), 60, null);
+			}
 		}
 	}
 
@@ -241,11 +342,8 @@ public class BattleView extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			if (!drawing) { // disable button while drawing
 				playSong(RUNAWAY);
-				mainFrame.outOfBattle();
-				mainFrame.getBattleView().setVisible(false);
-				mainFrame.getMapView().setVisible(true);
-				mainFrame.mapSwitchUpdate();
-				mainFrame.setupItems();
+				phase = 5;
+				timer.start();
 			}
 			
 		}
@@ -260,7 +358,10 @@ public class BattleView extends JPanel{
 			if (!drawing) { // disable button while drawing
 				trainer.useItem(ItemType.SAFARI_BALL);
 				//throw a safari ball first
+				phase = 4;
+				timer.start();
 				playSong(THROWBALL);
+
 				//TODO: check if pokemon is caught
 				if(encounter.isCaught()){
 					mainFrame.outOfBattle();
@@ -270,6 +371,7 @@ public class BattleView extends JPanel{
 					mainFrame.setupItems();
 					playSong(POKECAUGHT);
 				}
+
 			}
 			
 			
@@ -283,6 +385,9 @@ public class BattleView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!drawing) { // disable button while drawing
+				phase = 2;
+				timer.start();
+				encounter.throwRock();
 				trainer.useItem(ItemType.ROCK);
 				playSong(THROWROCK);
 			}
@@ -296,6 +401,9 @@ public class BattleView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!drawing) { // disable button while drawing
+				phase = 3;
+				timer.start();
+				encounter.throwBait();
 				trainer.useItem(ItemType.BAIT);
 				playSong(THROWBAIT);
 			}
@@ -314,21 +422,63 @@ public class BattleView extends JPanel{
 		this.sound.play();
 	}
 	
+	// exit the battleview and set up the map view
+	private void endOfBattle() {
+		mainFrame.outOfBattle();
+		mainFrame.getBattleView().setVisible(false);
+		mainFrame.getMapView().setVisible(true);
+		mainFrame.mapSwitchUpdate();
+		mainFrame.setupItems();
+		mainFrame.setUpMusic();
+	}
+	
 	private class animationListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
 			drawing = true;
-			if (count < 4) {
+			if (count < 5) {
 				repaint();
 				count++;
 			} else {
-				phase = 1;
+				if (phase == 2 || phase == 3) {
+					phase = encounter.performPokeAction();
+				}
+				else if (phase == 4) {
+					if(encounter.isCaught()){
+						phase = 10;
+					} else {
+						phase = 9;
+					}
+				}
+				else if (phase == 5) {
+					phase = 1;
+					endOfBattle();
+				} 
+				else if (phase == 8) {
+					phase = 1;
+					endOfBattle();
+				}
+				else if (phase == 9) {
+					phase = encounter.performPokeAction();
+				}
+				else if (phase == 10) {
+					phase = 1;
+					endOfBattle();
+					playSong(POKECAUGHT);
+				}
+				else {
+					phase = 1;
+				}
 				repaint();
 				count = 0;
 				timer.stop();
+				if (phase > 5) {
+					timer.start();
+				}
 				drawing = false;
+				
 			}
 			
 		}

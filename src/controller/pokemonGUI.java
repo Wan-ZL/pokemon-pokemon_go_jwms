@@ -188,6 +188,13 @@ public class pokemonGUI extends JFrame {
 		}
 
 	}
+	
+	// set up the music after a battle
+	public void setUpMusic() {
+		inMap = true;
+		inBattle = false;
+		setBGM();
+	}
 
 	private class MoveListener implements KeyListener {
 
@@ -203,6 +210,73 @@ public class pokemonGUI extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"Out of steps! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!");
 				} else if (!trainer.MoveChanged()) {
+					if (trainer.getMapNum() == 1) { // map1
+						if (trainer.getX() == 40 && trainer.getY() == 15) { // right
+																			// entrance
+
+							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+								System.out.println("switch");
+								trainer.setMapNum(2);
+								trainer.setPosition(5, 26);
+								mapSwitchUpdate();
+							}
+						} else if (trainer.getX() == 40 && trainer.getY() == 16) { // right
+																					// entrance
+							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+								System.out.println("switch");
+								trainer.setMapNum(2);
+								trainer.setPosition(5, 27);
+								mapSwitchUpdate();
+							}
+						} else if (trainer.getX() == 5 && trainer.getY() == 17) {	// left entrance
+							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+								System.out.println("switch");
+								trainer.setMapNum(2);
+								trainer.setPosition(40, 14);
+								mapSwitchUpdate();
+							}
+						} else if (trainer.getX() == 5 && trainer.getY() == 18) {	// left entrance
+							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+								System.out.println("switch");
+								trainer.setMapNum(2);
+								trainer.setPosition(40, 15);
+								mapSwitchUpdate();
+							}
+						}
+					} else if (trainer.getMapNum() == 2) { // map2
+						if (trainer.getX() == 5 && trainer.getY() == 26) {	//left entrance
+							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+								System.out.println("switch");
+								trainer.setMapNum(1);
+								trainer.setPosition(40, 15);
+								mapSwitchUpdate();
+							}
+
+						} else if (trainer.getX() == 5 && trainer.getY() == 27) {		// left entrance
+							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+								System.out.println("switch");
+								trainer.setMapNum(1);
+								trainer.setPosition(40, 16);
+								mapSwitchUpdate();
+							}
+						}
+						else if (trainer.getX() == 40 && trainer.getY() == 14) {	//right entrance
+							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+								System.out.println("switch");
+								trainer.setMapNum(1);
+								trainer.setPosition(5, 17);
+								mapSwitchUpdate();
+							}
+
+						} else if (trainer.getX() == 40 && trainer.getY() == 15) {		// right entrance
+							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+								System.out.println("switch");
+								trainer.setMapNum(1);
+								trainer.setPosition(5, 18);
+								mapSwitchUpdate();
+							}
+						}
+					}
 					// boolean move = false;
 					int x = trainer.getX();
 					int y = trainer.getY();
@@ -340,6 +414,10 @@ public class pokemonGUI extends JFrame {
 							trainer.setChangedMove(true);
 						}
 					}
+
+
+					// System.out.println(theMap[trainer.getY()][trainer.getX()]);
+
 					System.out.println("x is " + trainer.getX() + ", y is " + trainer.getY());
 					update();
 
@@ -385,6 +463,7 @@ public class pokemonGUI extends JFrame {
 				 * mapView.setVisible(false); redraw(); } }
 				 */
 
+
 				if (trainer.getX() == 5) { // map change
 					if (trainer.getY() == 17 || trainer.getY() == 18) {
 						System.out.println("switch");
@@ -402,6 +481,20 @@ public class pokemonGUI extends JFrame {
 						}
 					}
 				}
+
+				/*
+				 * if (trainer.getX() == 5) { // map change if (trainer.getY()
+				 * == 17 || trainer.getY() == 18) {
+				 * System.out.println("switch"); trainer.setMapNum(2);
+				 * trainer.setPosition(5, 27);
+				 * trainer.setTrainerDirection("right"); mapSwitchUpdate(); }
+				 * else { if (trainer.getY() == 26 || trainer.getY() == 27) {
+				 * System.out.println("switch"); trainer.setMapNum(1);
+				 * trainer.setPosition(5, 18);
+				 * trainer.setTrainerDirection("right"); mapSwitchUpdate(); } }
+				 * }
+				 */
+
 			}
 		}
 

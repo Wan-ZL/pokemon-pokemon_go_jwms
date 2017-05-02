@@ -23,7 +23,7 @@ public class Encounter implements Serializable{
 		
 		try {
 			for (int i=0; i < 5; i++) {
-				System.out.println("image: " + i);
+				//System.out.println("image: " + i);
 				File temp = new File(pokemon.getPic(i));
 				Image temp2 = ImageIO.read(temp);
 				pokemonImgs[i] = temp2;
@@ -56,6 +56,26 @@ public class Encounter implements Serializable{
 	// get the pokemons health
 	public String getPokemonHP() {
 		return pokemon.getCurHP() + "/" + pokemon.getMaxHP();
+	}
+	
+	// Trainer throws a rock at the pokemon
+	public void throwRock() {
+		pokemon.HitByRock();
+	}
+	
+	// Trainer throws a bait at the pokemon
+	public void throwBait() {
+		pokemon.eatBait();;
+	}
+	
+	// get a pokemon action
+	public int performPokeAction() {
+		Action action = pokemon.chooseAction();
+		if (action == Action.ATTACK) {
+			trainer.takeDamage(pokemon.performAttack());
+		}
+		return action.getValue();
+		//return Action.ATTACK.getValue();
 	}
 	
 	

@@ -13,23 +13,23 @@ public class Tauros extends Pokemon{
 
 	@Override
 	public void eatBait() {
-		changeFleeChance(15);
-		changeCatchChance(20);
+		changeFleeChance(-20);
+		changeCatchChance(-12);
 		setEating(true);
 	}
 
 	@Override
 	public void HitByRock() {
-		changeFleeChance(-20);
-		changeCatchChance(-15);
+		changeFleeChance(12);
+		changeCatchChance(20);
 		takeDamage(20);
 		setEating(false);
 	}
 
 	@Override
-	public void chooseAttack() {
+	public int performAttack() {
 		// TODO Auto-generated method stub
-		
+		return 47;
 	}
 
 }
