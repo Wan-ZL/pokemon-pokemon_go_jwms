@@ -127,7 +127,7 @@ public class MapView extends JPanel{
 		int y = trainer.getY();
 		for (int i = y-5, r = 0; i <= y +5; i++, r++) {
 			for (int j = x-5, c = 0; j <= x +5; j++, c++) {
-				String loc = theMap.getItemOnMap(this.trainer.getMap() ,i, j);
+				String loc = theMap.getItemOnMap(this.trainer.getMapNum() ,i, j);
 				//Draw images by compare strings
 				if (loc.equals("t")) {
 					g2.drawImage(tree, c * 20, r * 20, null);
