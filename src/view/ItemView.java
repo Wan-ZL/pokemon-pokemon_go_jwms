@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -39,6 +40,9 @@ public class ItemView extends JPanel implements Observer {
 		this.setLayout(new GridLayout(3, 1));
 		this.setBackground(Color.cyan);
 		this.trainer = trainer;
+		/*ImageIcon image = new ImageIcon("image/rsz_battle_bg.jpg");
+		JLabel label = new JLabel("", image, JLabel.CENTER);*/
+		//this.add(label);
 		text = new JPanel();
 		text.setLayout(new GridLayout(3, 1));
 		text.setBackground(Color.cyan);
@@ -58,14 +62,17 @@ public class ItemView extends JPanel implements Observer {
 		list_model = trainer.getPokemonBelt();
 		System.out.println(list_model);
 
+		//JScrollPane scrollPane1 = new JScrollPane();
 		list.setModel(list_model);
 		list.setBackground(Color.red);
+
 		list.setFocusable(false);
 		JScrollPane listScroll = new JScrollPane(list);		// make pokemon list scroll here
 		listScroll.setVisible(true);
 		this.add(listScroll);
 		//listScroll.setViewportView(list);
 		
+
 		
 		table = new JTable();
 		table.setFocusable(false);			// make table unselectable
@@ -80,8 +87,16 @@ public class ItemView extends JPanel implements Observer {
 	    RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table_model);
 	    table.setRowSorter(sorter);
 	    table.setMaximumSize(new Dimension(30, 30));
+
 	    table.setBackground(Color.white);
-	   
+	    System.out.println("in the items");
+	    
+	}
+	
+	public void updateTable(){
+		table.updateUI();
+
+
 	}
 	
 	public void updateSteps() {

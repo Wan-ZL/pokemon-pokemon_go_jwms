@@ -347,7 +347,6 @@ public class BattleView extends JPanel{
 			}
 			
 		}
-
 	}
 	
 	//Listener for throw a safari ball
@@ -367,16 +366,17 @@ public class BattleView extends JPanel{
 				phase = 4;
 				timer.start();
 				playSong(THROWBALL);
-				
-//				//TODO: check if pokemon is caught
-//				if(encounter.isCaught()){
-//					mainFrame.outOfBattle();
-//					mainFrame.getBattleView().setVisible(false);
-//					mainFrame.getMapView().setVisible(true);
-//					mainFrame.mapSwitchUpdate();
-//					mainFrame.setupItems();
-//					playSong(POKECAUGHT);
-//				}
+
+				//TODO: check if pokemon is caught
+				if(encounter.isCaught()){
+					mainFrame.outOfBattle();
+					mainFrame.getBattleView().setVisible(false);
+					mainFrame.getMapView().setVisible(true);
+					mainFrame.mapSwitchUpdate();
+					mainFrame.setupItems();
+					playSong(POKECAUGHT);
+				}
+
 			}
 			
 			
