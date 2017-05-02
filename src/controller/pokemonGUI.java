@@ -324,7 +324,7 @@ public class pokemonGUI extends JFrame {
 									trainer.addItem(new SafariBall(1));
 								}
 								else if(Math.random() < 0.3){
-									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									JOptionPane.showMessageDialog(null, "YOU get a potion");
 									trainer.addItem(new MaxPotion(1));
 								}
 								else{
@@ -370,7 +370,7 @@ public class pokemonGUI extends JFrame {
 									trainer.addItem(new SafariBall(1));
 								}
 								else if(Math.random() < 0.3){
-									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									JOptionPane.showMessageDialog(null, "YOU get a potion");
 									trainer.addItem(new MaxPotion(1));
 								}
 								else{
@@ -417,7 +417,7 @@ public class pokemonGUI extends JFrame {
 									trainer.addItem(new SafariBall(1));
 								}
 								else if(Math.random() < 0.3){
-									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									JOptionPane.showMessageDialog(null, "YOU get a potion");
 									trainer.addItem(new MaxPotion(1));
 								}
 								else{
@@ -463,7 +463,7 @@ public class pokemonGUI extends JFrame {
 									trainer.addItem(new SafariBall(1));
 								}
 								else if(Math.random() < 0.3){
-									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									JOptionPane.showMessageDialog(null, "YOU get a potion");
 									trainer.addItem(new MaxPotion(1));
 								}
 								else{
