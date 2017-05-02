@@ -357,6 +357,11 @@ public class BattleView extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			
 			if (!drawing) { // disable button while drawing
+				if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
+					phase = 1;
+					endOfBattle();
+					mainFrame.outOfBalls();
+				}
 				trainer.useItem(ItemType.SAFARI_BALL);
 				//throw a safari ball first
 				phase = 4;
