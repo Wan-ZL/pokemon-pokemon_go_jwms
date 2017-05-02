@@ -54,7 +54,7 @@ public class Trainer implements Serializable {
 		this.trainerPosition = new Point();
 
 		// initial position
-		this.trainerPosition.setLocation(15, 5);
+		this.trainerPosition.setLocation(15, 6);
 		this.positionChanged = false;
 		this.moved = false;
 		// this.addPokemon(new Paras()); // For testing
