@@ -138,6 +138,7 @@ public class pokemonGUI extends JFrame {
 		currentView.setLocation(0, 0);
 		currentView.setSize(11 * 20, 11 * 20);
 		cp.add(currentView);
+		menu.setEnabled(true);
 		this.repaint();
 	}
 
@@ -268,6 +269,7 @@ public class pokemonGUI extends JFrame {
 					JOptionPane.showMessageDialog(null, "Out of steps! You caught " + trainer.getPokemonBelt().getSize()
 							+ " Pokemon!\n  GameOver!!");
 					gameover = true;
+					playSong(GAMEOVER);
 					disableMenu();
 					setEndofGame();
 				} else if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
@@ -522,6 +524,7 @@ public class pokemonGUI extends JFrame {
 							inMap = false;
 							inBattle = true;
 							setBGM();
+							menu.setEnabled(false);
 							battleview.setSize(battleview.getPreferredSize());
 							battleview.setLocation(0, 0);
 							battleview.setVisible(true);

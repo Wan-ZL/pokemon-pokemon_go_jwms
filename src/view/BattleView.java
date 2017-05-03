@@ -347,7 +347,8 @@ public class BattleView extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 
 			if (!drawing) { // disable button while drawing
-				if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
+				if (trainer.getItemNum(ItemType.SAFARI_BALL) == 1) { // chekc this ??? changed from 0 to 1??
+					System.out.println("poke num" + trainer.getItemNum(ItemType.SAFARI_BALL));
 					phase = 1;
 					endOfBattle();
 					mainFrame.outOfBalls();
