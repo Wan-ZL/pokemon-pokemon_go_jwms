@@ -38,15 +38,15 @@ public class ItemView extends JPanel implements Observer {
 	public ItemView(Trainer trainer){
 		this.setPreferredSize(new Dimension(100,100));
 		this.setLayout(new GridLayout(3, 1));
-		this.setBackground(Color.cyan);
+		this.setBackground(Color.WHITE);
 		this.trainer = trainer;
 		/*ImageIcon image = new ImageIcon("image/rsz_battle_bg.jpg");
 		JLabel label = new JLabel("", image, JLabel.CENTER);*/
 		//this.add(label);
 		text = new JPanel();
 		text.setLayout(new GridLayout(3, 1));
-		text.setBackground(Color.cyan);
-		name = new JLabel(trainer.getName());
+		text.setBackground(Color.WHITE);
+		name = new JLabel("Trainer: "+trainer.getName());
 		steps = new JLabel("Steps: " + String.valueOf(trainer.getStep()));
 		numPokemon = new JLabel("Caught Pokemon: " + trainer.getPokemonBelt().getSize());
 		text.add(name);
@@ -60,11 +60,11 @@ public class ItemView extends JPanel implements Observer {
 		list = new JList<String>();
 		//this.add(list);
 		list_model = trainer.getPokemonBelt();
-		System.out.println(list_model);
+		System.out.println("You caught: \n" +list_model);
 
 		//JScrollPane scrollPane1 = new JScrollPane();
 		list.setModel(list_model);
-		list.setBackground(Color.red);
+		list.setBackground(Color.GRAY);
 
 		list.setFocusable(false);
 		JScrollPane listScroll = new JScrollPane(list);		// make pokemon list scroll here
