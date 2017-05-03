@@ -170,6 +170,9 @@ public class Trainer implements Serializable {
 	// take damage
 	public void takeDamage(int damage) {
 		this.damage += damage;
+		if(this.damage >= hp){
+			this.damage = hp;
+		}
 	}
 
 	public boolean addPokemon(Pokemon pokemon) { // add a pokemon to belt,
