@@ -51,11 +51,12 @@ public class pokemonGUI extends JFrame {
 
 	private static final long serialVersionUID = -2195306133576575637L;
 	private pokemonGUI mainFrame;
+	JMenu items, menu;
 	private MapView currentView;
 	private Trainer trainer;
 	private MapView mapView;
 	private Container cp;
-	private ItemView items;
+	private ItemView itemView;
 	private Map map;
 	private BattleView battleview;
 	private LoadingView loadingview;
@@ -107,8 +108,8 @@ public class pokemonGUI extends JFrame {
 	public void update() {
 		currentView.updatePanel();
 		// battleview.updatePanel();
-		items.updateSteps();
-		items.updateTable();
+		itemView.updateSteps();
+		itemView.updateTable();
 		// this.repaint();
 	}
 
@@ -122,7 +123,7 @@ public class pokemonGUI extends JFrame {
 		this.setJMenuBar(menuBar);
 		
 		
-		JMenu menu = new JMenu("Menu");
+		menu = new JMenu("Menu");
 		menuBar.add(menu);
 		JMenuItem save = new JMenuItem("Save");
 		menu.add(save);
@@ -131,7 +132,7 @@ public class pokemonGUI extends JFrame {
 		menu.add(quit);
 		quit.addActionListener(new SaveGame());
 
-		JMenu items = new JMenu("Items");
+		items = new JMenu("Items");
 		JMenuItem max_potion = new JMenuItem("MAX_POTION");
 		items.add(max_potion);
 		max_potion.addActionListener(new HealTrainer());
@@ -155,9 +156,9 @@ public class pokemonGUI extends JFrame {
 	}
 
 	public void setupItems() {
-		items = new ItemView(trainer);
-		items.setLocation((11 * 20), 0);
-		cp.add(items);
+		itemView = new ItemView(trainer);
+		itemView.setLocation((11 * 20), 0);
+		cp.add(itemView);
 		// System.out.println("here");
 	}
 
@@ -184,7 +185,7 @@ public class pokemonGUI extends JFrame {
 			if(trainer.isInBattle()){
 				battleview.updatePanel();
 			}else{ //in the map
-				items.updateTable();
+				itemView.updateTable();
 			}
 			
 			//System.out.println("after using the item: " + trainer.getCurrHP());
@@ -533,7 +534,7 @@ public class pokemonGUI extends JFrame {
 					if (trainer.getItemNum(ItemType.SAFARI_BALL) != 0) {
 						if (trainer.meetPokemon()) {
 							System.out.println("going to battle");
-							cp.remove(items);
+							cp.remove(itemView);
 							//
 							cp.remove(currentView);
 							/*
