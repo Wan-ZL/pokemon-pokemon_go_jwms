@@ -494,6 +494,9 @@ public class BattleView extends JPanel{
 					if (trainer.getCurrHP() == 0) {
 						phase = 12;
 					}
+					else{
+						phase = 1;
+					}
 				}
 				else if (phase == 8) {
 					phase = 1;
