@@ -64,6 +64,8 @@ public abstract class Pokemon implements Serializable{
 		return this.hp;
 	}
 	
+
+	
 	// returns the speed of the Pokemon
 	public int getSpeed() {
 		return this.speed;

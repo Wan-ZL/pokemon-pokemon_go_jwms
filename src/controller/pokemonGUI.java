@@ -119,16 +119,28 @@ public class pokemonGUI extends JFrame {
 	}
 
 	private void setupMenu() {
+		
+		JMenuBar menuBar = new JMenuBar();
+		this.setJMenuBar(menuBar);
+		
+		
 		JMenu menu = new JMenu("Menu");
+		menuBar.add(menu);
 		JMenuItem save = new JMenuItem("Save");
 		menu.add(save);
 		save.addActionListener(new SaveGame());
 		JMenuItem quit = new JMenuItem("Save and Quit");
 		menu.add(quit);
 		quit.addActionListener(new SaveGame());
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.add(menu);
-		this.setJMenuBar(menuBar);
+
+		JMenu items = new JMenu("Items");
+		JMenuItem max_potion = new JMenuItem("MAX_POTION");
+		items.add(max_potion);
+		max_potion.addActionListener(new HealTrainer());
+		menuBar.add(items);
+		//System.out.println("in the menu");
+		
+		
 	}
 
 	public void redraw() {
@@ -159,10 +171,40 @@ public class pokemonGUI extends JFrame {
 		return currentView;
 	}
 
+	private class HealTrainer implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(trainer.getItemNum(ItemType.MAX_POTION) == -1){
+				String meg = JOptionPane.showInputDialog("The trianer does not have any max potion left");
+				return;
+			}
+			if(trainer.getCurrHP() == 1000){
+				String meg = JOptionPane.showInputDialog("The trianer is alreay 1000/1000");
+				return;
+			}
+			trainer.heal();
+			if(trainer.isInBattle()){
+				battleview.updatePanel();
+			}else{ //in the map
+				items.updateTable();
+			}
+			
+			//System.out.println("after using the item: " + trainer.getCurrHP());
+			String path = JOptionPane.showInputDialog("The trianer's HP: " + trainer.getCurrHP() +"\n the amount of max_p: "+ trainer.getItemNum(ItemType.MAX_POTION));
+			
+		}
+	}
+	
+	
+	
+	
+	
+	
 	private class SaveGame implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			System.out.println("click save ");
 			if (!trainer.isInBattle()) {
 				int userInput = JOptionPane.showConfirmDialog(null, "Save over existing file?");
 				if (userInput == JOptionPane.YES_OPTION) {
