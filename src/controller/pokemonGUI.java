@@ -118,10 +118,6 @@ public class pokemonGUI extends JFrame {
 		items.add(max_potion);
 		max_potion.addActionListener(new HealTrainer());
 		menuBar.add(items);
-		if (GameOver()) {
-			menu.setEnabled(false);
-			items.setEnabled(false);
-		}
 	}
 
 	private void setEndofGame() {
