@@ -118,11 +118,7 @@ public class pokemonGUI extends JFrame {
 		JMenuItem max_potion = new JMenuItem("Heal Potion");
 		item_p.add(max_potion);
 		max_potion.addActionListener(new HealTrainer());
-<<<<<<< HEAD
-		menuBar.add(items);
-=======
 		menuBar.add(item_p);
->>>>>>> 5565ee089ac66968a6103af874f8ab29cfe4cf58
 	}
 
 	private void setEndofGame() {
