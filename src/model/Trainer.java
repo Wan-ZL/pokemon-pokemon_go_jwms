@@ -48,7 +48,7 @@ public class Trainer implements Serializable {
 		this.hp = 1000;
 		this.damage = 0;
 		this.pack = new BackPack();
-		pack.addItem(new SafariBall(1));
+		pack.addItem(new SafariBall(30));
 		pack.addItem(new MaxPotion(20));
 		this.belt = new PokemonBelt();
 		this.name = name;
