@@ -16,7 +16,7 @@ public class beginWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = -7509179605746684233L;
 	private LoadingView panel;
-	private final String BGM = Paths.get("sounds/BearDown.mp3").toUri().toString();
+	private final String BGM = Paths.get("sounds/StartMusic.mp3").toUri().toString();
 	private MediaPlayer mediaPlayer;
 
 	public beginWindow() {
