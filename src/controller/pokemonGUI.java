@@ -172,16 +172,22 @@ public class pokemonGUI extends JFrame {
 	private class HealTrainer implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("hello");
-			
+			if(trainer.getItemNum(ItemType.MAX_POTION) == -1){
+				String meg = JOptionPane.showInputDialog("The trianer does not have any max potion left");
+				return;
+			}
+			if(trainer.getCurrHP() == 1000){
+				String meg = JOptionPane.showInputDialog("The trianer is alreay 1000/1000");
+				return;
+			}
 			trainer.heal();
 			if(trainer.isInBattle()){
 				battleview.updatePanel();
-			}else{
+			}else{ //in the map
 				items.updateTable();
 			}
 			
-			System.out.println("after using the item: " + trainer.getCurrHP());
+			//System.out.println("after using the item: " + trainer.getCurrHP());
 			String path = JOptionPane.showInputDialog("The trianer's HP: " + trainer.getCurrHP() +"\n the amount of max_p: "+ trainer.getItemNum(ItemType.MAX_POTION));
 			
 		}
