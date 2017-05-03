@@ -45,7 +45,7 @@ public class Trainer implements Serializable {
 		this.map = new Map();
 		this.mapIndex = 1;
 		this.step = 500;
-		this.hp = 1000;
+		this.hp = 1;
 		this.damage = 0;
 		this.pack = new BackPack();
 		pack.addItem(new SafariBall(30));
@@ -170,6 +170,9 @@ public class Trainer implements Serializable {
 	// take damage
 	public void takeDamage(int damage) {
 		this.damage += damage;
+		if(this.damage >= hp){
+			this.damage = hp;
+		}
 	}
 
 	public boolean addPokemon(Pokemon pokemon) { // add a pokemon to belt,
