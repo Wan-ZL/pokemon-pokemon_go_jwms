@@ -1,43 +1,26 @@
 package controller;
 
 import java.awt.Container;
-
-import java.awt.GridLayout;
-
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
-
 import java.awt.event.KeyEvent;
-
 import java.awt.event.KeyListener;
-
 import java.io.FileNotFoundException;
-
 import java.io.FileOutputStream;
-
 import java.io.IOException;
-
 import java.io.ObjectOutputStream;
 import java.nio.file.Paths;
 
 import javax.swing.JFrame;
-
 import javax.swing.JMenu;
-
 import javax.swing.JMenuBar;
-
 import javax.swing.JMenuItem;
-
 import javax.swing.JOptionPane;
-
-import javax.swing.JPanel;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.Map;
-import model.Pokemon;
 import model.Trainer;
 import model.items.ItemType;
 import model.items.MaxPotion;
@@ -58,11 +41,11 @@ public class pokemonGUI extends JFrame {
 	private ItemView items;
 	private Map map;
 	private BattleView battleview;
-	private LoadingView loadingview;
 	private JFXPanel fxPanel;
 	private MediaPlayer mediaPlayer;
 	private static final String BATTLESONG = Paths.get("sounds/battlemus.mp3").toUri().toString();
 	private static final String BGM = Paths.get("sounds/bgm.mp3").toUri().toString();
+	private static final String GAMEOVER = Paths.get("sounds/gameover.mp3").toUri().toString();
 	private boolean inMap;
 	private boolean inBattle;
 	private boolean gameover;
@@ -91,7 +74,6 @@ public class pokemonGUI extends JFrame {
 		currentView.setLocation(0, 0);
 		currentView.setSize(11 * 20, 11 * 20);
 		this.addKeyListener(new MoveListener());
-		// cp.add(loadingview);
 		cp.setLayout(null);
 		cp.add(currentView);
 		setupMenu();
@@ -101,17 +83,16 @@ public class pokemonGUI extends JFrame {
 	public void setBGM() {
 		if (inMap) {
 			playSong(BGM);
-		} else {
+		} 
+		else{
 			playSong(BATTLESONG);
 		}
 	}
 
 	public void update() {
 		currentView.updatePanel();
-		// battleview.updatePanel();
 		items.updateSteps();
 		items.updateTable();
-		// this.repaint();
 	}
 
 	public void outOfBattle() {
@@ -137,7 +118,6 @@ public class pokemonGUI extends JFrame {
 		items.add(max_potion);
 		max_potion.addActionListener(new HealTrainer());
 		menuBar.add(items);
-		// System.out.println("in the menu");
 		if (GameOver()) {
 			menu.setEnabled(false);
 			items.setEnabled(false);
@@ -165,7 +145,6 @@ public class pokemonGUI extends JFrame {
 		items = new ItemView(trainer);
 		items.setLocation((11 * 20), 0);
 		cp.add(items);
-		// System.out.println("here");
 	}
 
 	public BattleView getBattleView() {
@@ -193,9 +172,6 @@ public class pokemonGUI extends JFrame {
 			} else { // in the map
 				items.updateTable();
 			}
-
-			// System.out.println("after using the item: " +
-			// trainer.getCurrHP());
 			JOptionPane.showMessageDialog(null, "The trianer's HP: " + trainer.getCurrHP() + "\n You have: "
 					+ trainer.getItemNum(ItemType.MAX_POTION) + "heal potion left!!");
 
@@ -240,6 +216,7 @@ public class pokemonGUI extends JFrame {
 	public void setUpMusic() {
 		inMap = true;
 		inBattle = false;
+		gameover = false;
 		setBGM();
 	}
 
@@ -249,6 +226,7 @@ public class pokemonGUI extends JFrame {
 				"Out of safari balls! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!\n  GameOver");
 		gameover = true;
 		setEndofGame();
+		playSong(GAMEOVER);
 	}
 
 	public void outOfHealth() {
@@ -256,6 +234,7 @@ public class pokemonGUI extends JFrame {
 				"Out of Health! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!\n  GameOver!!");
 		gameover = true;
 		setEndofGame();
+		playSong(GAMEOVER);
 	}
 
 	public boolean GameOver() {
@@ -357,6 +336,7 @@ public class pokemonGUI extends JFrame {
 					int y = trainer.getY();
 					int mapNum = trainer.getMapNum();
 					String[][] theMap = map.getMap(mapNum);
+					@SuppressWarnings("unused")
 					String face = trainer.getTrainerDirection();
 
 					// press "up"
@@ -513,29 +493,18 @@ public class pokemonGUI extends JFrame {
 						}
 					}
 
-					// System.out.println(theMap[trainer.getY()][trainer.getX()]);
-
 					if (trainer.getCurrHP() == 0) {
 						outOfHealth();
 					}
 					System.out.println("x is " + trainer.getX() + ", y is " + trainer.getY());
 					update();
 
-					// int x = trainer.getX();
-					// int y = trainer.getY();
 					if (trainer.getItemNum(ItemType.SAFARI_BALL) != 0) {
 						if (trainer.meetPokemon()) {
 							System.out.println("going to battle");
 							cp.remove(items);
-							//
 							cp.remove(currentView);
-							/*
-							 * try{ Thread.sleep(200); }catch(Exception e1){
-							 * 
-							 * }
-							 */
 							cp.add(battleview = new BattleView(trainer, mainFrame));
-							// playSong(BATTLESONG);
 							inMap = false;
 							inBattle = true;
 							setBGM();
@@ -547,47 +516,6 @@ public class pokemonGUI extends JFrame {
 						}
 					}
 				}
-				/*
-				 * //System.out.println(theMap[trainer.getY()][trainer.getX()]);
-				 * update();
-				 * 
-				 * 
-				 * //int x = trainer.getX(); //int y = trainer.getY();
-				 * if(trainer.getItemNum(ItemType.SAFARI_BALL) != 0){ Pokemon
-				 * poke = trainer.meetPokemon(); if(poke != null){
-				 * System.out.println(poke.getName()); cp.remove(items);
-				 * cp.remove(currentView); cp.add(battleview = new
-				 * BattleView(trainer));
-				 * battleview.setSize(battleview.getPreferredSize());
-				 * battleview.setLocation(0, 0); battleview.setVisible(true);
-				 * mapView.setVisible(false); redraw(); } }
-				 */
-
-				/*
-				 * if (trainer.getX() == 5) { // map change if (trainer.getY()
-				 * == 17 || trainer.getY() == 18) {
-				 * System.out.println("switch"); trainer.setMapNum(2);
-				 * trainer.setPosition(5, 27);
-				 * trainer.setTrainerDirection("right"); mapSwitchUpdate(); }
-				 * else { if (trainer.getY() == 26 || trainer.getY() == 27) {
-				 * System.out.println("switch"); trainer.setMapNum(1);
-				 * trainer.setPosition(5, 18);
-				 * trainer.setTrainerDirection("right"); mapSwitchUpdate(); } }
-				 * }
-				 */
-				/*
-				 * if (trainer.getX() == 5) { // map change if (trainer.getY()
-				 * == 17 || trainer.getY() == 18) {
-				 * System.out.println("switch"); trainer.setMapNum(2);
-				 * trainer.setPosition(5, 27);
-				 * trainer.setTrainerDirection("right"); mapSwitchUpdate(); }
-				 * else { if (trainer.getY() == 26 || trainer.getY() == 27) {
-				 * System.out.println("switch"); trainer.setMapNum(1);
-				 * trainer.setPosition(5, 18);
-				 * trainer.setTrainerDirection("right"); mapSwitchUpdate(); } }
-				 * }
-				 */
-
 			}
 		}
 
