@@ -40,6 +40,7 @@ import model.Map;
 import model.Pokemon;
 import model.Trainer;
 import model.items.ItemType;
+import model.items.MaxPotion;
 import model.items.SafariBall;
 import view.BattleView;
 import view.ItemView;
@@ -78,7 +79,7 @@ public class pokemonGUI extends JFrame {
 	private void setUpGameWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Pokemon Safari Zone");
-		this.setSize((20 * 11) + 230, (20 * 11) + 70);
+		this.setSize((20 * 11) + 230, (20 * 11) + 60);
 		this.setLocation(100, 100);
 		this.inMap = true;
 		this.inBattle = false;
@@ -109,6 +110,7 @@ public class pokemonGUI extends JFrame {
 		currentView.updatePanel();
 		// battleview.updatePanel();
 		items.updateSteps();
+		items.updateTable();
 		// this.repaint();
 	}
 
@@ -117,16 +119,28 @@ public class pokemonGUI extends JFrame {
 	}
 
 	private void setupMenu() {
+		
+		JMenuBar menuBar = new JMenuBar();
+		this.setJMenuBar(menuBar);
+		
+		
 		JMenu menu = new JMenu("Menu");
+		menuBar.add(menu);
 		JMenuItem save = new JMenuItem("Save");
 		menu.add(save);
 		save.addActionListener(new SaveGame());
 		JMenuItem quit = new JMenuItem("Save and Quit");
 		menu.add(quit);
 		quit.addActionListener(new SaveGame());
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.add(menu);
-		this.setJMenuBar(menuBar);
+
+		JMenu items = new JMenu("Items");
+		JMenuItem max_potion = new JMenuItem("MAX_POTION");
+		items.add(max_potion);
+		max_potion.addActionListener(new HealTrainer());
+		menuBar.add(items);
+		//System.out.println("in the menu");
+		
+		
 	}
 
 	public void redraw() {
@@ -157,10 +171,40 @@ public class pokemonGUI extends JFrame {
 		return currentView;
 	}
 
+	private class HealTrainer implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(trainer.getItemNum(ItemType.MAX_POTION) == -1){
+				JOptionPane.showMessageDialog(null, "The trianer does not have any max potion left");
+				return;
+			}
+			if(trainer.getCurrHP() == 1000){
+				JOptionPane.showMessageDialog(null, "The trianer is alreay 1000/1000");
+				return;
+			}
+			trainer.heal();
+			if(trainer.isInBattle()){
+				battleview.updatePanel();
+			}else{ //in the map
+				items.updateTable();
+			}
+			
+			//System.out.println("after using the item: " + trainer.getCurrHP());
+			JOptionPane.showMessageDialog(null, "The trianer's HP: " + trainer.getCurrHP() +"\n the amount of max_potion: "+ trainer.getItemNum(ItemType.MAX_POTION));
+			
+		}
+	}
+	
+	
+	
+	
+	
+	
 	private class SaveGame implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			System.out.println("click save ");
 			if (!trainer.isInBattle()) {
 				int userInput = JOptionPane.showConfirmDialog(null, "Save over existing file?");
 				if (userInput == JOptionPane.YES_OPTION) {
@@ -316,58 +360,95 @@ public class pokemonGUI extends JFrame {
 						if (theMap[y + 1][x] == "t" || theMap[y + 1][x] == "a" || theMap[y + 1][x] == "w"
 								|| theMap[y + 1][x] == "i" || theMap[y + 1][x] == "_") {
 							System.out.print("can't move because of " + theMap[y + 1][x]);
-						}
-						// else if(theMap[x][y+1] == "n" || theMap[x][y+1] ==
-						// "s"){
-						// trainer.setPosition(x, y);
-						// }
-						/*
-						 * else if(theMap[y+1][x] == "w"){
-						 * System.out.print("Walk into water now");
-						 * trainer.setPosition(x, y+1);
-						 * trainer.setChangedMove(true); }
-						 */
-						else if (theMap[y + 1][x] == "g") {
+						} else if (theMap[y + 1][x] == "g") {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
 						} else if (theMap[y + 1][x] == "p") {
-							System.out.print("You find a safari ball!!");
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
+							System.out.print("You find a safari ball!!");
+							JOptionPane.showMessageDialog(null, "You find a safari ball!!");
 							trainer.getBackpack().addItem(new SafariBall(1));
-							// trainer.getBackpack().notify();
-							// TODO: need to set the map back to "g"
-
-						} else {
+							//update();
+						}else if (theMap[y + 1][x] == "r"){ 
+							trainer.setPosition(x, y+1);
+							trainer.setChangedMove(true);
+							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
+							if(userInput == JOptionPane.YES_OPTION){
+								if(Math.random() < 0.1){
+									JOptionPane.showMessageDialog(null, "YOU token 1000 damage");
+									trainer.takeDamage(1000);
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new SafariBall(1));
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a potion");
+									trainer.addItem(new MaxPotion(1));
+								}
+								else{
+									JOptionPane.showMessageDialog(null, "Nothing");
+								}
+							}
+							else{
+								JOptionPane.showMessageDialog(null, "Smart! You may die if open the box");
+							}
+						}
+						else {
 							trainer.setPosition(x, y + 1);
 							trainer.setChangedMove(true);
 						}
-					} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+					}
+
+					else if (e.getKeyCode() == KeyEvent.VK_UP) {
 						trainer.setTrainerDirection("up");
 						if (theMap[y - 1][x] == "t" || theMap[y - 1][x] == "a" || theMap[y - 1][x] == "w"
 								|| theMap[y - 1][x] == "i" || theMap[y - 1][x] == "_") {
 							System.out.print("can't move because of " + theMap[y - 1][x]);
-						}
-						// else if(theMap[x][y-1] == "n" || theMap[x][y-1] ==
-						// "s"){
-						// trainer.setPosition(x, y);
-						// }
-						/*
-						 * else if(theMap[y-1][x] == "w"){
-						 * System.out.print("Walk into water now");
-						 * trainer.setPosition(x, y-1);
-						 * trainer.setChangedMove(true); }
-						 */
-						else if (theMap[y - 1][x] == "g") {
+						} else if (theMap[y - 1][x] == "g") {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x, y - 1);
 							trainer.setChangedMove(true);
-						} else {
+						} else if (theMap[y - 1][x] == "p") {
+							trainer.setPosition(x, y - 1);
+							trainer.setChangedMove(true);
+							JOptionPane.showMessageDialog(null, "You find a safari ball!!");
+							trainer.getBackpack().addItem(new SafariBall(1));
+							//update();
+						}else if (theMap[y - 1][x] == "r"){ 
+							trainer.setPosition(x, y-1);
+							trainer.setChangedMove(true);
+							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
+							if(userInput == JOptionPane.YES_OPTION){
+								if(Math.random() < 0.1){
+									JOptionPane.showMessageDialog(null, "YOU token 1000 damage");
+									trainer.takeDamage(1000);
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new SafariBall(1));
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a potion");
+									trainer.addItem(new MaxPotion(1));
+								}
+								else{
+									JOptionPane.showMessageDialog(null, "Nothing");
+								}
+							}
+							else{
+								JOptionPane.showMessageDialog(null, "Smart! You may die if open the box");
+							}
+						}
+						else {
 							trainer.setPosition(x, y - 1);
 							trainer.setChangedMove(true);
 						}
-					} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					}
+
+					else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 						trainer.setTrainerDirection("right");
 						if (theMap[y][x + 1] == "t" || theMap[y][x + 1] == "a" || theMap[y][x + 1] == "w"
 								|| theMap[y][x + 1] == "i" || theMap[y][x + 1] == "_") {
@@ -376,11 +457,45 @@ public class pokemonGUI extends JFrame {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x + 1, y);
 							trainer.setChangedMove(true);
-						} else {
+						} else if (theMap[y][x + 1] == "p") {
+							// System.out.print("Walk into grass now");
+							trainer.setPosition(x + 1, y);
+							trainer.setChangedMove(true);
+							JOptionPane.showMessageDialog(null, "You find a safari ball!!");
+							trainer.getBackpack().addItem(new SafariBall(1));
+							//update();
+						} else if (theMap[y][x + 1] == "r"){
+							trainer.setPosition(x + 1, y);
+							trainer.setChangedMove(true);
+							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
+							if(userInput == JOptionPane.YES_OPTION){
+								if(Math.random() < 0.1){
+									JOptionPane.showMessageDialog(null, "YOU token 1000 damage");
+									trainer.takeDamage(1000);
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new SafariBall(1));
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a potion");
+									trainer.addItem(new MaxPotion(1));
+								}
+								else{
+									JOptionPane.showMessageDialog(null, "Nothing");
+								}
+							}
+							else{
+								JOptionPane.showMessageDialog(null, "Smart! You may die if open the box");
+							}
+						}
+						else {
 							trainer.setPosition(x + 1, y);
 							trainer.setChangedMove(true);
 						}
-					} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					}
+
+					else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 						trainer.setTrainerDirection("left");
 						if (theMap[y][x - 1] == "t" || theMap[y][x - 1] == "a" || theMap[y][x - 1] == "w"
 								|| theMap[y][x - 1] == "i" || theMap[y][x - 1] == "_") {
@@ -389,13 +504,49 @@ public class pokemonGUI extends JFrame {
 							System.out.print("Walk into grass now");
 							trainer.setPosition(x - 1, y);
 							trainer.setChangedMove(true);
-						} else {
+						} else if (theMap[y][x - 1] == "p") {
+							trainer.setPosition(x - 1, y);
+							trainer.setChangedMove(true);
+							JOptionPane.showMessageDialog(null, "You find a safari ball!!");
+							trainer.getBackpack().addItem(new SafariBall(1));
+							//update();
+						}else if (theMap[y][x - 1] == "r") {
+							trainer.setPosition(x - 1, y);
+							trainer.setChangedMove(true);
+							int userInput = JOptionPane.showConfirmDialog(null, "You find a treasure box!! want to open it??");
+							if(userInput == JOptionPane.YES_OPTION){
+								if(Math.random() < 0.1){
+									JOptionPane.showMessageDialog(null, "YOU token 1000 damage");
+									trainer.takeDamage(1000);
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a ball");
+									trainer.addItem(new SafariBall(1));
+								}
+								else if(Math.random() < 0.3){
+									JOptionPane.showMessageDialog(null, "YOU get a potion");
+									trainer.addItem(new MaxPotion(1));
+								}
+								else{
+									JOptionPane.showMessageDialog(null, "Nothing");
+								}
+							}
+							else{
+								JOptionPane.showMessageDialog(null, "Smart! You may die if open the box");
+							}
+						}  
+						else {
 							trainer.setPosition(x - 1, y);
 							trainer.setChangedMove(true);
 						}
 					}
 
+
 					// System.out.println(theMap[trainer.getY()][trainer.getX()]);
+
+					if(trainer.getCurrHP() == 0){
+						outOfHealth();
+					}
 					System.out.println("x is " + trainer.getX() + ", y is " + trainer.getY());
 					update();
 
@@ -441,6 +592,25 @@ public class pokemonGUI extends JFrame {
 				 * mapView.setVisible(false); redraw(); } }
 				 */
 
+
+				/*if (trainer.getX() == 5) { // map change
+					if (trainer.getY() == 17 || trainer.getY() == 18) {
+						System.out.println("switch");
+						trainer.setMapNum(2);
+						trainer.setPosition(5, 27);
+						trainer.setTrainerDirection("right");
+						mapSwitchUpdate();
+					} else {
+						if (trainer.getY() == 26 || trainer.getY() == 27) {
+							System.out.println("switch");
+							trainer.setMapNum(1);
+							trainer.setPosition(5, 18);
+							trainer.setTrainerDirection("right");
+							mapSwitchUpdate();
+						}
+					}
+				}
+*/
 				/*
 				 * if (trainer.getX() == 5) { // map change if (trainer.getY()
 				 * == 17 || trainer.getY() == 18) {
@@ -453,6 +623,7 @@ public class pokemonGUI extends JFrame {
 				 * trainer.setTrainerDirection("right"); mapSwitchUpdate(); } }
 				 * }
 				 */
+
 			}
 		}
 

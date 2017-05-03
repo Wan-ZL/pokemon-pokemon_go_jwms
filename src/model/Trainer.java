@@ -7,6 +7,7 @@ import java.util.Random;
 
 import model.items.Item;
 import model.items.ItemType;
+import model.items.MaxPotion;
 import model.items.SafariBall;
 import model.pokemon.Dragonair;
 import model.pokemon.Dratini;
@@ -48,6 +49,7 @@ public class Trainer implements Serializable {
 		this.damage = 0;
 		this.pack = new BackPack();
 		pack.addItem(new SafariBall(30));
+		pack.addItem(new MaxPotion(20));
 		this.belt = new PokemonBelt();
 		this.name = name;
 		this.trainerDirection = "down";
@@ -76,6 +78,10 @@ public class Trainer implements Serializable {
 	public void setPosition(int x, int y) {
 		this.trainerPosition.setLocation(x, y);
 		step--;
+	}
+	
+	public boolean addItem(Item item){
+		return this.pack.addItem(item);
 	}
 
 	// ******
@@ -135,6 +141,11 @@ public class Trainer implements Serializable {
 
 	public void setMapNum(int mapNum) {
 		this.mapIndex = mapNum;
+	}
+	
+	public void heal(){
+		this.damage = 0;
+		useItem(ItemType.MAX_POTION);
 	}
 
 	public int getX() { // return trainer x position

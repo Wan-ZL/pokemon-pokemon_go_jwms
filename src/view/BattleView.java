@@ -190,7 +190,7 @@ public class BattleView extends JPanel{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		
+		TrainerHealth.setText(trainer.getName() + ": " + trainer.getCurrHP() + "/" + trainer.getMaxHP());
 		if (phase == 11) {
 			if (count % 2 == 0) {
 				g2.drawImage(burst1, 0, 0, 215, 220, null);
@@ -373,7 +373,6 @@ public class BattleView extends JPanel{
 			}
 			
 		}
-
 	}
 	
 	//Listener for throw a safari ball
@@ -393,7 +392,7 @@ public class BattleView extends JPanel{
 				phase = 4;
 				timer.start();
 				playSong(THROWBALL);
-				
+
 //				//TODO: check if pokemon is caught
 //				if(encounter.isCaught()){
 //					mainFrame.outOfBattle();
@@ -403,6 +402,7 @@ public class BattleView extends JPanel{
 //					mainFrame.setupItems();
 //					playSong(POKECAUGHT);
 //				}
+
 			}
 			
 			
