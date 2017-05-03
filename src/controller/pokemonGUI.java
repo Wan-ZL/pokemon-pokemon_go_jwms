@@ -530,10 +530,17 @@ public class pokemonGUI extends JFrame {
 			this.mediaPlayer.stop();
 			this.mediaPlayer.dispose();
 		}
-		Media song = new Media(location);
-		this.mediaPlayer = new MediaPlayer(song);
-		this.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-		this.mediaPlayer.play();
+		if(location.equals(GAMEOVER)){
+			Media song = new Media(location);
+			this.mediaPlayer = new MediaPlayer(song);
+			this.mediaPlayer.play();
+		}
+		else{
+			Media song = new Media(location);
+			this.mediaPlayer = new MediaPlayer(song);
+			this.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+			this.mediaPlayer.play();
+		}
 	}
 
 }
