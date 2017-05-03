@@ -502,6 +502,9 @@ public class pokemonGUI extends JFrame {
 
 					// System.out.println(theMap[trainer.getY()][trainer.getX()]);
 
+					if(trainer.getCurrHP() == 0){
+						outOfHealth();
+					}
 					System.out.println("x is " + trainer.getX() + ", y is " + trainer.getY());
 					update();
 
