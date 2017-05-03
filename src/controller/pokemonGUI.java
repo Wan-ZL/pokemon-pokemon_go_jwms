@@ -34,12 +34,12 @@ public class pokemonGUI extends JFrame {
 
 	private static final long serialVersionUID = -2195306133576575637L;
 	private pokemonGUI mainFrame;
-	JMenu items, menu;
+	private JMenu menu, item_p;
 	private MapView currentView;
 	private Trainer trainer;
 	private MapView mapView;
 	private Container cp;
-	private ItemView itemView;
+	private ItemView items;
 	private Map map;
 	private BattleView battleview;
 	private JFXPanel fxPanel;
@@ -91,12 +91,9 @@ public class pokemonGUI extends JFrame {
 	}
 
 	public void update() {
-
-		// battleview.updatePanel();
-		itemView.updateSteps();
-		itemView.updateTable();
-		// this.repaint();
-
+		currentView.updatePanel();
+		items.updateSteps();
+		items.updateTable();
 	}
 
 	public void outOfBattle() {
@@ -107,9 +104,8 @@ public class pokemonGUI extends JFrame {
 
 		JMenuBar menuBar = new JMenuBar();
 		this.setJMenuBar(menuBar);
-		
-		menu = new JMenu("Menu");
 
+		menu = new JMenu("Menu");
 		menuBar.add(menu);
 		JMenuItem save = new JMenuItem("Save");
 		menu.add(save);
@@ -118,16 +114,11 @@ public class pokemonGUI extends JFrame {
 		menu.add(quit);
 		quit.addActionListener(new SaveGame());
 
-		items = new JMenu("Items");
-		JMenuItem max_potion = new JMenuItem("MAX_POTION");
-
-		items.add(max_potion);
+		item_p = new JMenu("Items");
+		JMenuItem max_potion = new JMenuItem("Heal Potion");
+		item_p.add(max_potion);
 		max_potion.addActionListener(new HealTrainer());
-		menuBar.add(items);
-		if (GameOver()) {
-			menu.setEnabled(false);
-			items.setEnabled(false);
-		}
+		menuBar.add(item_p);
 	}
 
 	private void setEndofGame() {
@@ -148,11 +139,9 @@ public class pokemonGUI extends JFrame {
 	}
 
 	public void setupItems() {
-		itemView = new ItemView(trainer);
-		itemView.setLocation((11 * 20), 0);
-		cp.add(itemView);
-		// System.out.println("here");
-
+		items = new ItemView(trainer);
+		items.setLocation((11 * 20), 0);
+		cp.add(items);
 	}
 
 	public BattleView getBattleView() {
@@ -163,14 +152,11 @@ public class pokemonGUI extends JFrame {
 		return currentView;
 	}
 
+	
 	private class HealTrainer implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(gameover){
-				menu.setEnabled(false);
-				items.setEnabled(false);
-				return;
-			}
+			disableMenu();
 			if (trainer.getItemNum(ItemType.MAX_POTION) == -1) {
 				JOptionPane.showMessageDialog(null, "The trianer does not have any heal potion left");
 				return;
@@ -182,9 +168,8 @@ public class pokemonGUI extends JFrame {
 			trainer.heal();
 			if (trainer.isInBattle()) {
 				battleview.updatePanel();
-			}else{ //in the map
-				itemView.updateTable();
-
+			} else { // in the map
+				items.updateTable();
 			}
 			JOptionPane.showMessageDialog(null, "The trianer's HP: " + trainer.getCurrHP() + "\n You have: "
 					+ trainer.getItemNum(ItemType.MAX_POTION) + "heal potion left!!");
@@ -196,6 +181,7 @@ public class pokemonGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			disableMenu();
 			System.out.println("click save ");
 			if (!trainer.isInBattle()) {
 				int userInput = JOptionPane.showConfirmDialog(null, "Save over existing file?");
@@ -239,6 +225,7 @@ public class pokemonGUI extends JFrame {
 		JOptionPane.showMessageDialog(null,
 				"Out of safari balls! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!\n  GameOver");
 		gameover = true;
+		disableMenu();
 		setEndofGame();
 		playSong(GAMEOVER);
 	}
@@ -247,6 +234,7 @@ public class pokemonGUI extends JFrame {
 		JOptionPane.showMessageDialog(null,
 				"Out of Health! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!\n  GameOver!!");
 		gameover = true;
+		disableMenu();
 		setEndofGame();
 		playSong(GAMEOVER);
 	}
@@ -254,6 +242,14 @@ public class pokemonGUI extends JFrame {
 	public boolean GameOver() {
 		return gameover;
 	}
+	
+	public void disableMenu(){
+		if (GameOver()) {
+			menu.setEnabled(false);
+			item_p.setEnabled(false);
+		}
+	}
+	
 
 	private class MoveListener implements KeyListener {
 
@@ -269,6 +265,7 @@ public class pokemonGUI extends JFrame {
 					JOptionPane.showMessageDialog(null, "Out of steps! You caught " + trainer.getPokemonBelt().getSize()
 							+ " Pokemon!\n  GameOver!!");
 					gameover = true;
+					disableMenu();
 					setEndofGame();
 				} else if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
 					outOfBalls();
@@ -516,9 +513,7 @@ public class pokemonGUI extends JFrame {
 					if (trainer.getItemNum(ItemType.SAFARI_BALL) != 0) {
 						if (trainer.meetPokemon()) {
 							System.out.println("going to battle");
-							cp.remove(itemView);
-							//
-
+							cp.remove(items);
 							cp.remove(currentView);
 							cp.add(battleview = new BattleView(trainer, mainFrame));
 							inMap = false;
