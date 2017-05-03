@@ -65,6 +65,7 @@ public class pokemonGUI extends JFrame {
 	private static final String BGM = Paths.get("sounds/bgm.mp3").toUri().toString();
 	private boolean inMap;
 	private boolean inBattle;
+	private boolean gameover;
 
 	public pokemonGUI(Trainer trainer) {
 		JFXPanel fxPanel = new JFXPanel();
@@ -82,6 +83,7 @@ public class pokemonGUI extends JFrame {
 		this.setLocation(100, 100);
 		this.inMap = true;
 		this.inBattle = false;
+		this.gameover = false;
 		// playSong(BGM);*/
 		setBGM();
 		cp = getContentPane();
@@ -189,18 +191,29 @@ public class pokemonGUI extends JFrame {
 		}
 
 	}
-	
+
 	// set up the music after a battle
 	public void setUpMusic() {
 		inMap = true;
 		inBattle = false;
 		setBGM();
 	}
-	
+
 	// if out of balls end the game
 	public void outOfBalls() {
 		JOptionPane.showMessageDialog(null,
-				"Out of safari balls! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!");
+				"Out of safari balls! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!\n  GameOver");
+		gameover = true;
+	}
+
+	public void outOfHealth() {
+		JOptionPane.showMessageDialog(null,
+				"Out of Health! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!\n  GameOver!!");
+		gameover = true;
+	}
+
+	public boolean GameOver() {
+		return gameover;
 	}
 
 	private class MoveListener implements KeyListener {
@@ -212,10 +225,11 @@ public class pokemonGUI extends JFrame {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			if (!trainer.isInBattle()) {
+			if (!trainer.isInBattle() && !GameOver()) {
 				if (trainer.getStep() <= 0) {
 					JOptionPane.showMessageDialog(null,
-							"Out of steps! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!");
+							"Out of steps! You caught " + trainer.getPokemonBelt().getSize() + " Pokemon!\n  GameOver!!");
+					gameover = true;
 				} else if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
 					outOfBalls();
 				} else if (!trainer.MoveChanged()) {
@@ -237,14 +251,16 @@ public class pokemonGUI extends JFrame {
 								trainer.setPosition(5, 27);
 								mapSwitchUpdate();
 							}
-						} else if (trainer.getX() == 5 && trainer.getY() == 17) {	// left entrance
+						} else if (trainer.getX() == 5 && trainer.getY() == 17) { // left
+																					// entrance
 							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 								System.out.println("switch");
 								trainer.setMapNum(2);
 								trainer.setPosition(40, 14);
 								mapSwitchUpdate();
 							}
-						} else if (trainer.getX() == 5 && trainer.getY() == 18) {	// left entrance
+						} else if (trainer.getX() == 5 && trainer.getY() == 18) { // left
+																					// entrance
 							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 								System.out.println("switch");
 								trainer.setMapNum(2);
@@ -253,7 +269,8 @@ public class pokemonGUI extends JFrame {
 							}
 						}
 					} else if (trainer.getMapNum() == 2) { // map2
-						if (trainer.getX() == 5 && trainer.getY() == 26) {	//left entrance
+						if (trainer.getX() == 5 && trainer.getY() == 26) { // left
+																			// entrance
 							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 								System.out.println("switch");
 								trainer.setMapNum(1);
@@ -261,15 +278,16 @@ public class pokemonGUI extends JFrame {
 								mapSwitchUpdate();
 							}
 
-						} else if (trainer.getX() == 5 && trainer.getY() == 27) {		// left entrance
+						} else if (trainer.getX() == 5 && trainer.getY() == 27) { // left
+																					// entrance
 							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 								System.out.println("switch");
 								trainer.setMapNum(1);
 								trainer.setPosition(40, 16);
 								mapSwitchUpdate();
 							}
-						}
-						else if (trainer.getX() == 40 && trainer.getY() == 14) {	//right entrance
+						} else if (trainer.getX() == 40 && trainer.getY() == 14) { // right
+																					// entrance
 							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 								System.out.println("switch");
 								trainer.setMapNum(1);
@@ -277,7 +295,8 @@ public class pokemonGUI extends JFrame {
 								mapSwitchUpdate();
 							}
 
-						} else if (trainer.getX() == 40 && trainer.getY() == 15) {		// right entrance
+						} else if (trainer.getX() == 40 && trainer.getY() == 15) { // right
+																					// entrance
 							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 								System.out.println("switch");
 								trainer.setMapNum(1);

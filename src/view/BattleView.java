@@ -319,6 +319,11 @@ public class BattleView extends JPanel{
 				g2.drawImage(safariBall, (20*6), 60, null);
 			}
 		}
+		else if (phase == 12) {
+			g2.drawImage(background, 0, 0, 215, 220, null);
+			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+			g2.drawImage(trainerBase, 0, 156 + (count*20), null);
+		}
 	}
 
 	private Pokemon getPokemon() {
@@ -485,6 +490,11 @@ public class BattleView extends JPanel{
 					phase = 1;
 					endOfBattle();
 				} 
+				else if (phase == 6) {
+					if (trainer.getCurrHP() == 0) {
+						phase = 12;
+					}
+				}
 				else if (phase == 8) {
 					phase = 1;
 					endOfBattle();
@@ -496,6 +506,11 @@ public class BattleView extends JPanel{
 					phase = 1;
 					endOfBattle();
 					playSong(POKECAUGHT);
+				}
+				else if (phase == 12) {
+					phase = 1;
+					endOfBattle();
+					mainFrame.outOfHealth();
 				}
 				else {
 					phase = 1;
