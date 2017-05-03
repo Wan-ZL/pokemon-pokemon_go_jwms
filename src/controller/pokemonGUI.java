@@ -175,11 +175,11 @@ public class pokemonGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(trainer.getItemNum(ItemType.MAX_POTION) == -1){
-				String meg = JOptionPane.showInputDialog("The trianer does not have any max potion left");
+				JOptionPane.showMessageDialog(null, "The trianer does not have any max potion left");
 				return;
 			}
 			if(trainer.getCurrHP() == 1000){
-				String meg = JOptionPane.showInputDialog("The trianer is alreay 1000/1000");
+				JOptionPane.showMessageDialog(null, "The trianer is alreay 1000/1000");
 				return;
 			}
 			trainer.heal();
@@ -190,7 +190,7 @@ public class pokemonGUI extends JFrame {
 			}
 			
 			//System.out.println("after using the item: " + trainer.getCurrHP());
-			String path = JOptionPane.showInputDialog("The trianer's HP: " + trainer.getCurrHP() +"\n the amount of max_p: "+ trainer.getItemNum(ItemType.MAX_POTION));
+			JOptionPane.showMessageDialog(null, "The trianer's HP: " + trainer.getCurrHP() +"\n the amount of max_potion: "+ trainer.getItemNum(ItemType.MAX_POTION));
 			
 		}
 	}
