@@ -5,6 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+<<<<<<< HEAD
+=======
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+>>>>>>> abe5943764076bff2c9e39293058a5ce7b83516b
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -61,7 +66,8 @@ public class pokemonGUI extends JFrame {
 	}
 
 	private void setUpGameWindow() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new ListenForWindowClose());
 		this.setTitle("Pokemon Safari Zone");
 		this.setSize((20 * 11) + 230, (20 * 11) + 60);
 		this.setLocation(100, 100);
@@ -551,6 +557,18 @@ public class pokemonGUI extends JFrame {
 			this.mediaPlayer = new MediaPlayer(song);
 			this.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 			this.mediaPlayer.play();
+		}
+	}
+	
+	private class ListenForWindowClose extends WindowAdapter {
+		@Override
+		public void windowClosing(WindowEvent e) {
+			int userInput = JOptionPane.showConfirmDialog(null, "game will exit, continue?");
+			if (userInput == JOptionPane.YES_OPTION) {
+				System.exit(0);
+			}
+		
+		
 		}
 	}
 
