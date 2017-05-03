@@ -119,14 +119,16 @@ public class BattleView extends JPanel {
 		runAway.setSize(215, 45);
 		runAway.setLocation(215, 135);
 
-		TrainerHealth.setSize((int) 107.5, 40);
+		
+		TrainerHealth.setSize((int) 215, 100);
 		TrainerHealth.setLocation(215, 180);
 		TrainerHealth.setBackground(Color.WHITE);
 		TrainerHealth.replaceSelection(trainer.getName() + ": ");
-		PokemonHealth.setSize((int) 107.5, 40);
-		PokemonHealth.setLocation((int) 322.5, 180);
+		PokemonHealth.setSize((int) 215, 100);
+		PokemonHealth.setLocation((int) 215, 180+15); //322.5 180
 		PokemonHealth.setBackground(Color.WHITE);
-		PokemonHealth.replaceSelection(" " + encounter.getPokemonName() + ": ");
+		PokemonHealth.replaceSelection(encounter.getPokemonName() + ": ");
+		
 		this.add(ThrowABait);
 		this.add(runAway);
 		this.add(throwARock);

@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.Timer;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;

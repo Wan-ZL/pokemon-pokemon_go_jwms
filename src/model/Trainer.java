@@ -184,7 +184,7 @@ public class Trainer implements Serializable {
 	public void outOfBattle() { // call this function when battle end
 		this.isInBattle = false;
 	}
-
+/*
 	public boolean removePokemon(Pokemon pokemon) { // remove a pokemon from
 													// belt, if have multi same
 													// pokemon, remove the first
@@ -197,7 +197,8 @@ public class Trainer implements Serializable {
 												// pokemon object.
 		return this.belt.removePokemon(index);
 	}
-
+*/
+	/*
 	public ArrayList<Pokemon> getBeltArray() { // return the whole belt
 		return this.belt.getBeltArray();
 	}
@@ -205,7 +206,7 @@ public class Trainer implements Serializable {
 	public ArrayList<Item> getBackpackArray() { // return the whole backpack
 		return this.pack.getBackpackArray();
 	}
-
+*/
 	public int getSize() { // return the number of pokemon on belt.
 		return this.belt.getSize();
 	}
@@ -221,11 +222,11 @@ public class Trainer implements Serializable {
 	public BackPack getBackpack() {
 		return this.pack;
 	}
-
+/*
 	public void removeAllPokemoninBelt() {
 		belt.removAll();
 	}
-
+*/
 	public int getItemNum(ItemType type) {
 		return this.pack.numItem(type);
 	}

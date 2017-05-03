@@ -41,7 +41,7 @@ public class ItemView extends JPanel implements Observer {
 	private JLabel numPokemon;
 
 	public ItemView(Trainer trainer) {
-		this.setPreferredSize(new Dimension(100, 100));
+		this.setPreferredSize(new Dimension(100, 200));
 		this.setLayout(new GridLayout(3, 1));
 		this.setBackground(Color.WHITE);
 		this.trainer = trainer;
