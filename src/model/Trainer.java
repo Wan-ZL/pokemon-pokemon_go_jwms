@@ -185,27 +185,6 @@ public class Trainer implements Serializable {
 		this.isInBattle = false;
 	}
 
-	public boolean removePokemon(Pokemon pokemon) { // remove a pokemon from
-													// belt, if have multi same
-													// pokemon, remove the first
-													// one.
-		return this.belt.removePokemon(pokemon);
-	}
-
-	public Pokemon removePokemon(int index) { // remove a pokemon on specific
-												// index, return the removed
-												// pokemon object.
-		return this.belt.removePokemon(index);
-	}
-
-	public ArrayList<Pokemon> getBeltArray() { // return the whole belt
-		return this.belt.getBeltArray();
-	}
-
-	public ArrayList<Item> getBackpackArray() { // return the whole backpack
-		return this.pack.getBackpackArray();
-	}
-
 	public int getSize() { // return the number of pokemon on belt.
 		return this.belt.getSize();
 	}
@@ -220,10 +199,6 @@ public class Trainer implements Serializable {
 
 	public BackPack getBackpack() {
 		return this.pack;
-	}
-
-	public void removeAllPokemoninBelt() {
-		belt.removAll();
 	}
 
 	public int getItemNum(ItemType type) {

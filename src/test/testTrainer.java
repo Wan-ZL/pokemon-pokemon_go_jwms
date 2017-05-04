@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import model.Pokemon;
 import model.Trainer;
+import model.items.ItemType;
+import model.items.MaxPotion;
 import model.pokemon.Dragonair;
 import model.pokemon.Dratini;
 import model.pokemon.Exeggcute;
@@ -24,7 +26,7 @@ public class testTrainer {
 		// test name 
 		
 		Trainer t = Trainer.getTrainerInstance();
-		assertEquals("default name", t.getName());
+		assertEquals("Ash", t.getName());
 		String name1 = "trainer1";
 		t.setName(name1);
 		assertEquals("trainer1", t.getName());
@@ -37,7 +39,7 @@ public class testTrainer {
 		assertEquals(500,t.getStep());
 		// the position
 		assertEquals(15,t.getX());
-		assertEquals(5,t.getY());
+		assertEquals(6,t.getY());
 		
 		t.setPosition(15, 6);
 		assertEquals(15,t.getX());
@@ -72,14 +74,29 @@ public class testTrainer {
 		t.getPokemonBelt().removAll();
 		t.addPokemon(p1);
 		assertEquals(1, t.getPokemonBelt().getSize());
+		assertEquals(1,t.getSize());
 		t.addPokemon(p2);
 		assertEquals(2, t.getPokemonBelt().getSize());
 		t.addPokemon(p3);
 		assertEquals(3, t.getPokemonBelt().getSize());
 		
 		
-		assertEquals(30, t.getBackpack().getSize());
-		//
+		assertEquals(50, t.getBackpack().getSize());
+		
+		assertEquals(1000, t.getCurrHP());
+		t.takeDamage(100);
+		assertEquals(900, t.getCurrHP());
+		assertFalse(t.isInBattle());
+		t.heal();
+		assertEquals(1000, t.getCurrHP());
+		t.meetPokemon();
+		assertEquals(1, t.getMapNum());
+		t.setMapNum(2);
+		assertEquals(2, t.getMapNum());
+		int amt = t.getSize();
+		t.addItem(new MaxPotion(10));
+		assertEquals(3, t.getSize()); // num of Item object in the arrat list
+		
 
 	}
 	

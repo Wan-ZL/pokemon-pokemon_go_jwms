@@ -1,10 +1,7 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.nio.file.Paths;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import javafx.embed.swing.JFXPanel;
@@ -12,13 +9,17 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import view.LoadingView;
 
-public class beginWindow extends JFrame{
-	
+public class beginWindow extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7509179605746684233L;
 	private LoadingView panel;
-	private static final String BGM = Paths.get("sounds/BearDown.mp3").toUri().toString();
+	private final String BGM = Paths.get("sounds/StartMusic.mp3").toUri().toString();
 	private MediaPlayer mediaPlayer;
-	
-	public beginWindow(){
+
+	public beginWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Pokemon Safari Login");
 		JFXPanel fxPanel = new JFXPanel();
@@ -29,12 +30,10 @@ public class beginWindow extends JFrame{
 		playSong(this.BGM);
 		this.add(panel);
 	}
-	
-	public MediaPlayer getMedia(){
+
+	public MediaPlayer getMedia() {
 		return this.mediaPlayer;
 	}
-	
-	
 
 	private void playSong(String location) {
 		if (this.mediaPlayer != null) {

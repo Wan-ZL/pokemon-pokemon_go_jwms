@@ -41,6 +41,7 @@ public class testEncounter {
 		assertNotEquals(hp, e.getPokemonHP());
 		String hp2 = p.getCurHP() + "/" + p.getMaxHP();
 		assertEquals(hp2, e.getPokemonHP());
+		e.isCaught();
 	}
 
 }

@@ -42,7 +42,7 @@ import model.pokemon.Pinsir;
 import model.pokemon.Pikachu;
 import model.pokemon.Tauros;
 
-public class BattleView extends JPanel{
+public class BattleView extends JPanel {
 
 	/**
 	 * 
@@ -59,35 +59,36 @@ public class BattleView extends JPanel{
 	private JButton throwASafariBall;
 	// a button shows "throw A rock".
 	private JButton throwARock;
-	// a button shows "run away". 
+	// a button shows "run away".
 	private JButton runAway;
 	// a button shows "give bait".
 	private JButton ThrowABait;
-	
+
 	private Image background;
 	private JTextArea TrainerHealth;
 	private JTextArea PokemonHealth;
 	private boolean drawing;
 	private Image trainerBase, trainerDamage, trThrow[], safariBall, rock, bait;
 	private Image burst1, burst2;
-	
+
 	private MediaPlayer sound;
-	//Sound for run away
+	// Sound for run away
 	private static final String RUNAWAY = Paths.get("sounds/runsAway.mp3").toUri().toString();
 
-	//Sound for throw a bait
+	// Sound for throw a bait
 	private static final String THROWBAIT = Paths.get("sounds/bait.mp3").toUri().toString();
 
-	//Sound for catch a pokemon
+	// Sound for catch a pokemon
 	private static final String POKECAUGHT = Paths.get("sounds/caught.mp3").toUri().toString();
 
-	//Sound for throw a rock
+	// Sound for throw a rock
 	private static final String THROWROCK = Paths.get("sounds/rock.mp3").toUri().toString();
-	
-	//Sound for throw a safari ball
+
+	// Sound for throw a safari ball
 	private static final String THROWBALL = Paths.get("sounds/throwball.mp3").toUri().toString();
-	
+
 	private pokemonGUI mainFrame;
+
 	public BattleView(Trainer trainer, pokemonGUI mainFrame) {
 		drawing = false;
 		phase = 11;
@@ -96,20 +97,18 @@ public class BattleView extends JPanel{
 		this.mainFrame = mainFrame;
 		this.trainer = trainer;
 		encounter = new Encounter(getPokemon(), trainer);
-		//battlePan = new JPanel();
-		this.setPreferredSize(new Dimension((20*11)+215, 20*11));
+		this.setPreferredSize(new Dimension((20 * 11) + 215, 20 * 11));
 		this.setLayout(null);
-		//this.setBackground(Color.BLACK);
 		throwASafariBall = new JButton("Throw A Safari Ball");
 		throwARock = new JButton("Throw A Rock");
 		runAway = new JButton("Run Away");
 		ThrowABait = new JButton("Throw A Bait");
-		
+
 		timer = new Timer(100, new animationListener());
-		
+
 		TrainerHealth = new JTextArea(trainer.getCurrHP() + "/" + trainer.getMaxHP());
 		PokemonHealth = new JTextArea(encounter.getPokemonHP());
-		
+
 		TrainerHealth.setEditable(false);
 		throwASafariBall.setSize(215, 45);
 		throwASafariBall.setLocation(215, 0);
@@ -119,34 +118,30 @@ public class BattleView extends JPanel{
 		ThrowABait.setLocation(215, 90);
 		runAway.setSize(215, 45);
 		runAway.setLocation(215, 135);
+
 		
-		TrainerHealth.setSize((int) 107.5, 40);
+		TrainerHealth.setSize((int) 215, 100);
 		TrainerHealth.setLocation(215, 180);
 		TrainerHealth.setBackground(Color.WHITE);
 		TrainerHealth.replaceSelection(trainer.getName() + ": ");
-		//TrainerHealth.setAlignmentX(CENTER_ALIGNMENT);
-		//TrainerHealth.setAlignmentY(CENTER_ALIGNMENT);
-		PokemonHealth.setSize((int) 107.5, 40);
-		PokemonHealth.setLocation((int) 322.5, 180);
+		PokemonHealth.setSize((int) 215, 100);
+		PokemonHealth.setLocation((int) 215, 180+15); //322.5 180
 		PokemonHealth.setBackground(Color.WHITE);
-		PokemonHealth.replaceSelection(" " + encounter.getPokemonName() + ": ");
-		//throwASafariBall.setBounds(370, 380, 150, 30);
-		//throwARock.setBounds(520, 380, 150, 30);
-		//runAway.setBounds(520, 420, 150, 30);
-		//ThrowABait.setBounds(370, 420, 150, 30);
+		PokemonHealth.replaceSelection(encounter.getPokemonName() + ": ");
+		
 		this.add(ThrowABait);
 		this.add(runAway);
 		this.add(throwARock);
 		this.add(throwASafariBall);
 		this.add(PokemonHealth);
 		this.add(TrainerHealth);
-		
+
 		runAway.addActionListener(new RunAwayListener());
 		throwARock.addActionListener(new ThrowARocklListener());
 		throwASafariBall.addActionListener(new ThrowASafariBallListener());
 		ThrowABait.addActionListener(new ThrowBaitListener());
 		trThrow = new Image[4];
-		
+
 		try {
 			trainerBase = ImageIO.read(new File("image/TrainerSprites/trainer-base.png"));
 			trainerDamage = ImageIO.read(new File("image/TrainerSprites/trainer-damage.png"));
@@ -155,25 +150,14 @@ public class BattleView extends JPanel{
 			trThrow[2] = ImageIO.read(new File("image/TrainerSprites/trainer-3.png"));
 			trThrow[3] = ImageIO.read(new File("image/TrainerSprites/trainer-4.png"));
 			safariBall = ImageIO.read(new File("image/TrainerSprites/safari-ball.png"));
-			rock       = ImageIO.read(new File("image/TrainerSprites/rock.png"));
-			bait       = ImageIO.read(new File("image/TrainerSprites/bait.png"));
-			burst1     = ImageIO.read(new File("image/burst-1.jpg"));
-			burst2     = ImageIO.read(new File("image/burst-2.jpg"));
+			rock = ImageIO.read(new File("image/TrainerSprites/rock.png"));
+			bait = ImageIO.read(new File("image/TrainerSprites/bait.png"));
+			burst1 = ImageIO.read(new File("image/burst-1.jpg"));
+			burst2 = ImageIO.read(new File("image/burst-2.jpg"));
 		} catch (IOException e1) {
 			System.out.println("Cannot find the image file.");
 			e1.printStackTrace();
 		}
-		
-		/*JScrollPane scroll = new JScrollPane(TrainerHealth);
-		scroll.setBounds(50, 350, 300, 150);
-		this.add(scroll);*/
-//		ImageIcon image = new ImageIcon("image/rsz_battle_bg.jpg");
-//		JLabel label = new JLabel("", image, JLabel.CENTER);
-//		label.setLocation(0, 0);
-//		label.setSize(215, 220);
-//		
-//		this.add(label);
-		
 		try {
 			background = ImageIO.read(new File("image/battle_bg.jpg"));
 		} catch (IOException e) {
@@ -181,11 +165,10 @@ public class BattleView extends JPanel{
 			e.printStackTrace();
 		}
 		timer.start();
-		//repaint();
 	}
-	
-	//Four buttons: Throw a rock; Throw bait; Throw Pokeball; Run
-	
+
+	// Four buttons: Throw a rock; Throw bait; Throw Pokeball; Run
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -197,66 +180,59 @@ public class BattleView extends JPanel{
 			} else {
 				g2.drawImage(burst2, 0, 0, 215, 220, null);
 			}
-			
-		}
-		else if (phase == 0) { // Intro animations
+
+		} else if (phase == 0) { // Intro animations
 			g2.drawImage(background, 0, 0, 215, 220, null);
 			if (count < 5) {
-				g2.drawImage(encounter.getPokeImg(count), 20*6, 50, null);
-				g2.drawImage(trainerBase, count*10-50, 156, null);
+				g2.drawImage(encounter.getPokeImg(count), 20 * 6, 50, null);
+				g2.drawImage(trainerBase, count * 10 - 50, 156, null);
 			} else {
-				g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+				g2.drawImage(encounter.getPokeImg(4), 20 * 6, 50, null);
 				g2.drawImage(trainerBase, 0, 156, null);
 			}
-		}
-		else if (phase == 1) { // still animations
+		} else if (phase == 1) { // still animations
 			g2.drawImage(background, 0, 0, 215, 220, null);
-			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+			g2.drawImage(encounter.getPokeImg(4), 20 * 6, 50, null);
 			g2.drawImage(trainerBase, 0, 156, null);
-		}
-		else if (phase == 2) { // throw rock 
+		} else if (phase == 2) { // throw rock
 			g2.drawImage(background, 0, 0, 215, 220, null);
 			if (count < 4) {
 				if (count > 0) {
-					g2.drawImage(rock, 8 + (50*(count-1)), 156 - (40*(count-1)), null);
+					g2.drawImage(rock, 8 + (50 * (count - 1)), 156 - (40 * (count - 1)), null);
 				}
 				g2.drawImage(trThrow[count], 0, 156, null);
 			} else {
 				g2.drawImage(trThrow[3], 0, 156, null);
-				PokemonHealth.setText(" " +encounter.getPokemonName() + ": " +encounter.getPokemonHP());
+				PokemonHealth.setText(" " + encounter.getPokemonName() + ": " + encounter.getPokemonHP());
 			}
-			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
-		}
-		else if (phase == 3) { // throw bait
+			g2.drawImage(encounter.getPokeImg(4), 20 * 6, 50, null);
+		} else if (phase == 3) { // throw bait
 			g2.drawImage(background, 0, 0, 215, 220, null);
 			if (count < 4) {
 				if (count > 0) {
-					g2.drawImage(bait, 8 + (50*(count-1)), 156 - (40*(count-1)), null);
-				}
-				g2.drawImage(trThrow[count], 0, 156, null);
-			} else {
-				g2.drawImage(trThrow[3], 0, 156, null);
-			}
-			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);	
-		}
-		else if (phase == 4) { // throw safari ball
-			g2.drawImage(background, 0, 0, 215, 220, null);
-			if (count < 4) {
-				if (count > 0) {
-					g2.drawImage(safariBall, 8 + (50*(count-1)), 156 - (40*(count-1)), null);
+					g2.drawImage(bait, 8 + (50 * (count - 1)), 156 - (40 * (count - 1)), null);
 				}
 				g2.drawImage(trThrow[count], 0, 156, null);
 			} else {
 				g2.drawImage(trThrow[3], 0, 156, null);
 			}
-			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);	
-		}
-		else if (phase == 5) { // Trainer run away
+			g2.drawImage(encounter.getPokeImg(4), 20 * 6, 50, null);
+		} else if (phase == 4) { // throw safari ball
 			g2.drawImage(background, 0, 0, 215, 220, null);
-			g2.drawImage(trainerBase, 0 - (count*10), 156, null);
-			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
-		}
-		else if (phase == 6) { // pokemon attack
+			if (count < 4) {
+				if (count > 0) {
+					g2.drawImage(safariBall, 8 + (50 * (count - 1)), 156 - (40 * (count - 1)), null);
+				}
+				g2.drawImage(trThrow[count], 0, 156, null);
+			} else {
+				g2.drawImage(trThrow[3], 0, 156, null);
+			}
+			g2.drawImage(encounter.getPokeImg(4), 20 * 6, 50, null);
+		} else if (phase == 5) { // Trainer run away
+			g2.drawImage(background, 0, 0, 215, 220, null);
+			g2.drawImage(trainerBase, 0 - (count * 10), 156, null);
+			g2.drawImage(encounter.getPokeImg(4), 20 * 6, 50, null);
+		} else if (phase == 6) { // pokemon attack
 			g2.drawImage(background, 0, 0, 215, 220, null);
 			TrainerHealth.setText(trainer.getName() + ": " + trainer.getCurrHP() + "/" + trainer.getMaxHP());
 			if (count % 2 == 0) {
@@ -264,83 +240,72 @@ public class BattleView extends JPanel{
 			} else {
 				g2.drawImage(trainerDamage, 0, 156, null);
 			}
-			
+
 			if (count < 5) {
-				g2.drawImage(encounter.getPokeImg(count), 20*6, 50, null);
+				g2.drawImage(encounter.getPokeImg(count), 20 * 6, 50, null);
 			} else {
-				g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+				g2.drawImage(encounter.getPokeImg(4), 20 * 6, 50, null);
 			}
-		}
-		else if (phase == 7) { // pokemon eat
+		} else if (phase == 7) { // pokemon eat
 			g2.drawImage(background, 0, 0, 215, 220, null);
 			g2.drawImage(trainerBase, 0, 156, null);
 			if (count % 2 == 0) {
-				g2.drawImage(encounter.getPokeImg(4), 20*6, 60, null);
+				g2.drawImage(encounter.getPokeImg(4), 20 * 6, 60, null);
 			} else {
-				g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
+				g2.drawImage(encounter.getPokeImg(4), 20 * 6, 50, null);
 			}
-		}
-		else if (phase == 8) { // pokemon run
+		} else if (phase == 8) { // pokemon run
 			g2.drawImage(background, 0, 0, 215, 220, null);
 			g2.drawImage(trainerBase, 0, 156, null);
-			g2.drawImage(encounter.getPokeImg(4), (20*6) + (count*20), 60, null);
-		}
-		else if (phase == 9) { // pokemon not caught
+			g2.drawImage(encounter.getPokeImg(4), (20 * 6) + (count * 20), 60, null);
+		} else if (phase == 9) { // pokemon not caught
 			g2.drawImage(background, 0, 0, 215, 220, null);
 			g2.drawImage(trainerBase, 0, 156, null);
 			if (count == 0) {
-				g2.drawImage(safariBall, (20*6), 60, null);
-			}
-			else if (count < 5) {
+				g2.drawImage(safariBall, (20 * 6), 60, null);
+			} else if (count < 5) {
 				if (count % 2 == 0) {
-					g2.drawImage(safariBall, (20*6) + 10, 60, null);
+					g2.drawImage(safariBall, (20 * 6) + 10, 60, null);
 				} else {
-					g2.drawImage(safariBall, (20*6) - 10, 60, null);
+					g2.drawImage(safariBall, (20 * 6) - 10, 60, null);
 				}
+			} else if (count == 5) {
+				g2.drawImage(encounter.getPokeImg(4), (20 * 6), 50, null);
 			}
-			else if (count == 5) {
-				g2.drawImage(encounter.getPokeImg(4), (20*6), 50, null);
-			}
-		}
-		else if (phase == 10) { // pokemon caught
+		} else if (phase == 10) { // pokemon caught
 			g2.drawImage(background, 0, 0, 215, 220, null);
 			g2.drawImage(trainerBase, 0, 156, null);
 			if (count == 0) {
-				g2.drawImage(safariBall, (20*6), 60, null);
-			}
-			else if (count < 5) {
+				g2.drawImage(safariBall, (20 * 6), 60, null);
+			} else if (count < 5) {
 				if (count % 2 == 0) {
-					g2.drawImage(safariBall, (20*6) + 10, 60, null);
+					g2.drawImage(safariBall, (20 * 6) + 10, 60, null);
 				} else {
-					g2.drawImage(safariBall, (20*6) - 10, 60, null);
+					g2.drawImage(safariBall, (20 * 6) - 10, 60, null);
 				}
+			} else if (count == 5) {
+				g2.drawImage(safariBall, (20 * 6), 60, null);
 			}
-			else if (count == 5) {
-				g2.drawImage(safariBall, (20*6), 60, null);
-			}
-		}
-		else if (phase == 12) {
+		} else if (phase == 12) {
 			g2.drawImage(background, 0, 0, 215, 220, null);
-			g2.drawImage(encounter.getPokeImg(4), 20*6, 50, null);
-			g2.drawImage(trainerBase, 0, 156 + (count*20), null);
+			g2.drawImage(encounter.getPokeImg(4), 20 * 6, 50, null);
+			g2.drawImage(trainerBase, 0, 156 + (count * 20), null);
 		}
 	}
 
 	private Pokemon getPokemon() {
-		// TODO get a random int to choose which pokemon to create for the
-		//      encounter.
 		int rarity = rand.nextInt(10);
-		if (rarity == 0) {                   // Rare Pokemon
+		if (rarity == 0) { // Rare Pokemon
 			return new Mewtwo();
-		} else if (rarity < 4) {             // uncommon
+		} else if (rarity < 4) { // uncommon
 			int num = rand.nextInt(2);
-			if (num == 0) 
+			if (num == 0)
 				return new Dragonair();
 			else if (num == 1)
 				return new Pinsir();
-			else 
+			else
 				return new Marowak();
-		} else {                             // common
+		} else { // common
 			int num = rand.nextInt(5);
 			if (num == 0)
 				return new Tauros();
@@ -355,13 +320,13 @@ public class BattleView extends JPanel{
 			else
 				return new Dratini();
 		}
-		
+
 	}
-	
+
 	public void updatePanel() {
-				repaint();
+		repaint();
 	}
-	
+
 	// Listener for run away
 	private class RunAwayListener implements ActionListener {
 		@Override
@@ -371,46 +336,29 @@ public class BattleView extends JPanel{
 				phase = 5;
 				timer.start();
 			}
-			
+
 		}
 	}
-	
-	//Listener for throw a safari ball
+
+	// Listener for throw a safari ball
 	private class ThrowASafariBallListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 			if (!drawing) { // disable button while drawing
-				if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
-					phase = 1;
-					endOfBattle();
-					mainFrame.outOfBalls();
-				}
 				trainer.useItem(ItemType.SAFARI_BALL);
-				//throw a safari ball first
+				// throw a safari ball first
 				phase = 4;
 				timer.start();
 				playSong(THROWBALL);
-
-//				//TODO: check if pokemon is caught
-//				if(encounter.isCaught()){
-//					mainFrame.outOfBattle();
-//					mainFrame.getBattleView().setVisible(false);
-//					mainFrame.getMapView().setVisible(true);
-//					mainFrame.mapSwitchUpdate();
-//					mainFrame.setupItems();
-//					playSong(POKECAUGHT);
-//				}
-
 			}
-			
-			
+
 		}
-		
+
 	}
-	
-	//Listener for throw a rock
+
+	// Listener for throw a rock
 	private class ThrowARocklListener implements ActionListener {
 
 		@Override
@@ -423,11 +371,11 @@ public class BattleView extends JPanel{
 				playSong(THROWROCK);
 			}
 		}
-		
+
 	}
-	
-	//Listener for throw a bait
-	private class ThrowBaitListener implements ActionListener{
+
+	// Listener for throw a bait
+	private class ThrowBaitListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -439,9 +387,9 @@ public class BattleView extends JPanel{
 				playSong(THROWBAIT);
 			}
 		}
-		
+
 	}
-	
+
 	private void playSong(String file) {
 		if (this.sound != null) {
 			this.sound.stop();
@@ -452,7 +400,7 @@ public class BattleView extends JPanel{
 		// The song will repeat forever
 		this.sound.play();
 	}
-	
+
 	// exit the battleview and set up the map view
 	private void endOfBattle() {
 		mainFrame.outOfBattle();
@@ -462,12 +410,12 @@ public class BattleView extends JPanel{
 		mainFrame.setupItems();
 		mainFrame.setUpMusic();
 	}
-	
+
 	private class animationListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 			drawing = true;
 			if (count < 5) {
 				repaint();
@@ -475,47 +423,46 @@ public class BattleView extends JPanel{
 			} else {
 				if (phase == 11) {
 					phase = 0;
-				}
-				else if (phase == 2 || phase == 3) {
+				} else if (phase == 2 || phase == 3) {
 					phase = encounter.performPokeAction();
-				}
-				else if (phase == 4) {
-					if(encounter.isCaught()){
+				} else if (phase == 4) {
+					if (encounter.isCaught()) {
 						phase = 10;
 					} else {
 						phase = 9;
 					}
-				}
-				else if (phase == 5) {
+				} else if (phase == 5) {
 					phase = 1;
 					endOfBattle();
-				} 
-				else if (phase == 6) {
+				} else if (phase == 6) {
 					if (trainer.getCurrHP() == 0) {
 						phase = 12;
-					}
-					else{
+					} else {
 						phase = 1;
 					}
-				}
-				else if (phase == 8) {
+				} else if (phase == 8) {
 					phase = 1;
 					endOfBattle();
-				}
-				else if (phase == 9) {
-					phase = encounter.performPokeAction();
-				}
-				else if (phase == 10) {
+				} else if (phase == 9) {
+					if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
+						phase = 1;
+						endOfBattle();
+						mainFrame.outOfBalls();
+					} else {
+						phase = encounter.performPokeAction();
+					}
+				} else if (phase == 10) {
 					phase = 1;
 					endOfBattle();
+					if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
+						mainFrame.outOfBalls();
+					}
 					playSong(POKECAUGHT);
-				}
-				else if (phase == 12) {
+				} else if (phase == 12) {
 					phase = 1;
 					endOfBattle();
 					mainFrame.outOfHealth();
-				}
-				else {
+				} else {
 					phase = 1;
 				}
 				repaint();
@@ -525,11 +472,11 @@ public class BattleView extends JPanel{
 					timer.start();
 				}
 				drawing = false;
-				
+
 			}
-			
+
 		}
-		
+
 	}
 
 }
