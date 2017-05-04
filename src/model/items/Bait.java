@@ -1,8 +1,8 @@
 package model.items;
 
-public class Beit extends Item{
+public class Bait extends Item{
 
-	public Beit(ItemType type, int value, int amt) {
+	public Bait(ItemType type, int value, int amt) {
 		super(ItemType.BAIT, 3, amt);
 		// TODO Auto-generated constructor stub
 	}

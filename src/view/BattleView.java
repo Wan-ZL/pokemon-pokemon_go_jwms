@@ -347,12 +347,6 @@ public class BattleView extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 
 			if (!drawing) { // disable button while drawing
-				if (trainer.getItemNum(ItemType.SAFARI_BALL) == 1) { // chekc this ??? changed from 0 to 1??
-					System.out.println("poke num" + trainer.getItemNum(ItemType.SAFARI_BALL));
-					phase = 1;
-					endOfBattle();
-					mainFrame.outOfBalls();
-				}
 				trainer.useItem(ItemType.SAFARI_BALL);
 				// throw a safari ball first
 				phase = 4;
@@ -450,10 +444,19 @@ public class BattleView extends JPanel {
 					phase = 1;
 					endOfBattle();
 				} else if (phase == 9) {
-					phase = encounter.performPokeAction();
+					if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
+						phase = 1;
+						endOfBattle();
+						mainFrame.outOfBalls();
+					} else {
+						phase = encounter.performPokeAction();
+					}
 				} else if (phase == 10) {
 					phase = 1;
 					endOfBattle();
+					if (trainer.getItemNum(ItemType.SAFARI_BALL) == 0) {
+						mainFrame.outOfBalls();
+					}
 					playSong(POKECAUGHT);
 				} else if (phase == 12) {
 					phase = 1;

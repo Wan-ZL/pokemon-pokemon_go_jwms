@@ -16,26 +16,4 @@ public enum Action {
 		return this.value;
 	}
 	
-	// Get a string describing the action
-	/*public String toString() {
-		if (value == 0) {
-			return "is eating!";
-		} else if (value == 1) {
-			return "failed to run away!";
-		} else if (value == 2) {
-			return "ran away!";
-		} else if (value == 3) {
-			return "attacks!";
-		} else if (value == 4) {
-			return "threw a rock!";
-		} else if (value == 5) {
-			return "threw bait!";
-		} else if (value == 6) {
-			return "threw a pokeball!";
-		} else {
-			return "NA";
-		}
-		
-		
-	}*/
 }
